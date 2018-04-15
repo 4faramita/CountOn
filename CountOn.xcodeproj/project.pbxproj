@@ -15,6 +15,7 @@
 		B499CF6B208339A30054125D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B499CF6A208339A30054125D /* Storyboard.storyboard */; };
 		B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6C20833CD40054125D /* CounterCellNode.swift */; };
 		B499CF6F208347A30054125D /* CountArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6E208347A30054125D /* CountArea.swift */; };
+		B499CF71208395250054125D /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF70208395250054125D /* Counter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		B499CF6A208339A30054125D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		B499CF6C20833CD40054125D /* CounterCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCellNode.swift; sourceTree = "<group>"; };
 		B499CF6E208347A30054125D /* CountArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountArea.swift; sourceTree = "<group>"; };
+		B499CF70208395250054125D /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		B68A1A77EB30B936EF16B8C4 /* Pods-CountOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.release.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.release.xcconfig"; sourceTree = "<group>"; };
 		C1E76756C02A9625949EF240 /* Pods_CountOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BAE92AA37E8BB7F85D50D5 /* Pods-CountOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				B499CF5820832AC80054125D /* CounterViewController.swift */,
 				B499CF68208334650054125D /* TailLoadingCellNode.swift */,
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
+				B499CF70208395250054125D /* Counter.swift */,
 				B499CF6E208347A30054125D /* CountArea.swift */,
 				B499CF5D20832AD20054125D /* Assets.xcassets */,
 				B499CF6220832AD20054125D /* Info.plist */,
@@ -188,16 +191,22 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CountOn/Pods-CountOn-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DateToolsSwift/DateToolsSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Texture/AsyncDisplayKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateToolsSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AsyncDisplayKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +238,7 @@
 			files = (
 				B499CF69208334650054125D /* TailLoadingCellNode.swift in Sources */,
 				B499CF5920832AC80054125D /* CounterViewController.swift in Sources */,
+				B499CF71208395250054125D /* Counter.swift in Sources */,
 				B499CF6F208347A30054125D /* CountArea.swift in Sources */,
 				B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */,
 				B499CF5720832AC80054125D /* AppDelegate.swift in Sources */,
@@ -360,10 +370,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JUQ4EUY679;
 				INFOPLIST_FILE = CountOn/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.faramita.CountOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -379,10 +386,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JUQ4EUY679;
 				INFOPLIST_FILE = CountOn/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.faramita.CountOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

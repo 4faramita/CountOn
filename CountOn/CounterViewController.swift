@@ -8,26 +8,16 @@
 
 import UIKit
 import AsyncDisplayKit
+import RealmSwift
 
 final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate {
-    
-
-    struct State {
-        var itemCount: Int
-        var fetchingMore: Bool
-        static let empty = State(itemCount: 20, fetchingMore: false)
-    }
-    
-    enum Action {
-        case beginBatchFetch
-        case endBatchFetch(resultCount: Int)
-    }
     
     var tableNode: ASTableNode {
         return node as! ASTableNode
     }
-    
-    fileprivate(set) var state: State = .empty
+    let realm = try! Realm()
+    private let counters = try! Realm().objects(Counter.self)
+    var notificationToken: NotificationToken?
     
     init() {
         super.init(node: ASTableNode())
@@ -39,23 +29,54 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         fatalError("storyboards are incompatible with truth and beauty")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupData()
+        
+        // Set results notification block
+        self.notificationToken = counters.observe { (changes: RealmCollectionChange) in
+            switch changes {
+            case .initial:
+                // Results are now populated and can be accessed without blocking the UI
+                self.tableNode.reloadData()
+                break
+            case .update(_, let deletions, let insertions, let modifications):
+                // Query results have changed, so apply them to the TableView
+                self.tableNode.performBatchUpdates({
+                    self.tableNode.insertRows(at: insertions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                    self.tableNode.deleteRows(at: deletions.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                    self.tableNode.reloadRows(at: modifications.map { IndexPath(row: $0, section: 0) }, with: .automatic)
+                }, completion:nil)
+                break
+            case .error(let err):
+                // An error occurred while opening the Realm file on the background worker thread
+                fatalError("\(err)")
+                break
+            }
+        }
+    }
+    
     // MARK: ASTableNode data source and delegate.
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         // Should read the row count directly from table view but
         // https://github.com/facebook/AsyncDisplayKit/issues/1159
-        let rowCount = self.tableNode(tableNode, numberOfRowsInSection: 0)
+
+        let counter = self.counters[indexPath.row]
         
-        if state.fetchingMore && indexPath.row == rowCount - 1 {
-            let node = TailLoadingCellNode()
-            node.style.height = ASDimensionMake(44.0)
-            return node;
-        }
-        
-        let node = CounterCellNode()
+        let node = CounterCellNode(with: counter)
         node.style.height = ASDimensionMake(68.0)
         
         return node
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            realm.beginWrite()
+            realm.delete(counters[indexPath.row])
+            try! realm.commitWrite()
+        }
     }
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
@@ -63,80 +84,55 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        var count = state.itemCount
-        if state.fetchingMore {
-            count += 1
-        }
-        return count
+        return counters.count
     }
     
-    func tableNode(_ tableNode: ASTableNode, willBeginBatchFetchWith context: ASBatchContext) {
-        /// This call will come in on a background thread. Switch to main
-        /// to add our spinner, then fire off our fetch.
-        DispatchQueue.main.async {
-            let oldState = self.state
-            self.state = CounterViewController.handleAction(.beginBatchFetch, fromState: oldState)
-            self.renderDiff(oldState)
-        }
-        
-        CounterViewController.fetchDataWithCompletion { resultCount in
-            let action = Action.endBatchFetch(resultCount: resultCount)
-            let oldState = self.state
-            self.state = CounterViewController.handleAction(action, fromState: oldState)
-            self.renderDiff(oldState)
-            context.completeBatchFetching(true)
-        }
-    }
+    // Dummy Data
     
-    fileprivate func renderDiff(_ oldState: State) {
-        
-        self.tableNode.performBatchUpdates({
-            
-            // Add or remove items
-            let rowCountChange = state.itemCount - oldState.itemCount
-            if rowCountChange > 0 {
-                let indexPaths = (oldState.itemCount..<state.itemCount).map { index in
-                    IndexPath(row: index, section: 0)
+    func setupData() {
+        DispatchQueue.global().async {
+            // Get new realm and table since we are in a new thread
+            autoreleasepool {
+                let realm = try! Realm()
+                realm.beginWrite()
+                for _ in 0..<10 {
+                    // Add row via dictionary. Order is ignored.
+                    let counter = Counter()
+                    counter.title = CounterViewController.randomString()
+                    counter.status = Int(arc4random()) % 100
+                    counter.type = counter.status % 3
+                    let history = History()
+                    history.date = CounterViewController.randomDate()
+                    counter.history.append(history)
+                    
+                    realm.add(counter)
                 }
-                tableNode.insertRows(at: indexPaths, with: .none)
-            } else if rowCountChange < 0 {
-                assertionFailure("Deleting rows is not implemented. YAGNI.")
+                try! realm.commitWrite()
             }
-            
-            // Add or remove spinner.
-            if state.fetchingMore != oldState.fetchingMore {
-                if state.fetchingMore {
-                    // Add spinner.
-                    let spinnerIndexPath = IndexPath(row: state.itemCount, section: 0)
-                    tableNode.insertRows(at: [ spinnerIndexPath ], with: .none)
-                } else {
-                    // Remove spinner.
-                    let spinnerIndexPath = IndexPath(row: oldState.itemCount, section: 0)
-                    tableNode.deleteRows(at: [ spinnerIndexPath ], with: .none)
-                }
-            }
-        }, completion:nil)
-    }
-    
-    /// (Pretend) fetches some new items and calls the
-    /// completion handler on the main thread.
-    fileprivate static func fetchDataWithCompletion(_ completion: @escaping (Int) -> Void) {
-        let time = DispatchTime.now() + Double(Int64(TimeInterval(NSEC_PER_SEC) * 1.0)) / Double(NSEC_PER_SEC)
-        DispatchQueue.main.asyncAfter(deadline: time) {
-            let resultCount = Int(arc4random_uniform(20))
-            completion(resultCount)
         }
     }
     
-    fileprivate static func handleAction(_ action: Action, fromState state: State) -> State {
-        var state = state
-        switch action {
-        case .beginBatchFetch:
-            state.fetchingMore = true
-        case let .endBatchFetch(resultCount):
-            state.itemCount += resultCount
-            state.fetchingMore = false
+    // Helpers
+    
+    @objc func add() {
+        let counter = Counter()
+        counter.title = CounterViewController.randomString()
+        counter.status = Int(arc4random()) % 100
+        counter.type = counter.status % 3
+        let history = History()
+        history.date = CounterViewController.randomDate()
+        counter.history.append(history)
+        
+        try! realm.write {
+            realm.add(counter)
         }
-        return state
+    }
+    
+    class func randomString() -> String {
+        return "Title \(arc4random())"
+    }
+    
+    class func randomDate() -> Date {
+        return Date(timeInterval: TimeInterval(arc4random() % 3600), since: 1.hours.earlier)
     }
 }

@@ -8,6 +8,8 @@
 
 import AsyncDisplayKit
 import UIKit
+import RealmSwift
+import DateToolsSwift
 
 final class CounterCellNode: ASCellNode {
     let title = ASTextNode()
@@ -15,17 +17,18 @@ final class CounterCellNode: ASCellNode {
     let countArea: CountArea
     let count = ASTextNode()
     
-    override init() {
-        let types: [CountType] = [.increase, .decrease, .twoWays]
-        let seed = Int(arc4random())
-        countArea = CountArea(for: types[seed % 3], from: seed % 100)
+    let types: [CountType] = [.increase, .decrease, .twoWays]
+    
+    init(with counter: Counter) {
+        
+        countArea = CountArea(for: types[counter.type], from: counter.status)
         
         super.init()
         
         automaticallyManagesSubnodes = true
         
         title.attributedText = NSAttributedString(
-            string: "布洛芬",
+            string: counter.title,
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
                 NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 1),
@@ -33,7 +36,7 @@ final class CounterCellNode: ASCellNode {
         )
         
         lastLaunch.attributedText = NSAttributedString(
-            string: "上次：两天前",
+            string: "上次：\(counter.history.first!.date.timeAgoSinceNow)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
                 NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 0.5),
