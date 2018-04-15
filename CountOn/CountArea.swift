@@ -25,17 +25,15 @@ final class CountArea: ASDisplayNode {
             string: "\(number)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-//                NSAttributedStringKey.foregroundColor: countColor[self.type]![.foreground]!
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray
-]
+                NSAttributedStringKey.foregroundColor: countColor[self.type]![.foreground]!()
+            ]
         )
     }
     
     override func didLoad() {
         super.didLoad()
         
-//        self.backgroundColor = countColor[self.type]![.background]!
-        self.backgroundColor = UIColor.lightGray
+        self.backgroundColor = countColor[self.type]![.background]!()
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -62,18 +60,18 @@ enum ColorType {
 }
 
 
-let countColor: [CountType: [ColorType: UIColor]] = [
+let countColor: [CountType: [ColorType: () -> UIColor]] = [
     .increase: [
-        .foreground: UIColor(red: 80, green: 227, blue: 194, alpha: 1),
-        .background: UIColor(red: 80, green: 227, blue: 194, alpha: 0.06)
+        .foreground: { return UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 1) },
+        .background: { return UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 0.06) }
     ],
     .decrease: [
-        .foreground: UIColor(red: 245, green: 165, blue: 35, alpha: 1),
-        .background: UIColor(red: 245, green: 165, blue: 35, alpha: 0.06)
+        .foreground: { return UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 1) },
+        .background: { return UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 0.06) }
     ],
     .twoWays: [
-        .foreground: UIColor(red: 144, green: 19, blue: 254, alpha: 1),
-        .background: UIColor(red: 144, green: 19, blue: 254, alpha: 0.06)
+        .foreground: { return UIColor(red: 144 / 255, green: 19 / 255, blue: 254 / 255, alpha: 1) },
+        .background: { return UIColor(red: 144 / 255, green: 19 / 255, blue: 254 / 255, alpha: 0.06) }
     ]
 ]
 

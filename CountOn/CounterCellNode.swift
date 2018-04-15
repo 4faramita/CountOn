@@ -16,7 +16,9 @@ final class CounterCellNode: ASCellNode {
     let count = ASTextNode()
     
     override init() {
-        countArea = CountArea(for: .increase, from: 12)
+        let types: [CountType] = [.increase, .decrease, .twoWays]
+        let seed = Int(arc4random())
+        countArea = CountArea(for: types[seed % 3], from: seed % 100)
         
         super.init()
         
@@ -26,8 +28,7 @@ final class CounterCellNode: ASCellNode {
             string: "布洛芬",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-//                NSAttributedStringKey.foregroundColor: UIColor(red: 39, green: 61, blue: 82, alpha: 1),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray
+                NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 1),
             ]
         )
         
@@ -35,8 +36,7 @@ final class CounterCellNode: ASCellNode {
             string: "上次：两天前",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-//                NSAttributedStringKey.foregroundColor: UIColor(red: 39, green: 61, blue: 82, alpha: 0.5),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray
+                NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 0.5),
             ]
         )
     }
