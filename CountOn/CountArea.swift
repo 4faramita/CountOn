@@ -43,8 +43,8 @@ final class CountArea: ASDisplayNode {
             sizingOptions: .minimumXY,
             child: count
         )
-        
-        return ASRatioLayoutSpec(ratio: 0.85, child: centerSpec)
+                
+        return ASRatioLayoutSpec(ratio: 7 / 6, child: centerSpec)
     }
 }
 

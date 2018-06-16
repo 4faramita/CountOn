@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AsyncDisplayKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,10 +19,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.backgroundColor = .white
+//        let nav = ASNavigationController(rootViewController: CounterViewController())
         window.rootViewController = CounterViewController()
         window.makeKeyAndVisible()
         
         self.window = window
+        
+        let searchAddBar = SearchAddBarView()
+//        let searchAddBar = UIImageView(image: UIImage(named: "bar"))
+        
+//        searchAddBar.frame = CGRect(x: 20, y: window.frame.height - 70, width: 335, height: 55)
+        searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 32)
+        
+//        searchAddBar.style.height = ASDimensionMake(55.0)
+//        nav.navigationController?.view.addSubnode(searchAddBar)
+
+//        window.addSubnode(searchAddBar)
+        window.addSubview(searchAddBar)
+        window.bringSubview(toFront: searchAddBar)
         
         return true
     }

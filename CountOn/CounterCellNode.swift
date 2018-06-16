@@ -12,11 +12,18 @@ import RealmSwift
 import DateToolsSwift
 
 final class CounterCellNode: ASCellNode {
-    let title = ASTextNode()
-    let lastLaunch = ASTextNode()
+    
     let countArea: CountArea
     let count = ASTextNode()
     
+    let title = ASTextNode()
+    let lastLaunch = ASTextNode()
+    
+    let addButton = ASButtonNode()
+    let minusButton = ASButtonNode()
+    
+    let counterBackground = ASImageNode()
+
     let types: [CountType] = [.increase, .decrease, .twoWays]
     
     init(with counter: Counter) {
@@ -42,8 +49,37 @@ final class CounterCellNode: ASCellNode {
                 NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 0.5),
             ]
         )
+        
+        let addButtonNormalTitle = NSAttributedString(
+            string: "+",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            ]
+        )
+        addButton.setAttributedTitle(addButtonNormalTitle, for: UIControlState.normal)
+        
+        let minusButtonNormalTitle = NSAttributedString(
+            string: "-",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+            ]
+        )
+        minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControlState.normal)
+        
+//        let addButtonClickTitle = NSAttributedString(
+//            string: "+",
+//            attributes: [
+//                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
+//                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+//            ]
+//        )
+//        addButton.setAttributedTitle(addButtonClickTitle, for: UIControlState.selected)
+        
+        counterBackground.image = UIImage(named: "CounterBG")
+//        counterBackground.contentMode = .scaleToFill
     }
-
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
@@ -55,17 +91,73 @@ final class CounterCellNode: ASCellNode {
             children: [ title, lastLaunch ]
         )
         
+        
+        let addButtonCenter = ASCenterLayoutSpec(
+            centeringOptions: .XY,
+            sizingOptions: .minimumXY,
+            child: addButton
+        )
+        
+        let addButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: addButtonCenter)
+        
+        let minusButtonCenter = ASCenterLayoutSpec(
+            centeringOptions: .XY,
+            sizingOptions: .minimumXY,
+            child: minusButton
+        )
+        
+        let minusButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: minusButtonCenter)
+        
+        let buttons: [ASLayoutSpec]
+        switch countArea.type {
+        case .increase:
+            buttons = [addButtonSpec]
+        case .decrease:
+            buttons = [minusButtonSpec]
+        case .twoWays:
+            buttons = [minusButtonSpec, addButtonSpec]
+        }
+        
+        let buttonStack = ASStackLayoutSpec(
+            direction: .horizontal,
+            spacing: 0,
+            justifyContent: .start,
+            alignItems: .center,
+            children: buttons
+        )
+        
+        
         let infoInset = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 16, left: 18, bottom: 16, right: 18),
+            insets: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
             child: infoStack
         )
         
-        return ASStackLayoutSpec(
+        let counterInfoStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: 0,
             justifyContent: .start,
             alignItems: .center,
             children: [ countArea, infoInset ]
+        )
+        
+        let foregroundNode = ASStackLayoutSpec(
+            direction: .horizontal,
+            spacing: 0,
+            justifyContent: .spaceBetween,
+            alignItems: .center,
+            children: [ counterInfoStack, buttonStack ]
+        )
+        
+        let foregroundInsetSpec = ASInsetLayoutSpec(
+            insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 15.0, right: 0.0),
+            child: foregroundNode
+        )
+        
+        let bgSpec = ASBackgroundLayoutSpec(child: foregroundInsetSpec, background: counterBackground)
+        
+        return ASInsetLayoutSpec(
+            insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0),
+            child: bgSpec
         )
     }
 }

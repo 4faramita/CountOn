@@ -15,9 +15,12 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     var tableNode: ASTableNode {
         return node as! ASTableNode
     }
+    
     let realm = try! Realm()
     private let counters = try! Realm().objects(Counter.self)
     var notificationToken: NotificationToken?
+    
+//    let buttomBar = SearchAddBarNode()
     
     init() {
         super.init(node: ASTableNode())
@@ -32,7 +35,15 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupData()
+//        buttomBar.style.height = ASDimensionMake(55.0)
+        
+//        MARK: table
+        
+        tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tableNode.view.separatorStyle = .none
+        tableNode.view.allowsSelection = false
+        
+//        setupData()
         
         // Set results notification block
         self.notificationToken = counters.observe { (changes: RealmCollectionChange) in
@@ -57,6 +68,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         }
     }
     
+    
+    
     // MARK: ASTableNode data source and delegate.
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
@@ -66,8 +79,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         let counter = self.counters[indexPath.row]
         
         let node = CounterCellNode(with: counter)
-        node.style.height = ASDimensionMake(68.0)
-        
+        node.style.height = ASDimensionMake(85.0)
+
         return node
     }
     
@@ -87,7 +100,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return counters.count
     }
     
-    // Dummy Data
+    // MARK: Dummy Data
     
     func setupData() {
         DispatchQueue.global().async {
@@ -95,7 +108,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             autoreleasepool {
                 let realm = try! Realm()
                 realm.beginWrite()
-                for _ in 0..<10 {
+                for _ in 0 ..< 10 {
                     // Add row via dictionary. Order is ignored.
                     let counter = Counter()
                     counter.title = CounterViewController.randomString()
@@ -112,7 +125,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         }
     }
     
-    // Helpers
+    // MARK: Helpers
     
     @objc func add() {
         let counter = Counter()
