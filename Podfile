@@ -8,16 +8,16 @@ target 'CountOn' do
     
 	pod 'DateToolsSwift'
     
-#    pod 'RxSwift',    '~> 4.0'
-#    pod 'RxCocoa',    '~> 4.0'
-#    pod 'RxGesture'
+    pod 'RxSwift',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
+    pod 'RxGesture'
 #    pod 'RxRealm'
 
-#    pod 'SnapKit', '~> 4.0.0'
+    pod 'SnapKit', '~> 4.0.0'
 
     pod 'SwifterSwift'
     
-    pod 'DynamicColor', '~> 4.0.1'
-    
-    pod 'AnimatedCollectionViewLayout'
+#    pod 'DynamicColor', '~> 4.0.1'
+
+#    pod 'AnimatedCollectionViewLayout'
 end

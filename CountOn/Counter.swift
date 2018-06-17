@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 final class Counter: Object {
+    @objc dynamic var id = UUID().uuidString
     @objc dynamic var title = ""
     @objc dynamic var note = ""
     @objc dynamic var type = 0 // { 0: increase, 1: decrease, 2: both }

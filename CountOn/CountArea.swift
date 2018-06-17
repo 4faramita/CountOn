@@ -62,16 +62,16 @@ enum ColorType {
 
 let countColor: [CountType: [ColorType: () -> UIColor]] = [
     .increase: [
-        .foreground: { return UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 1) },
-        .background: { return UIColor(red: 80 / 255, green: 227 / 255, blue: 194 / 255, alpha: 0.06) }
+        .foreground: { return UIColor(hexString: "50E3C2", transparency: 1.0)! },
+        .background: { return UIColor(hexString: "50E3C2", transparency: 0.06)! }
     ],
     .decrease: [
-        .foreground: { return UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 1) },
-        .background: { return UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 0.06) }
+        .foreground: { return UIColor(hexString: "F5A623", transparency: 1.0)! },
+        .background: { return UIColor(hexString: "F5A623", transparency: 0.06)! }
     ],
     .twoWays: [
-        .foreground: { return UIColor(red: 144 / 255, green: 19 / 255, blue: 254 / 255, alpha: 1) },
-        .background: { return UIColor(red: 144 / 255, green: 19 / 255, blue: 254 / 255, alpha: 0.06) }
+        .foreground: { return UIColor(hexString: "9013FE", transparency: 1.0)! },
+        .background: { return UIColor(hexString: "9013FE", transparency: 0.06)! }
     ]
 ]
 

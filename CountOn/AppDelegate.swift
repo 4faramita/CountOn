@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AsyncDisplayKit
+//import AsyncDisplayKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,14 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let searchAddBar = SearchAddBarView()
 //        let searchAddBar = UIImageView(image: UIImage(named: "bar"))
-        
-//        searchAddBar.frame = CGRect(x: 20, y: window.frame.height - 70, width: 335, height: 55)
         searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 32)
         
-//        searchAddBar.style.height = ASDimensionMake(55.0)
-//        nav.navigationController?.view.addSubnode(searchAddBar)
-
-//        window.addSubnode(searchAddBar)
         window.addSubview(searchAddBar)
         window.bringSubview(toFront: searchAddBar)
         

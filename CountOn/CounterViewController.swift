@@ -39,7 +39,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         
 //        MARK: table
         
-        tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+        tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 66, right: 0)
         tableNode.view.separatorStyle = .none
         tableNode.view.allowsSelection = false
         
@@ -108,7 +108,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             autoreleasepool {
                 let realm = try! Realm()
                 realm.beginWrite()
-                for _ in 0 ..< 10 {
+                for _ in 0 ..< 100 {
                     // Add row via dictionary. Order is ignored.
                     let counter = Counter()
                     counter.title = CounterViewController.randomString()

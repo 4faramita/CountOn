@@ -10,6 +10,7 @@ import AsyncDisplayKit
 import UIKit
 import RealmSwift
 import DateToolsSwift
+import SwifterSwift
 
 final class CounterCellNode: ASCellNode {
     
@@ -38,7 +39,7 @@ final class CounterCellNode: ASCellNode {
             string: counter.title,
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-                NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 1),
+                NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
             ]
         )
         
@@ -46,7 +47,7 @@ final class CounterCellNode: ASCellNode {
             string: "上次：\(counter.history.first!.date.timeAgoSinceNow)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-                NSAttributedStringKey.foregroundColor: UIColor(red: 39 / 255, green: 61 / 255, blue: 82 / 255, alpha: 0.5),
+                NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
             ]
         )
         
