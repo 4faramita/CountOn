@@ -20,4 +20,6 @@ target 'CountOn' do
 #    pod 'DynamicColor', '~> 4.0.1'
 
 #    pod 'AnimatedCollectionViewLayout'
+
+    pod 'Reveal-SDK', :configurations => ['Debug']
 end

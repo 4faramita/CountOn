@@ -8,14 +8,21 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxGesture
 
-class SearchAddBarView: UIImageView {
+class SearchAddBarView: UIImageView, UITextFieldDelegate {
     
     let addButton = UIButton()
     let searchField = UITextField()
     
+    let disposeBag = DisposeBag()
+    
     convenience init() {
         self.init(image: UIImage(named: "bar"))
+        
+        self.isUserInteractionEnabled = true
         
         let buttonLabel = NSAttributedString(
             string: "Add",
@@ -35,6 +42,14 @@ class SearchAddBarView: UIImageView {
             make.width.equalTo(70)
         }
         
+        addButton.rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                print("tap")
+            })
+            .disposed(by: disposeBag)
+        
         searchField.attributedPlaceholder = NSAttributedString(
             string: "Type to search",
             attributes: [
@@ -42,6 +57,7 @@ class SearchAddBarView: UIImageView {
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.3)!,
             ]
         )
+        searchField.delegate = self
         
         self.addSubview(searchField)
         searchField.snp.makeConstraints { (make) in
@@ -50,7 +66,12 @@ class SearchAddBarView: UIImageView {
             make.height.equalTo(50)
             make.trailing.equalTo(addButton.snp.leading)
         }
-        
-        
+    }
+    
+//    MARK: Text Field Delegation
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchField.resignFirstResponder()
+        return true
     }
 }

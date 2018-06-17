@@ -79,6 +79,7 @@ final class CounterCellNode: ASCellNode {
 //        addButton.setAttributedTitle(addButtonClickTitle, for: UIControlState.selected)
         
         counterBackground.image = UIImage(named: "CounterBG")
+//        counterBackground.contentMode = .scaleAspectFit
 //        counterBackground.contentMode = .scaleToFill
     }
     
@@ -157,7 +158,7 @@ final class CounterCellNode: ASCellNode {
         let bgSpec = ASBackgroundLayoutSpec(child: foregroundInsetSpec, background: counterBackground)
         
         return ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0),
+            insets: UIEdgeInsets(top: 0.0, left: StaticValues.scale * 20.0, bottom: 0.0, right: StaticValues.scale * 20.0),
             child: bgSpec
         )
     }

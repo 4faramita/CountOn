@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		25BC1821E47757B3657E3810 /* Pods_CountOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E76756C02A9625949EF240 /* Pods_CountOn.framework */; };
 		B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */; };
+		B46CB21720D6B53200850067 /* SearchAddBarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CB21620D6B53200850067 /* SearchAddBarNode.swift */; };
 		B499CF5720832AC80054125D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5620832AC80054125D /* AppDelegate.swift */; };
 		B499CF5920832AC80054125D /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5820832AC80054125D /* CounterViewController.swift */; };
 		B499CF5E20832AD20054125D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499CF5D20832AD20054125D /* Assets.xcassets */; };
@@ -16,10 +17,12 @@
 		B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6C20833CD40054125D /* CounterCellNode.swift */; };
 		B499CF6F208347A30054125D /* CountArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6E208347A30054125D /* CountArea.swift */; };
 		B499CF71208395250054125D /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF70208395250054125D /* Counter.swift */; };
+		B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7DB0720D6A1E30074660D /* StaticValues.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddBarView.swift; sourceTree = "<group>"; };
+		B46CB21620D6B53200850067 /* SearchAddBarNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddBarNode.swift; sourceTree = "<group>"; };
 		B499CF5320832AC80054125D /* CountOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499CF5620832AC80054125D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B499CF5820832AC80054125D /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
@@ -29,6 +32,7 @@
 		B499CF6C20833CD40054125D /* CounterCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCellNode.swift; sourceTree = "<group>"; };
 		B499CF6E208347A30054125D /* CountArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountArea.swift; sourceTree = "<group>"; };
 		B499CF70208395250054125D /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		B4B7DB0720D6A1E30074660D /* StaticValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValues.swift; sourceTree = "<group>"; };
 		B68A1A77EB30B936EF16B8C4 /* Pods-CountOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.release.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.release.xcconfig"; sourceTree = "<group>"; };
 		C1E76756C02A9625949EF240 /* Pods_CountOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BAE92AA37E8BB7F85D50D5 /* Pods-CountOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
+				B46CB21620D6B53200850067 /* SearchAddBarNode.swift */,
+				B4B7DB0720D6A1E30074660D /* StaticValues.swift */,
 				B499CF5820832AC80054125D /* CounterViewController.swift */,
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
 				B499CF70208395250054125D /* Counter.swift */,
@@ -109,7 +115,6 @@
 				B499CF5020832AC70054125D /* Frameworks */,
 				B499CF5120832AC70054125D /* Resources */,
 				A92F400A15B7D6DB16CDF888 /* [CP] Embed Pods Frameworks */,
-				D9AF8C1421D591AB83D8AAD8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +202,7 @@
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${PODS_ROOT}/Reveal-SDK/RevealServer-15/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -212,6 +218,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -224,21 +231,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CountOn/Pods-CountOn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D9AF8C1421D591AB83D8AAD8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CountOn/Pods-CountOn-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -249,6 +241,8 @@
 				B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */,
 				B499CF5920832AC80054125D /* CounterViewController.swift in Sources */,
 				B499CF71208395250054125D /* Counter.swift in Sources */,
+				B46CB21720D6B53200850067 /* SearchAddBarNode.swift in Sources */,
+				B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */,
 				B499CF6F208347A30054125D /* CountArea.swift in Sources */,
 				B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */,
 				B499CF5720832AC80054125D /* AppDelegate.swift in Sources */,
@@ -381,7 +375,10 @@
 				DEVELOPMENT_TEAM = JUQ4EUY679;
 				INFOPLIST_FILE = CountOn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.faramita.CountOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -398,7 +395,10 @@
 				DEVELOPMENT_TEAM = JUQ4EUY679;
 				INFOPLIST_FILE = CountOn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.faramita.CountOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -26,8 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         
         let searchAddBar = SearchAddBarView()
-//        let searchAddBar = UIImageView(image: UIImage(named: "bar"))
-        searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 32)
+        searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40)
         
         window.addSubview(searchAddBar)
         window.bringSubview(toFront: searchAddBar)

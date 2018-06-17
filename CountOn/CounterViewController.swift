@@ -9,6 +9,9 @@
 import UIKit
 import AsyncDisplayKit
 import RealmSwift
+import RxSwift
+import RxCocoa
+import RxGesture
 
 final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
     
@@ -39,11 +42,11 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         
 //        MARK: table
         
-        tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 66, right: 0)
+        tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 80, right: 0)
         tableNode.view.separatorStyle = .none
         tableNode.view.allowsSelection = false
         
-//        setupData()
+        if counters.count == 0 { setupData() }
         
         // Set results notification block
         self.notificationToken = counters.observe { (changes: RealmCollectionChange) in
@@ -79,8 +82,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         let counter = self.counters[indexPath.row]
         
         let node = CounterCellNode(with: counter)
-        node.style.height = ASDimensionMake(85.0)
-
+        node.style.height = ASDimensionMake(UIScreen.main.bounds.size.width / 375 * 85)
+        
         return node
     }
     
