@@ -10,7 +10,7 @@ import UIKit
 import AsyncDisplayKit
 import RealmSwift
 
-final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate {
+final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
     
     var tableNode: ASTableNode {
         return node as! ASTableNode
@@ -84,13 +84,13 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return node
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            realm.beginWrite()
-            realm.delete(counters[indexPath.row])
-            try! realm.commitWrite()
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            realm.beginWrite()
+//            realm.delete(counters[indexPath.row])
+//            try! realm.commitWrite()
+//        }
+//    }
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
