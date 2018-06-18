@@ -11,10 +11,21 @@ import UIKit
 import RealmSwift
 import DateToolsSwift
 import SwifterSwift
+import RxSwift
+import RxCocoa
+import RxGesture
 
 final class CounterCellNode: ASCellNode {
     
-    let countArea: CountArea
+    let disposeBag = DisposeBag()
+    
+    var counter: Counter {
+        didSet {
+            countArea = CountArea(for: types[counter.type], from: counter.status)
+        }
+    }
+    
+    var countArea = CountArea()
     let count = ASTextNode()
     
     let title = ASTextNode()
@@ -29,7 +40,9 @@ final class CounterCellNode: ASCellNode {
     
     init(with counter: Counter) {
         
-        countArea = CountArea(for: types[counter.type], from: counter.status)
+        self.counter = counter
+        
+        self.countArea = CountArea(for: types[counter.type], from: counter.status)
         
         super.init()
         
@@ -60,6 +73,22 @@ final class CounterCellNode: ASCellNode {
         )
         addButton.setAttributedTitle(addButtonNormalTitle, for: UIControlState.normal)
         
+        addButton.rx
+            .event(.touchUpInside)
+            .subscribe(onNext: { [weak self] _ in
+                let realm = try! Realm()
+                let counterRef = ThreadSafeReference(to: (self?.counter)!)
+                guard let counter = realm.resolve(counterRef) else {
+                    return // person was deleted
+                }
+                try! realm.write {
+                    counter.history.insert(History(typeOf: 1), at: 0)
+                    counter.status += 1
+                    counter.last = Date()
+                }
+            })
+            .disposed(by: disposeBag)
+        
         let minusButtonNormalTitle = NSAttributedString(
             string: "-",
             attributes: [
@@ -68,6 +97,22 @@ final class CounterCellNode: ASCellNode {
             ]
         )
         minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControlState.normal)
+        
+        minusButton.rx
+            .event(.touchUpInside)
+            .subscribe(onNext: { [weak self] _ in
+                let realm = try! Realm()
+                let counterRef = ThreadSafeReference(to: (self?.counter)!)
+                guard let counter = realm.resolve(counterRef) else {
+                    return // person was deleted
+                }
+                try! realm.write {
+                    counter.history.insert(History(typeOf: -1), at: 0)
+                    counter.status -= 1
+                    counter.last = Date()
+                }
+            })
+            .disposed(by: disposeBag)
         
 //        let addButtonClickTitle = NSAttributedString(
 //            string: "+",
@@ -94,21 +139,21 @@ final class CounterCellNode: ASCellNode {
         )
         
         
-        let addButtonCenter = ASCenterLayoutSpec(
-            centeringOptions: .XY,
-            sizingOptions: .minimumXY,
-            child: addButton
-        )
+//        let addButtonCenter = ASCenterLayoutSpec(
+//            centeringOptions: .XY,
+//            sizingOptions: .minimumXY,
+//            child: addButton
+//        )
         
-        let addButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: addButtonCenter)
+        let addButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: addButton)
         
-        let minusButtonCenter = ASCenterLayoutSpec(
-            centeringOptions: .XY,
-            sizingOptions: .minimumXY,
-            child: minusButton
-        )
+//        let minusButtonCenter = ASCenterLayoutSpec(
+//            centeringOptions: .XY,
+//            sizingOptions: .minimumXY,
+//            child: minusButton
+//        )
         
-        let minusButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: minusButtonCenter)
+        let minusButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: minusButton)
         
         let buttons: [ASLayoutSpec]
         switch countArea.type {

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = window
         
-        let searchAddBar = SearchAddBarView()
+        let searchAddBar = SearchAddBarView.shared
         searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40)
         
         window.addSubview(searchAddBar)

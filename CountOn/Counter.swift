@@ -16,9 +16,17 @@ final class Counter: Object {
     @objc dynamic var type = 0 // { 0: increase, 1: decrease, 2: both }
     @objc dynamic var status = 0
     let history = List<History>() // insert from head
+    
+    @objc dynamic var last = Date()  // for sorting
 }
 
 class History: Object {
     @objc dynamic var date = Date()
     @objc dynamic var action = 0 // {1: increase, -1: decrease, 0: init}
+    
+    convenience init(typeOf action: Int) {
+        self.init()
+        
+        self.action = action
+    }
 }

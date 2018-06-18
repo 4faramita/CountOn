@@ -11,8 +11,12 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import RxGesture
+import RealmSwift
 
 class SearchAddBarView: UIImageView, UITextFieldDelegate {
+    
+    // Singleton
+    static let shared = SearchAddBarView()
     
     let addButton = UIButton()
     let searchField = UITextField()
@@ -45,8 +49,16 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         addButton.rx
             .tapGesture()
             .when(.recognized)
-            .subscribe(onNext: { _ in
-                print("tap")
+            .subscribe(onNext: { [weak self] _ in
+                let newCounter = CounterViewController.generateCounter(
+                    self?.searchField.text,
+                    at: Date()
+                )
+                
+                let realm = try! Realm()
+                try! realm.write {
+                    realm.add(newCounter)
+                }
             })
             .disposed(by: disposeBag)
         

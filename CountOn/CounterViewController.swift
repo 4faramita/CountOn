@@ -20,7 +20,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     }
     
     let realm = try! Realm()
-    private let counters = try! Realm().objects(Counter.self)
+    private let counters = try! Realm().objects(Counter.self).sorted(byKeyPath: "last", ascending: false)
     var notificationToken: NotificationToken?
     
 //    let buttomBar = SearchAddBarNode()
@@ -111,17 +111,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             autoreleasepool {
                 let realm = try! Realm()
                 realm.beginWrite()
-                for _ in 0 ..< 100 {
-                    // Add row via dictionary. Order is ignored.
-                    let counter = Counter()
-                    counter.title = CounterViewController.randomString()
-                    counter.status = Int(arc4random()) % 100
-                    counter.type = counter.status % 3
-                    let history = History()
-                    history.date = CounterViewController.randomDate()
-                    counter.history.append(history)
-                    
-                    realm.add(counter)
+                for _ in 0 ..< 10 {
+                    realm.add(CounterViewController.generateCounter())
                 }
                 try! realm.commitWrite()
             }
@@ -130,17 +121,34 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     
     // MARK: Helpers
     
-    @objc func add() {
+    static func generateCounter(
+        _ title: String? = nil,
+        at date: Date? = nil,
+        from status: Int? = nil,
+        of type: Int? = nil
+    ) -> Counter {
         let counter = Counter()
-        counter.title = CounterViewController.randomString()
-        counter.status = Int(arc4random()) % 100
-        counter.type = counter.status % 3
+        
+        if let title = title, title.count > 0 {
+            counter.title = title
+        } else {
+            counter.title = CounterViewController.randomString()
+        }
+        
+        counter.status = status ?? Int(arc4random()) % 100
+        counter.type = type ?? counter.status % 3
+        
         let history = History()
-        history.date = CounterViewController.randomDate()
+        history.date = date ?? CounterViewController.randomDate()
+        counter.last = history.date
         counter.history.append(history)
         
+        return counter
+    }
+    
+    @objc func add() {
         try! realm.write {
-            realm.add(counter)
+            realm.add(CounterViewController.generateCounter())
         }
     }
     
