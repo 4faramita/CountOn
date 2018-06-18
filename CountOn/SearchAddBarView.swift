@@ -59,11 +59,13 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
                 try! realm.write {
                     realm.add(newCounter)
                 }
+                
+                self?.searchField.text = ""
             })
             .disposed(by: disposeBag)
         
         searchField.attributedPlaceholder = NSAttributedString(
-            string: "Type to search",
+            string: "Type to search or add",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.3)!,
