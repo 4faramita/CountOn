@@ -1,5 +1,9 @@
 PODS:
   - DateToolsSwift (4.0.0)
+  - GTTexture-RxExtension (1.2.0):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+    - Texture (~> 2.6)
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -22,9 +26,6 @@ PODS:
     - Realm (= 3.7.2)
   - Reveal-SDK (15)
   - RxCocoa (4.2.0):
-    - RxSwift (~> 4.0)
-  - RxGesture (1.2.1):
-    - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
   - SnapKit (4.0.0)
@@ -53,10 +54,10 @@ PODS:
 
 DEPENDENCIES:
   - DateToolsSwift
+  - GTTexture-RxExtension
   - RealmSwift
   - Reveal-SDK
   - RxCocoa (~> 4.0)
-  - RxGesture
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
   - SwifterSwift
@@ -65,6 +66,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DateToolsSwift
+    - GTTexture-RxExtension
     - PINCache
     - PINOperation
     - PINRemoteImage
@@ -72,7 +74,6 @@ SPEC REPOS:
     - RealmSwift
     - Reveal-SDK
     - RxCocoa
-    - RxGesture
     - RxSwift
     - SnapKit
     - SwifterSwift
@@ -80,6 +81,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
+  GTTexture-RxExtension: 1093ac89fc8d1cf4c8cf7e12c3998ae7052c2ac3
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
@@ -87,12 +89,11 @@ SPEC CHECKSUMS:
   RealmSwift: 79917cae59a0c43ef8118b233a5978891dd50b4a
   Reveal-SDK: 25e21896c478b60b948f876043f91570d368d23d
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
-  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: c372cbf8ace8e6468dcb7e557b8d2cde4d6deb1a
+PODFILE CHECKSUM: d99a7b5afaf583e5114cf07b14761b7aedd10a78
 
 COCOAPODS: 1.5.3

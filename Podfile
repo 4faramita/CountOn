@@ -10,9 +10,9 @@ target 'CountOn' do
     
     pod 'RxSwift',    '~> 4.0'
     pod 'RxCocoa',    '~> 4.0'
-    pod 'RxGesture'
+#    pod 'RxGesture'
 #    pod 'RxRealm'
-#    pod 'GTTexture-RxExtension'
+    pod 'GTTexture-RxExtension'
 
     pod 'SnapKit', '~> 4.0.0'
 

@@ -11,7 +11,6 @@ import AsyncDisplayKit
 import RealmSwift
 import RxSwift
 import RxCocoa
-import RxGesture
 
 final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
     

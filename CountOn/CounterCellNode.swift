@@ -13,7 +13,7 @@ import DateToolsSwift
 import SwifterSwift
 import RxSwift
 import RxCocoa
-import RxGesture
+import GTTexture_RxExtension
 
 final class CounterCellNode: ASCellNode {
     
@@ -74,7 +74,7 @@ final class CounterCellNode: ASCellNode {
         addButton.setAttributedTitle(addButtonNormalTitle, for: UIControlState.normal)
         
         addButton.rx
-            .event(.touchUpInside)
+            .tap
             .subscribe(onNext: { [weak self] _ in
                 let realm = try! Realm()
                 let counterRef = ThreadSafeReference(to: (self?.counter)!)
@@ -99,7 +99,7 @@ final class CounterCellNode: ASCellNode {
         minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControlState.normal)
         
         minusButton.rx
-            .event(.touchUpInside)
+            .tap
             .subscribe(onNext: { [weak self] _ in
                 let realm = try! Realm()
                 let counterRef = ThreadSafeReference(to: (self?.counter)!)
