@@ -12,22 +12,32 @@ import UIKit
 final class CountArea: ASDisplayNode {
     
     let type: CountType
-    var count = ASTextNode()
+    var countValue: Int {
+        didSet {
+            setLabel()
+        }
+    }
+    var countLabel = ASTextNode()
     
-    init(for type: CountType = .increase, from number: Int = 0) {
-        self.type = type
-        
-        super.init()
-        
-        automaticallyManagesSubnodes = true
-        
-        count.attributedText = NSAttributedString(
-            string: "\(number)",
+    private func setLabel() {
+        countLabel.attributedText = NSAttributedString(
+            string: "\(self.countValue)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
                 NSAttributedStringKey.foregroundColor: countColor[self.type]![.foreground]!()
             ]
         )
+    }
+    
+    init(for type: CountType = .increase, from number: Int = 0) {
+        self.type = type
+        self.countValue = number
+        
+        super.init()
+        
+        automaticallyManagesSubnodes = true
+        
+        setLabel()
     }
     
     override func didLoad() {
@@ -41,7 +51,7 @@ final class CountArea: ASDisplayNode {
         let centerSpec = ASCenterLayoutSpec(
             centeringOptions: .XY,
             sizingOptions: .minimumXY,
-            child: count
+            child: countLabel
         )
                 
         return ASRatioLayoutSpec(ratio: 7 / 6, child: centerSpec)

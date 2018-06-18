@@ -73,21 +73,6 @@ final class CounterCellNode: ASCellNode {
         )
         addButton.setAttributedTitle(addButtonNormalTitle, for: UIControlState.normal)
         
-        addButton.rx
-            .tap
-            .subscribe(onNext: { [weak self] _ in
-                let realm = try! Realm()
-                let counterRef = ThreadSafeReference(to: (self?.counter)!)
-                guard let counter = realm.resolve(counterRef) else {
-                    return // person was deleted
-                }
-                try! realm.write {
-                    counter.history.insert(History(typeOf: 1), at: 0)
-                    counter.status += 1
-                    counter.last = Date()
-                }
-            })
-            .disposed(by: disposeBag)
         
         let minusButtonNormalTitle = NSAttributedString(
             string: "-",
@@ -98,30 +83,61 @@ final class CounterCellNode: ASCellNode {
         )
         minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControlState.normal)
         
-        minusButton.rx
-            .tap
-            .subscribe(onNext: { [weak self] _ in
-                let realm = try! Realm()
-                let counterRef = ThreadSafeReference(to: (self?.counter)!)
-                guard let counter = realm.resolve(counterRef) else {
-                    return // person was deleted
-                }
-                try! realm.write {
-                    counter.history.insert(History(typeOf: -1), at: 0)
-                    counter.status -= 1
-                    counter.last = Date()
-                }
-            })
-            .disposed(by: disposeBag)
         
-//        let addButtonClickTitle = NSAttributedString(
-//            string: "+",
-//            attributes: [
-//                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-//                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
-//            ]
-//        )
-//        addButton.setAttributedTitle(addButtonClickTitle, for: UIControlState.selected)
+        let addsNumber = addButton.rx
+            .tap
+            .map { _ in
+                return 1
+            }
+        
+        let minusesNumber = minusButton.rx
+            .tap
+            .map { _ in
+                return -1
+            }
+        
+        let editResult = Observable.of(addsNumber, minusesNumber)
+            .merge()
+        
+        editResult.subscribe(onNext: { [weak self] number in
+            self?.countArea.countValue += number
+        }).disposed(by: disposeBag)
+        
+        
+        let addsHistory = addButton.rx
+            .tap
+            .map { _ in
+                return History(typeOf: 1)
+            }
+        
+        let minusesHistory = minusButton.rx
+            .tap
+            .map { _ in
+                return History(typeOf: -1)
+            }
+        
+        let historyResult = Observable.of(addsHistory, minusesHistory)
+            .merge()
+            .scan(List<History>(), accumulator: { (oldList: List<History>, newValue: History) -> List<History> in
+                oldList.insert(newValue, at: 0)
+                return oldList
+            })
+            .debounce(1.0, scheduler: MainScheduler.instance)
+            .take(1)
+        
+        historyResult.subscribe(onNext: { [weak self] historyList in
+            let realm = try! Realm()
+            let counterRef = ThreadSafeReference(to: (self?.counter)!)
+            guard let counter = realm.resolve(counterRef) else {
+                return // entity was deleted
+            }
+            try! realm.write {
+                counter.history.insert(contentsOf: historyList, at: 0)
+                counter.status = (self?.countArea.countValue)!
+                counter.last = (counter.history.first?.date)!
+            }
+        }).disposed(by: disposeBag)
+        
         
         counterBackground.image = UIImage(named: "CounterBG")
 //        counterBackground.contentMode = .scaleAspectFit
@@ -138,21 +154,8 @@ final class CounterCellNode: ASCellNode {
             children: [ title, lastLaunch ]
         )
         
-        
-//        let addButtonCenter = ASCenterLayoutSpec(
-//            centeringOptions: .XY,
-//            sizingOptions: .minimumXY,
-//            child: addButton
-//        )
-        
         let addButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: addButton)
-        
-//        let minusButtonCenter = ASCenterLayoutSpec(
-//            centeringOptions: .XY,
-//            sizingOptions: .minimumXY,
-//            child: minusButton
-//        )
-        
+
         let minusButtonSpec = ASRatioLayoutSpec(ratio: 70 / 54, child: minusButton)
         
         let buttons: [ASLayoutSpec]

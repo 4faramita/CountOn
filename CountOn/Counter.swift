@@ -15,7 +15,7 @@ final class Counter: Object {
     @objc dynamic var note = ""
     @objc dynamic var type = 0 // { 0: increase, 1: decrease, 2: both }
     @objc dynamic var status = 0
-    let history = List<History>() // insert from head
+    var history = List<History>() // insert from head
     
     @objc dynamic var last = Date()  // for sorting
 }
