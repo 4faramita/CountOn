@@ -27,6 +27,9 @@ PODS:
   - Reveal-SDK (15)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
+  - RxKeyboard (0.8.3):
+    - RxCocoa (>= 4.1.0)
+    - RxSwift (>= 4.1.0)
   - RxSwift (4.2.0)
   - SnapKit (4.0.0)
   - SwifterSwift (4.3.0):
@@ -58,6 +61,7 @@ DEPENDENCIES:
   - RealmSwift
   - Reveal-SDK
   - RxCocoa (~> 4.0)
+  - RxKeyboard
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
   - SwifterSwift
@@ -74,6 +78,7 @@ SPEC REPOS:
     - RealmSwift
     - Reveal-SDK
     - RxCocoa
+    - RxKeyboard
     - RxSwift
     - SnapKit
     - SwifterSwift
@@ -89,11 +94,12 @@ SPEC CHECKSUMS:
   RealmSwift: 79917cae59a0c43ef8118b233a5978891dd50b4a
   Reveal-SDK: 25e21896c478b60b948f876043f91570d368d23d
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
+  RxKeyboard: e5efbaa109c35be909dd888e53de0f0efdf5169e
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: d99a7b5afaf583e5114cf07b14761b7aedd10a78
+PODFILE CHECKSUM: 2bb9ad090f4aff0673ed30c49a3d05634f826282
 
 COCOAPODS: 1.5.3

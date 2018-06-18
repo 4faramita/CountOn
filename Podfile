@@ -13,6 +13,7 @@ target 'CountOn' do
 #    pod 'RxGesture'
 #    pod 'RxRealm'
     pod 'GTTexture-RxExtension'
+    pod 'RxKeyboard'
 
     pod 'SnapKit', '~> 4.0.0'
 

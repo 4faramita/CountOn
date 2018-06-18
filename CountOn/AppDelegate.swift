@@ -8,12 +8,15 @@
 
 import UIKit
 //import AsyncDisplayKit
+import RxSwift
+import RxCocoa
+import RxKeyboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+    let disposeBag = DisposeBag()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -30,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window.addSubview(searchAddBar)
         window.bringSubview(toFront: searchAddBar)
+        
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { keyboardVisibleHeight in
+                searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40 - keyboardVisibleHeight)
+            })
+            .disposed(by: disposeBag)
         
         return true
     }
