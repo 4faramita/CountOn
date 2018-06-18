@@ -19,7 +19,7 @@ target 'CountOn' do
 
     pod 'SwifterSwift'
     
-#    pod 'DynamicColor', '~> 4.0.1'
+    pod 'DynamicColor', '~> 4.0.1'
 
 #    pod 'AnimatedCollectionViewLayout'
 

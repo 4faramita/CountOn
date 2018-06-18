@@ -71,7 +71,16 @@ final class CounterCellNode: ASCellNode {
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray,
             ]
         )
-        addButton.setAttributedTitle(addButtonNormalTitle, for: UIControlState.normal)
+        addButton.setAttributedTitle(addButtonNormalTitle, for: .normal)
+        
+        let addButtonHighlightedTitle = NSAttributedString(
+            string: "+",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+            ]
+        )
+        addButton.setAttributedTitle(addButtonHighlightedTitle, for: .highlighted)
         
         
         let minusButtonNormalTitle = NSAttributedString(
@@ -82,6 +91,15 @@ final class CounterCellNode: ASCellNode {
             ]
         )
         minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControlState.normal)
+        
+        let minusButtonHighlightedTitle = NSAttributedString(
+            string: "-",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+                ]
+        )
+        minusButton.setAttributedTitle(minusButtonHighlightedTitle, for: .highlighted)
         
         
         let addsNumber = addButton.rx
@@ -122,7 +140,7 @@ final class CounterCellNode: ASCellNode {
                 oldList.insert(newValue, at: 0)
                 return oldList
             })
-            .debounce(1.0, scheduler: MainScheduler.instance)
+            .debounce(0.5, scheduler: MainScheduler.instance)
             .take(1)
         
         historyResult.subscribe(onNext: { [weak self] historyList in

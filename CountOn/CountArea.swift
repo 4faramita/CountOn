@@ -24,7 +24,7 @@ final class CountArea: ASDisplayNode {
             string: "\(self.countValue)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: countColor[self.type]![.foreground]!()
+                NSAttributedStringKey.foregroundColor: Colors.countColor[self.type]![.foreground]!
             ]
         )
     }
@@ -43,7 +43,7 @@ final class CountArea: ASDisplayNode {
     override func didLoad() {
         super.didLoad()
         
-        self.backgroundColor = countColor[self.type]![.background]!()
+        self.backgroundColor = Colors.countColor[self.type]![.background]
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
@@ -57,31 +57,3 @@ final class CountArea: ASDisplayNode {
         return ASRatioLayoutSpec(ratio: 7 / 6, child: centerSpec)
     }
 }
-
-enum CountType {
-    case increase
-    case decrease
-    case twoWays
-}
-
-enum ColorType {
-    case foreground
-    case background
-}
-
-
-let countColor: [CountType: [ColorType: () -> UIColor]] = [
-    .increase: [
-        .foreground: { return UIColor(hexString: "50E3C2", transparency: 1.0)! },
-        .background: { return UIColor(hexString: "50E3C2", transparency: 0.06)! }
-    ],
-    .decrease: [
-        .foreground: { return UIColor(hexString: "F5A623", transparency: 1.0)! },
-        .background: { return UIColor(hexString: "F5A623", transparency: 0.06)! }
-    ],
-    .twoWays: [
-        .foreground: { return UIColor(hexString: "9013FE", transparency: 1.0)! },
-        .background: { return UIColor(hexString: "9013FE", transparency: 0.06)! }
-    ]
-]
-
