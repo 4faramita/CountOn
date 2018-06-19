@@ -106,6 +106,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         if editingStyle == .delete {
             CounterStore.shared.remove(at: indexPath.row)
         }
+//        FIXME: deletion from search result
     }
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {

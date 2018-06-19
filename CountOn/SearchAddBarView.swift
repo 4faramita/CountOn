@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
-//import RxGesture
+import RxGesture
 import RealmSwift
 
 class SearchAddBarView: UIImageView, UITextFieldDelegate {
@@ -80,6 +80,14 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             make.height.equalTo(50)
             make.trailing.equalTo(addButton.snp.leading)
         }
+        
+//        Pull down to dismiss keyboard
+        self.rx
+            .swipeGesture([.down])
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.searchField.resignFirstResponder()
+            }).disposed(by: disposeBag)
     }
     
 //    MARK: Text Field Delegation
