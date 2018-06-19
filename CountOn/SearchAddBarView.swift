@@ -52,16 +52,14 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
                 let title = self?.searchField.text
 //                TODO: Maybe find a way to automatically clear this and emit a event
 //                self?.searchField.clear()
+//                CounterStore.shared.reset()
                 
                 let newCounter = CounterViewController.generateCounter(
                     title,
                     at: Date()
                 )
                 
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.add(newCounter)
-                }
+                CounterStore.shared.insert(item: newCounter)
             })
             .disposed(by: disposeBag)
         

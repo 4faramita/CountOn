@@ -10,6 +10,7 @@
 		25BC1821E47757B3657E3810 /* Pods_CountOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E76756C02A9625949EF240 /* Pods_CountOn.framework */; };
 		B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */; };
 		B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46BAEFA20D819A000524DB8 /* Colors.swift */; };
+		B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46BAEFC20D9501700524DB8 /* CounterStore.swift */; };
 		B499CF5720832AC80054125D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5620832AC80054125D /* AppDelegate.swift */; };
 		B499CF5920832AC80054125D /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5820832AC80054125D /* CounterViewController.swift */; };
 		B499CF5E20832AD20054125D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499CF5D20832AD20054125D /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddBarView.swift; sourceTree = "<group>"; };
 		B46BAEFA20D819A000524DB8 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		B46BAEFC20D9501700524DB8 /* CounterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterStore.swift; sourceTree = "<group>"; };
 		B499CF5320832AC80054125D /* CountOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499CF5620832AC80054125D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B499CF5820832AC80054125D /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
+				B46BAEFC20D9501700524DB8 /* CounterStore.swift */,
 				B4B7DB0720D6A1E30074660D /* StaticValues.swift */,
 				B46BAEFA20D819A000524DB8 /* Colors.swift */,
 				B499CF5820832AC80054125D /* CounterViewController.swift */,
@@ -244,6 +247,7 @@
 				B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */,
 				B499CF5920832AC80054125D /* CounterViewController.swift in Sources */,
 				B499CF71208395250054125D /* Counter.swift in Sources */,
+				B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */,
 				B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */,
 				B499CF6F208347A30054125D /* CountArea.swift in Sources */,
 				B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */,

@@ -11,6 +11,7 @@ import AsyncDisplayKit
 import RealmSwift
 import RxSwift
 import RxCocoa
+//import RxRealm
 //import GTTexture_RxExtension
 
 final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
@@ -21,12 +22,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return node as! ASTableNode
     }
     
-    let realm = try! Realm()
-    private var counters = try! Realm().objects(Counter.self)
-        .sorted(byKeyPath: "last", ascending: false)
     var notificationToken: NotificationToken?
-    
-//    let buttomBar = SearchAddBarNode()
     
     init() {
         super.init(node: ASTableNode())
@@ -41,35 +37,33 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        buttomBar.style.height = ASDimensionMake(55.0)
-        
         //    MARK: Rx
         SearchAddBarView.shared.searchField.rx
             .text
             .orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] keyword in
-                print("emit")
-                var counters = try! Realm().objects(Counter.self)
-                    .sorted(byKeyPath: "last", ascending: false)
-                if !keyword.isEmpty {
-                    counters = counters
-                        .filter("title CONTAINS[cd] '\(keyword)'")
+                print("emit \(keyword)")
+                if keyword.isEmpty {
+                    CounterStore.shared.reset()
+                } else {
+                    CounterStore.shared.filter(with: keyword)
                 }
-                self?.counters = counters
                 self?.tableNode.reloadData()
             }).disposed(by: disposeBag)
+        
         
 //        MARK: table
         
         tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 80, right: 0)
         tableNode.view.separatorStyle = .none
-        tableNode.view.allowsSelection = true  // FIXME: Should be disabled
+        // FIXME: Should be disabled
+        tableNode.view.allowsSelection = true
         
-        if counters.count == 0 { setupData() }
+        if CounterStore.shared.count == 0 { setupData() }
         
         // Set results notification block
-        self.notificationToken = counters.observe { (changes: RealmCollectionChange) in
+        self.notificationToken = CounterStore.shared.items.observe { (changes: RealmCollectionChange) in
             switch changes {
             case .initial:
                 // Results are now populated and can be accessed without blocking the UI
@@ -98,7 +92,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         // Should read the row count directly from table view but
         // https://github.com/facebook/AsyncDisplayKit/issues/1159
 
-        let counter = self.counters[indexPath.row]
+        let counter = CounterStore.shared.item(at: indexPath.row)
         
         let node = CounterCellNode(with: counter)
         node.style.height = ASDimensionMake(UIScreen.main.bounds.size.width / 375 * 85)
@@ -106,14 +100,11 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return node
     }
     
-//    MARK: Swipe to delete.
-//    FIXME: Disable this
+//    FIXME: Disable Swipe to delete.
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            realm.beginWrite()
-            realm.delete(counters[indexPath.row])
-            try! realm.commitWrite()
+            CounterStore.shared.remove(at: indexPath.row)
         }
     }
     
@@ -122,13 +113,13 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return counters.count
+        return CounterStore.shared.count
     }
     
-//    FIXME: Should be disabled
+//    FIXME: Disabled selection
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        print(counters[indexPath.row].history.first!)
+        print(CounterStore.shared.item(at: indexPath.row).history.first!)
     }
     
     // MARK: Dummy Data
@@ -175,9 +166,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     }
     
     @objc func add() {
-        try! realm.write {
-            realm.add(CounterViewController.generateCounter())
-        }
+        CounterStore.shared.insert(item: CounterViewController.generateCounter())
     }
     
     class func randomString() -> String {

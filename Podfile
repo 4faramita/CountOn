@@ -14,12 +14,13 @@ target 'CountOn' do
 #    pod 'RxRealm'
     pod 'GTTexture-RxExtension'
     pod 'RxKeyboard'
+#    pod 'RxASDataSources'
 
     pod 'SnapKit', '~> 4.0.0'
 
     pod 'SwifterSwift'
     
-    pod 'DynamicColor', '~> 4.0.1'
+#    pod 'DynamicColor', '~> 4.0.1'
 
 #    pod 'AnimatedCollectionViewLayout'
 

@@ -134,6 +134,7 @@ final class CounterCellNode: ASCellNode {
             .take(1)
         
         historyResult.subscribe(onNext: { [weak self] historyList in
+//            FIXME: counter edit
             let realm = try! Realm()
             let counterRef = ThreadSafeReference(to: (self?.counter)!)
             guard let counter = realm.resolve(counterRef) else {
