@@ -11,27 +11,23 @@ import RealmSwift
 class CounterStore {
     static let shared = CounterStore()
     
-//    var id = UUID().uuidString
-    
     let realm = try! Realm()
-    private(set) var items = try! Realm().objects(Counter.self)
-        .sorted(byKeyPath: "last", ascending: false)
-//    {
-//        didSet {
-//            self.id = UUID().uuidString
-//        }
-//    }
     
-    private init() {}
+    private let allItems = try! Realm().objects(Counter.self)
+        .sorted(byKeyPath: "last", ascending: false)
+    
+    private(set) var items: Results<Counter>
+    
+    private init() {
+        items = allItems
+    }
     
     func reset() {
-        items = try! Realm().objects(Counter.self)
-            .sorted(byKeyPath: "last", ascending: false)
+        items = allItems
     }
     
     func filter(with keyword: String) {
-        items = try! Realm().objects(Counter.self)
-            .sorted(byKeyPath: "last", ascending: false)
+        items = allItems
             .filter("title CONTAINS[cd] '\(keyword)'")
     }
     
