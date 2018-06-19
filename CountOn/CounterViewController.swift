@@ -11,15 +11,19 @@ import AsyncDisplayKit
 import RealmSwift
 import RxSwift
 import RxCocoa
+//import GTTexture_RxExtension
 
 final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
+    
+    let disposeBag = DisposeBag()
     
     var tableNode: ASTableNode {
         return node as! ASTableNode
     }
     
     let realm = try! Realm()
-    private let counters = try! Realm().objects(Counter.self).sorted(byKeyPath: "last", ascending: false)
+    private var counters = try! Realm().objects(Counter.self)
+        .sorted(byKeyPath: "last", ascending: false)
     var notificationToken: NotificationToken?
     
 //    let buttomBar = SearchAddBarNode()
@@ -38,6 +42,23 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         super.viewDidLoad()
         
 //        buttomBar.style.height = ASDimensionMake(55.0)
+        
+        //    MARK: Rx
+        SearchAddBarView.shared.searchField.rx
+            .text
+            .orEmpty
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] keyword in
+                print("emit")
+                var counters = try! Realm().objects(Counter.self)
+                    .sorted(byKeyPath: "last", ascending: false)
+                if !keyword.isEmpty {
+                    counters = counters
+                        .filter("title CONTAINS[cd] '\(keyword)'")
+                }
+                self?.counters = counters
+                self?.tableNode.reloadData()
+            }).disposed(by: disposeBag)
         
 //        MARK: table
         
@@ -69,7 +90,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             }
         }
     }
-    
     
     
     // MARK: ASTableNode data source and delegate.

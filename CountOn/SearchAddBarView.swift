@@ -49,8 +49,12 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         addButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
+                let title = self?.searchField.text
+//                TODO: Maybe find a way to automatically clear this and emit a event
+//                self?.searchField.clear()
+                
                 let newCounter = CounterViewController.generateCounter(
-                    self?.searchField.text,
+                    title,
                     at: Date()
                 )
                 
@@ -58,8 +62,6 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
                 try! realm.write {
                     realm.add(newCounter)
                 }
-                
-                self?.searchField.text = ""
             })
             .disposed(by: disposeBag)
         
@@ -71,6 +73,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             ]
         )
         searchField.delegate = self
+        searchField.clearButtonMode = UITextFieldViewMode.whileEditing
         
         self.addSubview(searchField)
         searchField.snp.makeConstraints { (make) in
