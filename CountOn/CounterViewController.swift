@@ -43,7 +43,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         
         tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 80, right: 0)
         tableNode.view.separatorStyle = .none
-        tableNode.view.allowsSelection = false
+        tableNode.view.allowsSelection = true  // FIXME: Should be disabled
         
         if counters.count == 0 { setupData() }
         
@@ -86,13 +86,16 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return node
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            realm.beginWrite()
-//            realm.delete(counters[indexPath.row])
-//            try! realm.commitWrite()
-//        }
-//    }
+//    MARK: Swipe to delete.
+//    FIXME: Disable this
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            realm.beginWrite()
+            realm.delete(counters[indexPath.row])
+            try! realm.commitWrite()
+        }
+    }
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
@@ -100,6 +103,12 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
         return counters.count
+    }
+    
+//    FIXME: Should be disabled
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        print(counters[indexPath.row].history.first!)
     }
     
     // MARK: Dummy Data
@@ -137,7 +146,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         counter.status = status ?? Int(arc4random()) % 100
         counter.type = type ?? counter.status % 3
         
-        let history = History()
+        let history = History(from: status ?? Int(arc4random()) % 100)
         history.date = date ?? CounterViewController.randomDate()
         counter.last = history.date
         counter.history.append(history)

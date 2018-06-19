@@ -23,10 +23,18 @@ final class Counter: Object {
 class History: Object {
     @objc dynamic var date = Date()
     @objc dynamic var action = 0 // {1: increase, -1: decrease, 0: init}
+    @objc dynamic var status = -1
+    
+    convenience init(from status: Int) {
+        self.init()
+        
+        self.status = status
+    }
     
     convenience init(typeOf action: Int) {
         self.init()
         
         self.action = action
+//        self.status = status + action
     }
 }

@@ -110,32 +110,22 @@ final class CounterCellNode: ASCellNode {
         
         let minusesNumber = minusButton.rx
             .tap
-            .map { _ in
-                return -1
+            .map { [weak self] _ in
+                if let countValue = self?.countArea.countValue, countValue > 0 {
+                    return -1
+                }
+                return -2
+            }.filter { number in
+                number == -1
             }
         
-        let editResult = Observable.of(addsNumber, minusesNumber)
+        let editStream = Observable.of(addsNumber, minusesNumber)
             .merge()
         
-        editResult.subscribe(onNext: { [weak self] number in
-            self?.countArea.countValue += number
-        }).disposed(by: disposeBag)
-        
-        
-        let addsHistory = addButton.rx
-            .tap
-            .map { _ in
-                return History(typeOf: 1)
+        let historyResult = editStream
+            .map { number in
+                return History(typeOf: number)
             }
-        
-        let minusesHistory = minusButton.rx
-            .tap
-            .map { _ in
-                return History(typeOf: -1)
-            }
-        
-        let historyResult = Observable.of(addsHistory, minusesHistory)
-            .merge()
             .scan(List<History>(), accumulator: { (oldList: List<History>, newValue: History) -> List<History> in
                 oldList.insert(newValue, at: 0)
                 return oldList
@@ -154,6 +144,10 @@ final class CounterCellNode: ASCellNode {
                 counter.status = (self?.countArea.countValue)!
                 counter.last = (counter.history.first?.date)!
             }
+        }).disposed(by: disposeBag)
+        
+        editStream.subscribe(onNext: { [weak self] number in
+            self?.countArea.countValue += number
         }).disposed(by: disposeBag)
         
         
