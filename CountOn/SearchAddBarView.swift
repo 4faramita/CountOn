@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import RealmSwift
+import AsyncDisplayKit
 
 class SearchAddBarView: UIImageView, UITextFieldDelegate {
     
@@ -46,22 +47,6 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             make.width.equalTo(70)
         }
         
-        addButton.rx
-            .tap
-            .subscribe(onNext: { [weak self] _ in
-                let title = self?.searchField.text
-//                TODO: Maybe find a way to automatically clear this and emit a event
-//                self?.searchField.clear()
-//                CounterStore.shared.reset()
-                
-                let newCounter = CounterViewController.generateCounter(
-                    title,
-                    at: Date()
-                )
-                
-                CounterStore.shared.insert(item: newCounter)
-            })
-            .disposed(by: disposeBag)
         
         searchField.attributedPlaceholder = NSAttributedString(
             string: "Type to search or add",
@@ -80,14 +65,6 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             make.height.equalTo(50)
             make.trailing.equalTo(addButton.snp.leading)
         }
-        
-//        Pull down to dismiss keyboard
-        self.rx
-            .swipeGesture([.down])
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                self?.searchField.resignFirstResponder()
-            }).disposed(by: disposeBag)
     }
     
 //    MARK: Text Field Delegation
@@ -95,5 +72,13 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchField.resignFirstResponder()
         return true
+    }
+    
+    func hide() {
+        self.isHidden = true
+    }
+    
+    func show() {
+        self.isHidden = false
     }
 }

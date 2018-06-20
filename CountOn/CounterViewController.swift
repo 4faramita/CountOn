@@ -52,13 +52,43 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
                 self?.tableNode.reloadData()
             }).disposed(by: disposeBag)
         
+        SearchAddBarView.shared.addButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] _ in
+                let title = SearchAddBarView.shared.searchField.text ?? ""
+                SearchAddBarView.shared.searchField.clear()
+                CounterStore.shared.reset()
+                self?.tableNode.reloadData()
+                
+//                let newCounter = CounterViewController.generateCounter(
+//                    title,
+//                    at: Date()
+//                )
+//
+//                CounterStore.shared.insert(item: newCounter)
+                
+//                let nav = ASNavigationController(rootViewController: DetailViewController(with: title))
+                let detailVC = DetailViewController(with: title)
+                self?.present(detailVC, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        SearchAddBarView.shared.rx
+            .swipeGesture([.down])
+            .when(.recognized)
+            .subscribe(onNext: { _ in
+                SearchAddBarView.shared.searchField.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
+
         
 //        MARK: table
         
         tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 80, right: 0)
         tableNode.view.separatorStyle = .none
-        // FIXME: Should be disabled
         tableNode.view.allowsSelection = true
+        
+        tableNode.view.keyboardDismissMode = .interactive
         
         if CounterStore.shared.count == 0 { setupData() }
         
@@ -97,6 +127,16 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         let node = CounterCellNode(with: counter)
         node.style.height = ASDimensionMake(UIScreen.main.bounds.size.width / 375 * 85)
         
+        node.selectionStyle = .none
+        
+//        node.view.rx
+//            .tapGesture()
+//            .when(.recognized)
+//            .subscribe(onNext: { _ in
+//                self.present(DetailViewController(of: CounterStore.shared.item(at: indexPath.row)), animated: true, completion: nil)
+//            })
+//            .disposed(by: disposeBag)
+        
         return node
     }
     
@@ -117,11 +157,16 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return CounterStore.shared.count
     }
     
-//    FIXME: Disabled selection
-    
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        print(CounterStore.shared.item(at: indexPath.row).history.first!)
+        print(">>> select \(indexPath.row)")
+//        let navVC = ASNavigationController(rootViewController: DetailViewController(of: CounterStore.shared.item(at: indexPath.row)))
+        let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
+        self.present(detailVC, animated: true, completion: nil)
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.present(DetailViewController(of: CounterStore.shared.item(at: indexPath.row)), animated: true, completion: nil)
+//    }
     
     // MARK: Dummy Data
     
