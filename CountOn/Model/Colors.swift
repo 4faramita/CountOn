@@ -25,10 +25,10 @@ struct Colors {
     ]
 }
 
-enum CountType {
-    case increase
-    case decrease
-    case twoWays
+enum CountType: Int {
+    case increase = 0
+    case decrease = 1
+    case twoWays = 2
 }
 
 enum ColorType {

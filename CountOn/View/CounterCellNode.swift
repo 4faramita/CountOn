@@ -55,14 +55,20 @@ final class CounterCellNode: ASCellNode {
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
             ]
         )
+        title.style.width = ASDimensionMake(128.0 * StaticValues.scale)
+        title.maximumNumberOfLines = 1
+        title.truncationMode = .byTruncatingTail
         
         lastLaunch.attributedText = NSAttributedString(
-            string: "上次：\(counter.history.first!.date.timeAgoSinceNow)",
+            string: "\(counter.history.first!.date.timeAgoSinceNow)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
             ]
         )
+        lastLaunch.style.width = ASDimensionMake(128.0 * StaticValues.scale)
+        lastLaunch.maximumNumberOfLines = 1
+        lastLaunch.truncationMode = .byTruncatingTail
         
         let addButtonNormalTitle = NSAttributedString(
             string: "+",
@@ -104,8 +110,13 @@ final class CounterCellNode: ASCellNode {
         
         let addsNumber = addButton.rx
             .tap
-            .map { _ in
-                return 1
+            .map { [weak self] _ in
+                if let countValue = self?.countArea.countValue, countValue < 999 {
+                    return 1
+                }
+                return 2
+            }.filter { number in
+                number == 1
             }
         
         let minusesNumber = minusButton.rx

@@ -26,6 +26,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     
     init() {
         super.init(node: ASTableNode())
+        
         tableNode.delegate = self
         tableNode.dataSource = self
     }
