@@ -18,10 +18,6 @@ class DetailViewController: ASViewController<ASDisplayNode> {
     
     let disposeBag = DisposeBag()
     
-    init() {
-        super.init(node: ASDisplayNode())
-    }
-    
     init(of counter: Counter) {
         super.init(node: DetailView(of: counter))
         
@@ -42,14 +38,12 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         super.viewDidLoad()
         
         node.view.addSubview(doneCancelBar)
-        doneCancelBar.center = CGPoint(x: node.frame.width / 2, y: node.frame.height - 40)
+        doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
         SearchAddBarView.shared.hide()
         
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [weak self] keyboardVisibleHeight in
-                if let node = self?.node {
-                    self?.doneCancelBar.center = CGPoint(x: node.frame.width / 2, y: node.frame.height - 40 - keyboardVisibleHeight)
-                }
+                self?.doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40 - keyboardVisibleHeight)
             })
             .disposed(by: disposeBag)
         
@@ -62,9 +56,9 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             .disposed(by: disposeBag)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        print(">>> will appear")
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        print(">>> will appear")
+//    }
 }

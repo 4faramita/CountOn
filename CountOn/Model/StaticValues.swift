@@ -9,5 +9,7 @@
 import UIKit
 
 struct StaticValues {
-    static let scale = UIScreen.main.bounds.size.width / 375
+    static let screenWidth = UIScreen.main.bounds.size.width
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let scale = screenWidth / 375
 }

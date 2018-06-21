@@ -75,6 +75,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B46A199420DB954500FF7A81 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
+				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
+				B46A198E20DAA1C500FF7A81 /* DetailView.swift */,
+				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
+				B499CF6E208347A30054125D /* CountArea.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B46A199520DB957500FF7A81 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B46BAEFC20D9501700524DB8 /* CounterStore.swift */,
+				B4B7DB0720D6A1E30074660D /* StaticValues.swift */,
+				B46BAEFA20D819A000524DB8 /* Colors.swift */,
+				B499CF70208395250054125D /* Counter.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B46A199620DB959000FF7A81 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B499CF5820832AC80054125D /* CounterViewController.swift */,
+				B46A198C20DA98A400FF7A81 /* DetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		B499CF4A20832AC70054125D = {
 			isa = PBXGroup;
 			children = (
@@ -96,17 +128,9 @@
 		B499CF5520832AC80054125D /* CountOn */ = {
 			isa = PBXGroup;
 			children = (
-				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
-				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
-				B46BAEFC20D9501700524DB8 /* CounterStore.swift */,
-				B4B7DB0720D6A1E30074660D /* StaticValues.swift */,
-				B46BAEFA20D819A000524DB8 /* Colors.swift */,
-				B499CF5820832AC80054125D /* CounterViewController.swift */,
-				B46A198C20DA98A400FF7A81 /* DetailViewController.swift */,
-				B46A198E20DAA1C500FF7A81 /* DetailView.swift */,
-				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
-				B499CF70208395250054125D /* Counter.swift */,
-				B499CF6E208347A30054125D /* CountArea.swift */,
+				B46A199620DB959000FF7A81 /* ViewController */,
+				B46A199420DB954500FF7A81 /* View */,
+				B46A199520DB957500FF7A81 /* Model */,
 				B499CF5D20832AD20054125D /* Assets.xcassets */,
 				B499CF6220832AD20054125D /* Info.plist */,
 				B499CF5620832AC80054125D /* AppDelegate.swift */,
