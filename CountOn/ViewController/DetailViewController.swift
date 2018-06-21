@@ -39,10 +39,8 @@ class DetailViewController: ASViewController<ASDisplayNode> {
     }
     
     private func dismissKeyboard() {
-//        if let detailNode = node as? DetailView {
         detailNode.titleField.resignFirstResponder()
         detailNode.noteView.resignFirstResponder()
-//        }
     }
     
     override func viewDidLoad() {
@@ -50,8 +48,20 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         
         detailNode = node as! DetailView
         
+        
+//        MARK: Swipe down to dismiss VC
+        
+//        detailNode.view.rx
+//            .swipeGesture(.down)
+//            .when(.recognized)
+//            .subscribe(onNext: { [weak self] _ in
+//                self?.dismiss(animated: true, completion: nil)
+//            })
+//            .disposed(by: disposeBag)
+        
         node.view.addSubview(doneCancelBar)
         doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
+        
         
 //        MARK: Title and note
         
@@ -83,10 +93,10 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 SearchAddBarView.shared.show()
             })
             .disposed(by: disposeBag)
-        
-        
+
+
 //        MARK: Done and save
-        
+
         doneCancelBar.doneButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
@@ -95,10 +105,10 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 SearchAddBarView.shared.show()
             })
             .disposed(by: disposeBag)
-        
-        
+
+
 //        MARK: click to dismiss keyboard
-        
+
 //        node.view.rx
 //            .tapGesture()
 //            .when(.recognized)
@@ -106,9 +116,9 @@ class DetailViewController: ASViewController<ASDisplayNode> {
 //                self?.dismissKeyboard()
 //            })
 //            .disposed(by: disposeBag)
-        
-        
-//        MARK: doneCancelBar swipe to dismiss keyboard
+
+
+//        MARK: swipe doneCancelBar down to dismiss keyboard
         
         doneCancelBar.rx
             .swipeGesture([.down])
@@ -118,7 +128,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 self?.dismissKeyboard()
             })
             .disposed(by: disposeBag)
-        
+
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [weak self] keyboardVisibleHeight in
                 self?.doneCancelBar.center = CGPoint(
@@ -128,10 +138,4 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
     }
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        print(">>> will appear")
-//    }
 }

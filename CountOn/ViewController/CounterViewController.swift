@@ -39,6 +39,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         super.viewDidLoad()
         
         //    MARK: Rx
+        
         SearchAddBarView.shared.searchField.rx
             .text
             .orEmpty
@@ -60,15 +61,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
                 SearchAddBarView.shared.searchField.clear()
                 CounterStore.shared.reset()
                 self?.tableNode.reloadData()
-                
-//                let newCounter = CounterViewController.generateCounter(
-//                    title,
-//                    at: Date()
-//                )
-//
-//                CounterStore.shared.insert(item: newCounter)
-                
-//                let nav = ASNavigationController(rootViewController: DetailViewController(with: title))
+            
                 let detailVC = DetailViewController(with: title)
                 self?.present(detailVC, animated: true, completion: nil)
             })
@@ -130,32 +123,15 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         
         node.selectionStyle = .none
         
-        // I really really do not want to set up presentViewController in this way
-        // but didSelectRowAt give me a wierd bug
-        // when I click a row, it emit the select event
-        // but not until I click again
-        // it does not emit viewWillAppear of the presented VC
-        node.view.rx
-            .tapGesture(configuration: { gestureRecognizer, delegate in
-                delegate.simultaneousRecognitionPolicy = .never
-            })
-            .when(.recognized)
-            .subscribe(onNext: { _ in
-                self.present(DetailViewController(of: CounterStore.shared.item(at: indexPath.row)), animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
-        
         return node
     }
     
-//    FIXME: Disable Swipe to delete.
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            CounterStore.shared.remove(at: indexPath.row)
-        }
-//        FIXME: deletion from search result
-    }
+//    Disabled Swipe to delete.
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            CounterStore.shared.remove(at: indexPath.row)
+//        }
+//    }
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
@@ -165,10 +141,13 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         return CounterStore.shared.count
     }
     
-//    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-//        let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
-//        self.present(detailVC, animated: true, completion: nil)
-//    }
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
+        
+        DispatchQueue.main.async {
+            self.present(detailVC, animated: true, completion: nil)
+        }
+    }
     
     // MARK: Dummy Data
     

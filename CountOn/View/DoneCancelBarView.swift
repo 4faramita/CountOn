@@ -14,10 +14,13 @@ import RxGesture
 import RealmSwift
 
 class DoneCancelBarView: UIImageView {
+    
+//    static let shared = DoneCancelBarView()
+    
     let disposeBag = DisposeBag()
     
-        let doneButton = UIButton()
-        let cancelButton = UIButton()
+    let doneButton = UIButton()
+    let cancelButton = UIButton()
     
     convenience init() {
         self.init(image: UIImage(named: "clear_bar"))

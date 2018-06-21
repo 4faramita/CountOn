@@ -20,7 +20,7 @@ class DetailView: ASDisplayNode {
     
     let titleField = ASEditableTextNode()
     let noteView = ASEditableTextNode()
-//    let typePicker
+    let typePicker = UISegmentedControl()
     
     let historyView = ASTextNode()
     
