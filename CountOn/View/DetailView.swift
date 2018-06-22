@@ -16,11 +16,18 @@ import SwifterSwift
 
 class DetailView: ASDisplayNode {
     
-    let counterType: [CountType] = [.increase, .decrease, .twoWays]
-    
     let titleField = ASEditableTextNode()
     let noteView = ASEditableTextNode()
-    let typePicker = UISegmentedControl()
+    
+    var typePickerView = UISegmentedControl(items: ["Increase", "Decrease", "Both"])
+    private lazy var typePicker: ASDisplayNode = {
+        ///The node is initialized with a view block that initializes the segment
+        return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
+            self?.typePickerView.selectedSegmentIndex = self?.type.rawValue ?? 0
+            self?.typePickerView.tintColor = Colors.countColor[((self?.type)?.rawValue)!][.foreground]
+            return (self?.typePickerView)!
+        })
+    }()
     
     let historyView = ASTextNode()
     
@@ -45,7 +52,7 @@ class DetailView: ASDisplayNode {
         self.counter = counter
         self.title = counter.title
         self.note = counter.note
-        self.type = counterType[counter.type]
+        self.type = StaticValues.counterType[counter.type]
         self.history = counter.history
         
         setupFields()
@@ -153,12 +160,15 @@ class DetailView: ASDisplayNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        
+        typePicker.style.height = ASDimensionMake(typePickerView.frame.height)
+        
         let infoStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 20,
             justifyContent: .start,
             alignItems: .stretch,
-            children: [ titleField, noteView, historyView ]
+            children: [ titleField, typePicker, noteView, historyView ]
         )
         
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 50, left: 32, bottom: 50, right: 32), child: infoStack)

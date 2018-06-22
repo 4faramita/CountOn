@@ -49,6 +49,19 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         detailNode = node as! DetailView
         
         
+//        MARK: Danamically change the UISegmentedControl's tint color
+        
+        detailNode.typePickerView.rx
+            .selectedSegmentIndex
+            .distinctUntilChanged()
+            .filter({ [0, 1, 2].contains($0) })
+            .subscribe(onNext: { [weak self] index in
+                self?.detailNode.type = StaticValues.counterType[index]
+                self?.detailNode.typePickerView.tintColor = Colors.countColor[index][.foreground]
+            })
+            .disposed(by: disposeBag)
+        
+        
 //        MARK: Swipe down to dismiss VC
         
 //        detailNode.view.rx

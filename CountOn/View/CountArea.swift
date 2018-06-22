@@ -24,7 +24,7 @@ final class CountArea: ASDisplayNode {
             string: "\(self.countValue)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: Colors.countColor[self.type]![.foreground]!
+                NSAttributedStringKey.foregroundColor: Colors.countColor[self.type.rawValue][.foreground]!
             ]
         )
     }
@@ -43,7 +43,7 @@ final class CountArea: ASDisplayNode {
     override func didLoad() {
         super.didLoad()
         
-        self.backgroundColor = Colors.countColor[self.type]![.background]
+        self.backgroundColor = Colors.countColor[self.type.rawValue][.background]
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

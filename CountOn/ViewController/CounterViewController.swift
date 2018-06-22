@@ -45,7 +45,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             .orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] keyword in
-                print("emit \(keyword)")
                 if keyword.isEmpty {
                     CounterStore.shared.reset()
                 } else {
@@ -144,8 +143,9 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
         
-        DispatchQueue.main.async {
-            self.present(detailVC, animated: true, completion: nil)
+//        FIXME: Actually this is not my bug! How about that!
+        DispatchQueue.main.async { [weak self] in
+            self?.present(detailVC, animated: true, completion: nil)
         }
     }
     
