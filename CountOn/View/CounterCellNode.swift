@@ -195,7 +195,9 @@ final class CounterCellNode: ASCellNode {
             counterBackground.image = UIImage(named: "counter_both")
         }
         
-//        counterBackground.contentMode = .scaleAspectFit
+//        if StaticValues.scale < 1 {
+//            counterBackground.contentMode = .sc
+//        }
 //        counterBackground.contentMode = .scaleToFill
     }
     

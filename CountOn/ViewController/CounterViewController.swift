@@ -145,7 +145,10 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         
 //        FIXME: Actually this is not my bug! How about that!
         DispatchQueue.main.async { [weak self] in
-            self?.present(detailVC, animated: true, completion: nil)
+            self?.present(detailVC, animated: true, completion: {
+                CounterStore.shared.reset()
+                self?.tableNode.reloadData()
+            })
         }
     }
     

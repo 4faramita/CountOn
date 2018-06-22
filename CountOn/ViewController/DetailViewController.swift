@@ -126,8 +126,14 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         doneCancelBar.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
+//                CounterStore.shared.reset()
                 self?.detailNode.delete()
                 self?.dismiss(animated: true, completion: nil)
+//                TODO: Now I clear search field
+//                      to prevent crash when deleteing from the search result.
+//                      But hopefully I do not have to do that
+                SearchAddBarView.shared.searchField.clear()
+
                 SearchAddBarView.shared.show()
             })
             .disposed(by: disposeBag)
