@@ -186,8 +186,15 @@ final class CounterCellNode: ASCellNode {
             })
             .disposed(by: disposeBag)
         
+        switch StaticValues.counterType[counter.type] {
+        case .increase:
+            counterBackground.image = UIImage(named: "counter_increase")
+        case .decrease:
+            counterBackground.image = UIImage(named: "counter_decrease")
+        case .twoWays:
+            counterBackground.image = UIImage(named: "counter_both")
+        }
         
-        counterBackground.image = UIImage(named: "CounterBG")
 //        counterBackground.contentMode = .scaleAspectFit
 //        counterBackground.contentMode = .scaleToFill
     }
