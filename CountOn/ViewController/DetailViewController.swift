@@ -80,7 +80,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
 //        MARK: Title, note and status
 //        TODO: This does not have to emit according to change
         
-        detailNode.titleField.textView.rx
+        detailNode.titleField.rx
             .text.orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newTitle in
@@ -103,13 +103,13 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-        detailNode.statusField.textView.rx
+        detailNode.statusField.rx
             .text.orEmpty
             .distinctUntilChanged()
 //            .filter { $0.isDigits }
             .subscribe(onNext: { [weak self] newStatus in
                 if let status = Int(newStatus.trimmed){
-                    self?.detailNode.status = status
+                    self?.detailNode.status = max(0, min(999, status))
                 }
             })
             .disposed(by: disposeBag)

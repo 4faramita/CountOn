@@ -12,13 +12,25 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 import SwifterSwift
-//import GTTexture_RxExtension
 
 class DetailView: ASDisplayNode {
     
-    let titleField = ASEditableTextNode()
+    var titleField = UITextField()
+    private lazy var titleNode: ASDisplayNode = {
+        return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
+            return (self?.titleField)!
+        })
+    }()
+    
     let noteView = ASEditableTextNode()
-    let statusField = ASEditableTextNode()
+    
+    var statusField = UITextField()
+    private lazy var statusNode: ASDisplayNode = {
+        return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
+            return (self?.statusField)!
+        })
+    }()
+    
     let historyView = ASTextNode()
     
     let centerParagraphStyle = NSMutableParagraphStyle()
@@ -58,12 +70,12 @@ class DetailView: ASDisplayNode {
         
         centerParagraphStyle.alignment = .center
 
-        multiLineParagraphStyle.lineSpacing = 5
-        multiLineParagraphStyle.paragraphSpacing = 10
+        multiLineParagraphStyle.lineSpacing = 3
+        multiLineParagraphStyle.paragraphSpacing = 5
         
         multiLineCenterParagraphStyle.alignment = .center
-        multiLineCenterParagraphStyle.lineSpacing = 5
-        multiLineCenterParagraphStyle.paragraphSpacing = 10
+        multiLineCenterParagraphStyle.lineSpacing = 3
+        multiLineCenterParagraphStyle.paragraphSpacing = 5
         
         backgroundColor = .white
         automaticallyManagesSubnodes = true
@@ -93,30 +105,14 @@ class DetailView: ASDisplayNode {
 //    MARK: Setup UI
     
     private func initTitleField() {
-        titleField.attributedPlaceholderText = NSAttributedString(
-            string: "Title of the counter",
-            attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-                ]
-        )
-        titleField.maximumLinesToDisplay = 1
-        titleField.scrollEnabled = false
         titleField.enablesReturnKeyAutomatically = true
-        titleField.typingAttributes = [
-            NSAttributedStringKey.font.rawValue: UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1),
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkGray,
-        ]
+        titleField.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
+        titleField.textColor = UIColor.darkGray
+        titleField.placeholder = "Title of the counter"
     }
     
     private func setupTitleField() {
-        titleField.attributedText = NSAttributedString(
-            string: title,
-            attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
-                ]
-        )
+        titleField.text = title
     }
     
     private func initNoteView() {
@@ -129,7 +125,6 @@ class DetailView: ASDisplayNode {
                 ]
         )
         noteView.scrollEnabled = true
-        noteView.style.height = ASDimensionMake(96.0)
 
         noteView.typingAttributes = [
             NSAttributedStringKey.font.rawValue: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
@@ -145,40 +140,20 @@ class DetailView: ASDisplayNode {
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
                 NSAttributedStringKey.foregroundColor: UIColor.darkGray,
                 NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
-                ]
+            ]
         )
     }
     
     private func initStatusField() {
-        
-        statusField.attributedPlaceholderText = NSAttributedString(
-            string: "Starts from…",
-            attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.largeTitle),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-                NSAttributedStringKey.paragraphStyle: centerParagraphStyle
-            ]
-        )
-        statusField.maximumLinesToDisplay = 1
-        statusField.scrollEnabled = false
         statusField.enablesReturnKeyAutomatically = true
-        
-        statusField.typingAttributes = [
-            NSAttributedStringKey.font.rawValue: UIFont.preferredFont(forTextStyle: UIFontTextStyle.largeTitle),
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkGray,
-            NSAttributedStringKey.paragraphStyle.rawValue: centerParagraphStyle
-        ]
+        statusField.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.largeTitle)
+        statusField.textColor = UIColor.darkGray
+        statusField.textAlignment = .center
+        statusField.placeholder = "Starts from…"
     }
     
     private func setupStatusField() {
-        statusField.attributedText = NSAttributedString(
-            string: "\(status)",
-            attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.callout),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
-                NSAttributedStringKey.paragraphStyle: centerParagraphStyle
-                ]
-        )
+        statusField.text = "\(status)"
     }
     
     private func setupFields() {
@@ -222,29 +197,22 @@ class DetailView: ASDisplayNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        
+        titleNode.style.height = ASDimensionMake(44)
+        noteView.style.height = ASDimensionMake(96)
+        statusNode.style.height = ASDimensionMake(42)
         typePicker.style.height = ASDimensionMake(typePickerView.frame.height)
         
-        let bottom = isInEditMode ? historyView : statusField
+        let bottom = isInEditMode ? historyView : statusNode
         
         let infoStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 20,
             justifyContent: .start,
             alignItems: .stretch,
-            children: [ titleField, typePicker, noteView, bottom ]
+            children: [ titleNode, typePicker, noteView, bottom ]
         )
         
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 50, left: 32, bottom: 50, right: 32), child: infoStack)
     }
 }
 
-extension DetailView: ASEditableTextNodeDelegate {
-    func editableTextNode(_ editableTextNode: ASEditableTextNode, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
-            return true
-        }
-        editableTextNode.resignFirstResponder()
-        return false
-    }
-}
