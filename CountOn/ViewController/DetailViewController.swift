@@ -88,29 +88,11 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-//        detailNode.titleField.textView.rx
-//            .controlEvent([.editingDidEndOnExit])
-//            .subscribe(onNext: { _ in
-//                detailNode.titleField.textView.resignFirstResponder()
-//            })
-//            .disposed(by: disposeBag)
-        
         detailNode.noteView.textView.rx
             .text.orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newNote in
                 self?.detailNode.note = newNote
-            })
-            .disposed(by: disposeBag)
-        
-        detailNode.statusField.rx
-            .text.orEmpty
-            .distinctUntilChanged()
-//            .filter { $0.isDigits }
-            .subscribe(onNext: { [weak self] newStatus in
-                if let status = Int(newStatus.trimmed){
-                    self?.detailNode.status = max(0, min(999, status))
-                }
             })
             .disposed(by: disposeBag)
         

@@ -24,10 +24,10 @@ class DetailView: ASDisplayNode {
     
     let noteView = ASEditableTextNode()
     
-    var statusField = UITextField()
+    var statusPicker = UIPickerView()
     private lazy var statusNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
-            return (self?.statusField)!
+            return (self?.statusPicker)!
         })
     }()
     
@@ -49,7 +49,6 @@ class DetailView: ASDisplayNode {
     
     var typePickerView = UISegmentedControl(items: ["Increase", "Decrease", "Both"])
     private lazy var typePicker: ASDisplayNode = {
-        ///The node is initialized with a view block that initializes the segment
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
             self?.typePickerView.selectedSegmentIndex = self?.type.rawValue ?? 0
             self?.typePickerView.tintColor = Colors.countColor[((self?.type)?.rawValue)!][.foreground]
@@ -144,16 +143,9 @@ class DetailView: ASDisplayNode {
         )
     }
     
-    private func initStatusField() {
-        statusField.enablesReturnKeyAutomatically = true
-        statusField.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.largeTitle)
-        statusField.textColor = UIColor.darkGray
-        statusField.textAlignment = .center
-        statusField.placeholder = "Starts from…"
-    }
-    
-    private func setupStatusField() {
-        statusField.text = "\(status)"
+    private func initStatusNode() {
+        statusPicker.delegate = self
+        statusPicker.dataSource = self
     }
     
     private func setupFields() {
@@ -161,8 +153,7 @@ class DetailView: ASDisplayNode {
         setupTitleField()
         initNoteView()
         setupNoteView()
-        initStatusField()
-//        setupStatusField()
+        initStatusNode()
     }
     
     
@@ -198,8 +189,8 @@ class DetailView: ASDisplayNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         titleNode.style.height = ASDimensionMake(44)
-        noteView.style.height = ASDimensionMake(96)
-        statusNode.style.height = ASDimensionMake(42)
+        noteView.style.height = ASDimensionMake(128)
+        statusNode.style.height = ASDimensionMake(statusPicker.frame.height)
         typePicker.style.height = ASDimensionMake(typePickerView.frame.height)
         
         let bottom = isInEditMode ? historyView : statusNode
@@ -216,3 +207,26 @@ class DetailView: ASDisplayNode {
     }
 }
 
+extension DetailView: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 10
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(row)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        var stringValue = ""
+        for index in 0 ..< pickerView.numberOfComponents {
+            let selectedRow = pickerView.selectedRow(inComponent: index)
+            let title = self.pickerView(pickerView, titleForRow: selectedRow, forComponent: index)
+            stringValue += title!
+        }
+        status = Int(stringValue.trimmed)!
+    }
+}
