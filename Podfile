@@ -24,5 +24,11 @@ target 'CountOn' do
 
 #    pod 'AnimatedCollectionViewLayout'
 
+    pod 'SwiftMessages'
+    
+#    pod 'SkyFloatingLabelTextField', '~> 3.0'
+
+#    pod 'SwipeCellKit'
+
     pod 'Reveal-SDK', :configurations => ['Debug']
 end

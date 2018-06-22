@@ -187,6 +187,18 @@ class DetailView: ASDisplayNode {
         }
     }
     
+    func delete() {
+        let realm = try! Realm()
+        
+        if isInEditMode {
+            let counterRef = ThreadSafeReference(to: counter!)
+            guard let counter = realm.resolve(counterRef) else {
+                return // entity was deleted
+            }
+            CounterStore.shared.remove(item: counter)
+        }
+    }
+    
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         titleNode.style.height = ASDimensionMake(44)
         noteView.style.height = ASDimensionMake(128)
@@ -228,5 +240,9 @@ extension DetailView: UIPickerViewDataSource, UIPickerViewDelegate {
             stringValue += title!
         }
         status = Int(stringValue.trimmed)!
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return CGFloat(50 * StaticValues.scale)
     }
 }

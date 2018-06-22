@@ -50,6 +50,9 @@ PODS:
   - SwifterSwift/MapKit (4.3.0)
   - SwifterSwift/SwiftStdlib (4.3.0)
   - SwifterSwift/UIKit (4.3.0)
+  - SwiftMessages (4.1.4):
+    - SwiftMessages/App (= 4.1.4)
+  - SwiftMessages/App (4.1.4)
   - Texture (2.7):
     - Texture/PINRemoteImage (= 2.7)
   - Texture/Core (2.7)
@@ -69,6 +72,7 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
   - SwifterSwift
+  - SwiftMessages
   - Texture
 
 SPEC REPOS:
@@ -87,6 +91,7 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SwifterSwift
+    - SwiftMessages
     - Texture
 
 SPEC CHECKSUMS:
@@ -104,8 +109,9 @@ SPEC CHECKSUMS:
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
+  SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: 8d120e2efdcbf0a021df046326f227139ac1a902
+PODFILE CHECKSUM: 2996c729c989f5a58e4c9bbc1c0fa1b563e7bb91
 
 COCOAPODS: 1.5.3

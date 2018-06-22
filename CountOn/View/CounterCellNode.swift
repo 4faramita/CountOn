@@ -14,6 +14,7 @@ import SwifterSwift
 import RxSwift
 import RxCocoa
 import GTTexture_RxExtension
+import SwiftMessages
 
 final class CounterCellNode: ASCellNode {
     
@@ -108,29 +109,35 @@ final class CounterCellNode: ASCellNode {
         minusButton.setAttributedTitle(minusButtonHighlightedTitle, for: .highlighted)
         
         
-        let addsNumber = addButton.rx
+        let addStream = addButton.rx
             .tap
-            .map { [weak self] _ in
+            .map { [weak self] _ -> Int in
                 if let countValue = self?.countArea.countValue, countValue < 999 {
                     return 1
                 }
                 return 2
-            }.filter { number in
+            }
+        
+        let validAddStream = addStream
+            .filter { number in
                 number == 1
             }
         
-        let minusesNumber = minusButton.rx
+        let minusStream = minusButton.rx
             .tap
-            .map { [weak self] _ in
+            .map { [weak self] _ -> Int in
                 if let countValue = self?.countArea.countValue, countValue > 0 {
                     return -1
                 }
                 return -2
-            }.filter { number in
+            }
+        
+        let validMinuseStream = minusStream
+            .filter { number in
                 number == -1
             }
         
-        let editStream = Observable.of(addsNumber, minusesNumber)
+        let editStream = Observable.of(validAddStream, validMinuseStream)
             .merge()
         
         let historyResult = editStream
@@ -162,10 +169,52 @@ final class CounterCellNode: ASCellNode {
             self?.countArea.countValue += number
         }).disposed(by: disposeBag)
         
+        addStream
+            .filter { $0 != 1 }
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                SwiftMessages.show(view: (self?.generateWarning(forZero: false))!)
+            })
+            .disposed(by: disposeBag)
+        
+        
+        minusStream
+            .filter { $0 != -1 }
+            .throttle(0.5, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                SwiftMessages.show(view: (self?.generateWarning(forZero: true))!)
+            })
+            .disposed(by: disposeBag)
+        
         
         counterBackground.image = UIImage(named: "CounterBG")
 //        counterBackground.contentMode = .scaleAspectFit
 //        counterBackground.contentMode = .scaleToFill
+    }
+    
+    private func generateWarning(forZero: Bool) -> UIView {
+        let view = MessageView.viewFromNib(layout: .cardView)
+        
+        // Theme message elements with the warning style.
+        view.configureTheme(.warning)
+        
+        // Add a drop shadow.
+        view.configureDropShadow()
+        
+        // Set message title, body, and icon. Here, we're overriding the default warning
+        // image with an emoji character.
+        let iconText = ["🤷‍♂️", "🤷‍♀️"].sm_random()!
+        let sentence = (forZero ? "Do not want to go negative." : "Cannot go over 999.")
+        view.configureContent(title: "Warning", body: sentence, iconText: iconText)
+        
+        // Hide when button tapped
+        view.buttonTapHandler = { _ in SwiftMessages.hide() }
+        view.button?.setTitle("OK", for: .normal)
+        
+        // Hide when message view tapped
+        view.tapHandler = { _ in SwiftMessages.hide() }
+        
+        return view
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

@@ -120,6 +120,17 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 SearchAddBarView.shared.show()
             })
             .disposed(by: disposeBag)
+    
+//        MARK: Delete
+        
+        doneCancelBar.deleteButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.detailNode.delete()
+                self?.dismiss(animated: true, completion: nil)
+                SearchAddBarView.shared.show()
+            })
+            .disposed(by: disposeBag)
 
 
 //        MARK: click to dismiss keyboard
