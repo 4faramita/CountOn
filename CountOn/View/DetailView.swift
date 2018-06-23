@@ -12,6 +12,7 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 import SwifterSwift
+import DateToolsSwift
 
 class DetailView: ASDisplayNode {
     
@@ -31,8 +32,9 @@ class DetailView: ASDisplayNode {
         })
     }()
     
-    let historyView = ASTextNode()
-    
+    var historyTable: HistoryTableNode?
+    let bottomTitle = ASTextNode()
+
     let centerParagraphStyle = NSMutableParagraphStyle()
     let multiLineParagraphStyle = NSMutableParagraphStyle()
     let multiLineCenterParagraphStyle = NSMutableParagraphStyle()
@@ -60,7 +62,6 @@ class DetailView: ASDisplayNode {
     var note = ""
     var type = CountType.increase
     var status = 0  // only for new
-    var history = List<History>()
     
     var counter: Counter?
     
@@ -87,7 +88,6 @@ class DetailView: ASDisplayNode {
         self.title = counter.title
         self.note = counter.note
         self.type = StaticValues.counterType[counter.type]
-        self.history = counter.history
         
         setupFields()
     }
@@ -148,12 +148,32 @@ class DetailView: ASDisplayNode {
         statusPicker.dataSource = self
     }
     
+    private func setupHistoryTable() {
+        self.historyTable = HistoryTableNode(with: self.counter!.history)
+    }
+    
+    private func initBottomTitle() {
+        bottomTitle.attributedText = NSAttributedString(
+            string: isInEditMode ? "History" : "Start from",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
+                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
+            ]
+        )
+    }
+    
     private func setupFields() {
         initTitleField()
         setupTitleField()
         initNoteView()
         setupNoteView()
-        initStatusNode()
+        if isInEditMode {
+            setupHistoryTable()
+        } else {
+            initStatusNode()
+        }
+        initBottomTitle()
     }
     
     
@@ -200,19 +220,28 @@ class DetailView: ASDisplayNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        titleNode.style.height = ASDimensionMake(44)
-        noteView.style.height = ASDimensionMake(128)
+        titleNode.style.height = ASDimensionMake(48)
         statusNode.style.height = ASDimensionMake(statusPicker.frame.height)
+        noteView.style.height = ASDimensionMake(96)
         typePicker.style.height = ASDimensionMake(typePickerView.frame.height)
+        historyTable?.style.height = ASDimensionMake(StaticValues.screenHeight - 309)
         
-        let bottom = isInEditMode ? historyView : statusNode
+        let bottom = isInEditMode ? historyTable! : statusNode
+        
+        let bottomStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: 10,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [ bottomTitle, bottom ]
+        )
         
         let infoStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 20,
             justifyContent: .start,
             alignItems: .stretch,
-            children: [ titleNode, typePicker, noteView, bottom ]
+            children: [ titleNode, typePicker, noteView, bottomStack ]
         )
         
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 50, left: 32, bottom: 50, right: 32), child: infoStack)

@@ -14,6 +14,8 @@
 		B46A199320DAA7C500FF7A81 /* DoneCancelBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */; };
 		B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46BAEFA20D819A000524DB8 /* Colors.swift */; };
 		B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46BAEFC20D9501700524DB8 /* CounterStore.swift */; };
+		B47FEFAA20DE5BD400028825 /* HistoryTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */; };
+		B47FEFAC20DE606A00028825 /* HistoryCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */; };
 		B499CF5720832AC80054125D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5620832AC80054125D /* AppDelegate.swift */; };
 		B499CF5920832AC80054125D /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5820832AC80054125D /* CounterViewController.swift */; };
 		B499CF5E20832AD20054125D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499CF5D20832AD20054125D /* Assets.xcassets */; };
@@ -31,6 +33,8 @@
 		B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneCancelBarView.swift; sourceTree = "<group>"; };
 		B46BAEFA20D819A000524DB8 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B46BAEFC20D9501700524DB8 /* CounterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterStore.swift; sourceTree = "<group>"; };
+		B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableNode.swift; sourceTree = "<group>"; };
+		B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCellNode.swift; sourceTree = "<group>"; };
 		B499CF5320832AC80054125D /* CountOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499CF5620832AC80054125D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B499CF5820832AC80054125D /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +86,9 @@
 				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
 				B46A198E20DAA1C500FF7A81 /* DetailView.swift */,
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
+				B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */,
 				B499CF6E208347A30054125D /* CountArea.swift */,
+				B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -280,8 +286,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47FEFAC20DE606A00028825 /* HistoryCellNode.swift in Sources */,
 				B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */,
 				B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */,
+				B47FEFAA20DE5BD400028825 /* HistoryTableNode.swift in Sources */,
 				B499CF5920832AC80054125D /* CounterViewController.swift in Sources */,
 				B499CF71208395250054125D /* Counter.swift in Sources */,
 				B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */,
