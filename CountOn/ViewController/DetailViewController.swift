@@ -126,15 +126,22 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         doneCancelBar.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-//                CounterStore.shared.reset()
-                self?.detailNode.delete()
-                self?.dismiss(animated: true, completion: nil)
+                let alert = UIAlertController(title: "This counter is about to be deleted.", message: "This cannot be undone. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+                let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive) { _ in
+                    self?.detailNode.delete()
+                    self?.dismiss(animated: true, completion: nil)
 //                TODO: Now I clear search field
 //                      to prevent crash when deleteing from the search result.
 //                      But hopefully I do not have to do that
-                SearchAddBarView.shared.searchField.clear()
-
-                SearchAddBarView.shared.show()
+                    SearchAddBarView.shared.searchField.clear()
+//                CounterStore.shared.reset()
+                    
+                    SearchAddBarView.shared.show()
+                }
+                alert.addAction(cancelAction)
+                alert.addAction(yesAction)
+                self?.present(alert, animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
 
