@@ -22,10 +22,10 @@ class HistoryCellNode: ASCellNode {
         switch history.action {
         case 1:
             typeString = "+"
-            backgroundColor = UIColor(named: "increasing")!.withAlphaComponent(StaticValues.backgroundAlpha)
+            backgroundColor = R.color.increasing()!.withAlphaComponent(StaticValues.backgroundAlpha)
         case -1:
             typeString = "-"
-            backgroundColor = UIColor(named: "decreasing")!.withAlphaComponent(StaticValues.backgroundAlpha)
+            backgroundColor = R.color.decreasing()!.withAlphaComponent(StaticValues.backgroundAlpha)
         case 0:
             typeString = "→ \(history.status)"
         default:

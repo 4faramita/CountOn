@@ -19,16 +19,12 @@ target 'CountOn' do
     pod 'SnapKit', '~> 4.0.0'
 
     pod 'SwifterSwift'
-    
-#    pod 'DynamicColor', '~> 4.0.1'
 
 #    pod 'AnimatedCollectionViewLayout'
 
     pod 'SwiftMessages'
-    
-#    pod 'SkyFloatingLabelTextField', '~> 3.0'
 
-#    pod 'SwipeCellKit'
+    pod 'R.swift'
 
     pod 'Reveal-SDK', :configurations => ['Debug']
 end

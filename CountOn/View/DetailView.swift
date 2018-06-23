@@ -110,7 +110,7 @@ class DetailView: ASDisplayNode {
             string: "Title",
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
+                NSAttributedStringKey.foregroundColor: R.color.title()!,
                 NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
@@ -130,7 +130,7 @@ class DetailView: ASDisplayNode {
             string: "Description",
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
+                NSAttributedStringKey.foregroundColor: R.color.title()!,
                 NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
@@ -177,7 +177,7 @@ class DetailView: ASDisplayNode {
             string: isInEditMode ? "History: \(counter!.history.count)" : "Start from",
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
+                NSAttributedStringKey.foregroundColor: R.color.title()!,
                 NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )

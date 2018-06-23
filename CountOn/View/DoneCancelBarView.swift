@@ -25,7 +25,7 @@ class DoneCancelBarView: UIImageView {
     
     
     convenience init() {
-        self.init(image: UIImage(named: "clear_bar"))
+        self.init(image: R.image.clear_bar())
         
         self.isUserInteractionEnabled = true
         

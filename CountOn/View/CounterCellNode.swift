@@ -188,11 +188,11 @@ final class CounterCellNode: ASCellNode {
         
         switch StaticValues.counterType[counter.type] {
         case .increase:
-            counterBackground.image = UIImage(named: "counter_increase")
+            counterBackground.image = R.image.counter_increase()
         case .decrease:
-            counterBackground.image = UIImage(named: "counter_decrease")
+            counterBackground.image = R.image.counter_decrease()
         case .twoWays:
-            counterBackground.image = UIImage(named: "counter_both")
+            counterBackground.image = R.image.counter_both()
         }
         
 //        if StaticValues.scale < 1 {

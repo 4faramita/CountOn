@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25BC1821E47757B3657E3810 /* Pods_CountOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E76756C02A9625949EF240 /* Pods_CountOn.framework */; };
+		B436700220DEA7E500A9237E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B436700120DEA7E500A9237E /* R.generated.swift */; };
 		B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */; };
 		B46A198D20DA98A400FF7A81 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A198C20DA98A400FF7A81 /* DetailViewController.swift */; };
 		B46A198F20DAA1C500FF7A81 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A198E20DAA1C500FF7A81 /* DetailView.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B436700120DEA7E500A9237E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddBarView.swift; sourceTree = "<group>"; };
 		B46A198C20DA98A400FF7A81 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B46A198E20DAA1C500FF7A81 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				B499CF5D20832AD20054125D /* Assets.xcassets */,
 				B499CF6220832AD20054125D /* Info.plist */,
 				B499CF5620832AC80054125D /* AppDelegate.swift */,
+				B436700120DEA7E500A9237E /* R.generated.swift */,
 				B499CF6A208339A30054125D /* Storyboard.storyboard */,
 			);
 			path = CountOn;
@@ -153,6 +156,7 @@
 			buildConfigurationList = B499CF6520832AD20054125D /* Build configuration list for PBXNativeTarget "CountOn" */;
 			buildPhases = (
 				30DA145C0B8FF700F5AA0FEC /* [CP] Check Pods Manifest.lock */,
+				B436700020DEA75E00A9237E /* ShellScript */,
 				B499CF4F20832AC70054125D /* Sources */,
 				B499CF5020832AC70054125D /* Frameworks */,
 				B499CF5120832AC70054125D /* Resources */,
@@ -243,6 +247,7 @@
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer-15/iOS/RevealServer.framework",
@@ -262,6 +267,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
@@ -279,6 +285,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CountOn/Pods-CountOn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B436700020DEA75E00A9237E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -288,6 +307,7 @@
 			files = (
 				B47FEFAC20DE606A00028825 /* HistoryCellNode.swift in Sources */,
 				B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */,
+				B436700220DEA7E500A9237E /* R.generated.swift in Sources */,
 				B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */,
 				B47FEFAA20DE5BD400028825 /* HistoryTableNode.swift in Sources */,
 				B499CF5920832AC80054125D /* CounterViewController.swift in Sources */,

@@ -25,7 +25,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
     let disposeBag = DisposeBag()
     
     convenience init() {
-        self.init(image: UIImage(named: "bar"))
+        self.init(image: R.image.bar())
         
         self.isUserInteractionEnabled = true
         
@@ -33,11 +33,11 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             string: "Add",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
-                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
+                NSAttributedStringKey.foregroundColor: R.color.title()!,
             ]
         )
         addButton.setAttributedTitle(buttonLabel, for: UIControlState.normal)
-        addButton.backgroundColor = UIColor(named: "title")!.withAlphaComponent(StaticValues.backgroundAlpha)
+        addButton.backgroundColor = R.color.title()!.withAlphaComponent(StaticValues.backgroundAlpha)
         
         self.addSubview(addButton)
         addButton.snp.makeConstraints { (make) -> Void in

@@ -11,16 +11,16 @@ import UIKit
 struct Colors {
     static let countColor: [[ColorType: UIColor]] = [
         [
-            .foreground: UIColor(named: "increasing")!,
-            .background: UIColor(named: "increasing")!.withAlphaComponent(StaticValues.backgroundAlpha)
+            .foreground: R.color.increasing()!,
+            .background: R.color.increasing()!.withAlphaComponent(StaticValues.backgroundAlpha)
         ],
         [
-            .foreground: UIColor(named: "decreasing")!,
-            .background: UIColor(named: "decreasing")!.withAlphaComponent(StaticValues.backgroundAlpha)
+            .foreground: R.color.decreasing()!,
+            .background: R.color.decreasing()!.withAlphaComponent(StaticValues.backgroundAlpha)
         ],
         [
-            .foreground: UIColor(named: "twoWays")!,
-            .background: UIColor(named: "twoWays")!.withAlphaComponent(StaticValues.backgroundAlpha)
+            .foreground: R.color.twoWays()!,
+            .background: R.color.twoWays()!.withAlphaComponent(StaticValues.backgroundAlpha)
         ]
     ]
 }
