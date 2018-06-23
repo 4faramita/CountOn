@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  CountOn
+
+  Created by 4faramita on 2018/6/24.
+  Copyright © 2018年 4faramita. All rights reserved.
+*/
+
+"Type to search or add" = "键入以查找或添加";
+"Add" = "添加";
+
+"Title" = "标题";
+"Name of the counter" = "给计数器起个名字";
+
+"Increase" = "增加";
+"Decrease" = "减少";
+"Both" = "增减";
+
+"Description" = "描述";
+"Describe the counter" = "描述一下这个计数器";
+
+"Start from" = "计数起始于";
+"History" = "历史记录";
+
+"Cancel" = "取消";
+"Done" = "完成";
+"Delete" = "删除";
+"Yes" = "是";
+
+"This counter is about to be deleted" = "这个计数器即将被删除";
+"This cannot be undone. Are you sure?" = "删除操作无法撤销，是否确定删除？";

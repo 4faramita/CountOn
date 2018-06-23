@@ -51,7 +51,7 @@ class DetailView: ASDisplayNode {
         }
     }
     
-    var typePickerView = UISegmentedControl(items: ["Increase", "Decrease", "Both"])
+    var typePickerView = UISegmentedControl(items: [R.string.localizable.increase(), R.string.localizable.decrease(), R.string.localizable.both()])
     private lazy var typePicker: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
             self?.typePickerView.selectedSegmentIndex = self?.type.rawValue ?? 0
@@ -107,7 +107,7 @@ class DetailView: ASDisplayNode {
     
     private func initTitleField() {
         titleTitle.attributedText = NSAttributedString(
-            string: "Title",
+            string: R.string.localizable.title(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
@@ -118,7 +118,7 @@ class DetailView: ASDisplayNode {
         titleField.enablesReturnKeyAutomatically = true
         titleField.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
         titleField.textColor = UIColor.darkGray
-        titleField.placeholder = "Name of the counter"
+        titleField.placeholder = R.string.localizable.nameOfTheCounter()
     }
     
     private func setupTitleField() {
@@ -127,7 +127,7 @@ class DetailView: ASDisplayNode {
     
     private func initNoteView() {
         noteTitle.attributedText = NSAttributedString(
-            string: "Description",
+            string: R.string.localizable.description(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
@@ -136,7 +136,7 @@ class DetailView: ASDisplayNode {
         )
         
         noteView.attributedPlaceholderText = NSAttributedString(
-            string: "Describe the counter",
+            string: R.string.localizable.describeTheCounter(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray,
@@ -174,7 +174,7 @@ class DetailView: ASDisplayNode {
     
     private func initBottom() {
         bottomTitle.attributedText = NSAttributedString(
-            string: isInEditMode ? "History: \(counter!.history.count)" : "Start from",
+            string: isInEditMode ? R.string.localizable.history() + ": \(counter!.history.count)" : R.string.localizable.startFrom(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,

@@ -126,9 +126,9 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         doneCancelBar.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-                let alert = UIAlertController(title: "This counter is about to be deleted.", message: "This cannot be undone. Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-                let yesAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive) { _ in
+                let alert = UIAlertController(title: R.string.localizable.thisCounterIsAboutToBeDeleted(), message: R.string.localizable.thisCannotBeUndoneAreYouSure(), preferredStyle: UIAlertControllerStyle.alert)
+                let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: UIAlertActionStyle.cancel, handler: nil)
+                let yesAction = UIAlertAction(title: R.string.localizable.yes(), style: UIAlertActionStyle.destructive) { _ in
                     self?.detailNode.delete()
                     self?.dismiss(animated: true, completion: nil)
 //                TODO: Now I clear search field

@@ -30,7 +30,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         self.isUserInteractionEnabled = true
         
         let buttonLabel = NSAttributedString(
-            string: "Add",
+            string: R.string.localizable.add(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
@@ -49,7 +49,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         
         
         searchField.attributedPlaceholder = NSAttributedString(
-            string: "Type to search or add",
+            string: R.string.localizable.typeToSearchOrAdd(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray,

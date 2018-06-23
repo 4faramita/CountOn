@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  CountOn
+
+  Created by 4faramita on 2018/6/24.
+  Copyright © 2018年 4faramita. All rights reserved.
+*/
+
+"Type to search or add" = "Type to search or add";
+"Add" = "Add";
+
+"Title" = "Title";
+"Name of the counter" = "Name of the counter";
+
+"Increase" = "Increase";
+"Decrease" = "Decrease";
+"Both" = "Both";
+
+"Description" = "Description";
+"Describe the counter" = "Describe the counter";
+
+"Start from" = "Start from";
+"History" = "History";
+
+"Cancel" = "Cancel";
+"Done" = "Done";
+"Delete" = "Delete";
+"Yes" = "Yes";
+
+"This counter is about to be deleted" = "This counter is about to be deleted.";
+"This cannot be undone. Are you sure?" = "This cannot be undone. Are you sure?";

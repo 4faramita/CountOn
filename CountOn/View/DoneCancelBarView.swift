@@ -36,10 +36,10 @@ class DoneCancelBarView: UIImageView {
 //        MARK: Cancel button
         
         let cancelLabel = NSAttributedString(
-            string: "Cancel",
+            string: R.string.localizable.cancel(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "4A4A4A", transparency: 1.0)!,
+                NSAttributedStringKey.foregroundColor: R.color.cancel()!,
                 ]
         )
         cancelButton.setAttributedTitle(cancelLabel, for: UIControlState.normal)
@@ -56,10 +56,10 @@ class DoneCancelBarView: UIImageView {
 //        MARK: Done button
         
         let doneLabel = NSAttributedString(
-            string: "Done",
+            string: R.string.localizable.done(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "417505", transparency: 1.0)!,
+                NSAttributedStringKey.foregroundColor: R.color.done()!,
             ]
         )
         doneButton.setAttributedTitle(doneLabel, for: UIControlState.normal)
@@ -78,10 +78,10 @@ class DoneCancelBarView: UIImageView {
 //        MARK: Delete button
         
         let deleteLabel = NSAttributedString(
-            string: "Delete",
+            string: R.string.localizable.delete(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "D0021B", transparency: 1.0)!,
+                NSAttributedStringKey.foregroundColor: R.color.delete()!,
             ]
         )
         deleteButton.setAttributedTitle(deleteLabel, for: UIControlState.normal)
