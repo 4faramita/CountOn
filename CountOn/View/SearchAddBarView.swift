@@ -33,11 +33,11 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             string: "Add",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "4A90E2", transparency: 1.0)!,
+                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
             ]
         )
         addButton.setAttributedTitle(buttonLabel, for: UIControlState.normal)
-        addButton.backgroundColor = UIColor(hexString: "4A90E2", transparency: 0.06)!
+        addButton.backgroundColor = UIColor(named: "title")!.withAlphaComponent(StaticValues.backgroundAlpha)
         
         self.addSubview(addButton)
         addButton.snp.makeConstraints { (make) -> Void in
@@ -52,7 +52,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             string: "Type to search or add",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.3)!,
+                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
             ]
         )
         searchField.delegate = self

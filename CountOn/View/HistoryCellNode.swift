@@ -21,11 +21,13 @@ class HistoryCellNode: ASCellNode {
         let typeString: String
         switch history.action {
         case 1:
-            typeString = "Increased by 1"
+            typeString = "+"
+            backgroundColor = UIColor(named: "increasing")!.withAlphaComponent(StaticValues.backgroundAlpha)
         case -1:
-            typeString = "Decreased by 1"
+            typeString = "-"
+            backgroundColor = UIColor(named: "decreasing")!.withAlphaComponent(StaticValues.backgroundAlpha)
         case 0:
-            typeString = "Initialized at \(history.status)"
+            typeString = "→ \(history.status)"
         default:
             fatalError()
         }

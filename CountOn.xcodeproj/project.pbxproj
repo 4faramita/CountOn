@@ -82,13 +82,13 @@
 		B46A199420DB954500FF7A81 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
-				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
 				B46A198E20DAA1C500FF7A81 /* DetailView.swift */,
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
-				B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */,
+				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
+				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
 				B499CF6E208347A30054125D /* CountArea.swift */,
 				B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */,
+				B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

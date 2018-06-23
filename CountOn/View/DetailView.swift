@@ -16,6 +16,7 @@ import DateToolsSwift
 
 class DetailView: ASDisplayNode {
     
+    let titleTitle = ASTextNode()
     var titleField = UITextField()
     private lazy var titleNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
@@ -23,6 +24,7 @@ class DetailView: ASDisplayNode {
         })
     }()
     
+    let noteTitle = ASTextNode()
     let noteView = ASEditableTextNode()
     
     var statusPicker = UIPickerView()
@@ -104,10 +106,19 @@ class DetailView: ASDisplayNode {
 //    MARK: Setup UI
     
     private func initTitleField() {
+        titleTitle.attributedText = NSAttributedString(
+            string: "Title",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
+                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
+                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
+            ]
+        )
+        
         titleField.enablesReturnKeyAutomatically = true
         titleField.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
         titleField.textColor = UIColor.darkGray
-        titleField.placeholder = "Title of the counter"
+        titleField.placeholder = "Name of the counter"
     }
     
     private func setupTitleField() {
@@ -115,8 +126,17 @@ class DetailView: ASDisplayNode {
     }
     
     private func initNoteView() {
+        noteTitle.attributedText = NSAttributedString(
+            string: "Description",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
+                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
+                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
+            ]
+        )
+        
         noteView.attributedPlaceholderText = NSAttributedString(
-            string: "Description of the counter",
+            string: "Describe the counter",
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray,
@@ -152,15 +172,21 @@ class DetailView: ASDisplayNode {
         self.historyTable = HistoryTableNode(with: self.counter!.history)
     }
     
-    private func initBottomTitle() {
+    private func initBottom() {
         bottomTitle.attributedText = NSAttributedString(
-            string: isInEditMode ? "History" : "Start from",
+            string: isInEditMode ? "History: \(counter!.history.count)" : "Start from",
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+                NSAttributedStringKey.foregroundColor: UIColor(named: "title")!,
                 NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
+        
+        if isInEditMode {
+            setupHistoryTable()
+        } else {
+            initStatusNode()
+        }
     }
     
     private func setupFields() {
@@ -168,12 +194,8 @@ class DetailView: ASDisplayNode {
         setupTitleField()
         initNoteView()
         setupNoteView()
-        if isInEditMode {
-            setupHistoryTable()
-        } else {
-            initStatusNode()
-        }
-        initBottomTitle()
+
+        initBottom()
     }
     
     
@@ -220,17 +242,33 @@ class DetailView: ASDisplayNode {
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
-        titleNode.style.height = ASDimensionMake(48)
+        titleNode.style.height = ASDimensionMake(32)
         statusNode.style.height = ASDimensionMake(statusPicker.frame.height)
         noteView.style.height = ASDimensionMake(96)
         typePicker.style.height = ASDimensionMake(typePickerView.frame.height)
-        historyTable?.style.height = ASDimensionMake(StaticValues.screenHeight - 309)
+        historyTable?.style.height = ASDimensionMake(StaticValues.screenHeight - 330)
+        
+        let titleStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: 5,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [ titleTitle, titleNode ]
+        )
+        
+        let noteStack = ASStackLayoutSpec(
+            direction: .vertical,
+            spacing: 5,
+            justifyContent: .start,
+            alignItems: .start,
+            children: [ noteTitle, noteView ]
+        )
         
         let bottom = isInEditMode ? historyTable! : statusNode
         
         let bottomStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 10,
+            spacing: 5,
             justifyContent: .start,
             alignItems: .start,
             children: [ bottomTitle, bottom ]
@@ -241,7 +279,7 @@ class DetailView: ASDisplayNode {
             spacing: 20,
             justifyContent: .start,
             alignItems: .stretch,
-            children: [ titleNode, typePicker, noteView, bottomStack ]
+            children: [ titleStack, typePicker, noteStack, bottomStack ]
         )
         
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 50, left: 32, bottom: 50, right: 32), child: infoStack)
