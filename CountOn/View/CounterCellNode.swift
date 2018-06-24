@@ -195,9 +195,9 @@ final class CounterCellNode: ASCellNode {
             counterBackground.image = R.image.counter_both()
         }
         
-//        if StaticValues.scale < 1 {
-//            counterBackground.contentMode = .sc
-//        }
+        if StaticValues.scale < 1 {
+            counterBackground.contentMode = .scaleAspectFit
+        }
 //        counterBackground.contentMode = .scaleToFill
     }
     
@@ -228,11 +228,15 @@ final class CounterCellNode: ASCellNode {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
+        let isSE = (StaticValues.scale < 1)
+        let scale: CGFloat = 6.0 / 7.0
+        
+        let spacing: CGFloat = isSE ? (7 * scale) : 7
         let infoStack = ASStackLayoutSpec(
             direction: .vertical,
-            spacing: 7,
+            spacing: spacing,
             justifyContent: .center,
-            alignItems: .start,
+            alignItems: .center,
             children: [ title, lastLaunch ]
         )
         
@@ -258,9 +262,9 @@ final class CounterCellNode: ASCellNode {
             children: buttons
         )
         
-        
-        let infoInset = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
+        let infoInset: CGFloat = isSE ? (16 * scale) : 16
+        let infoInsetSpac = ASInsetLayoutSpec(
+            insets: UIEdgeInsets(top: infoInset, left: infoInset, bottom: infoInset, right: infoInset),
             child: infoStack
         )
         
@@ -269,7 +273,7 @@ final class CounterCellNode: ASCellNode {
             spacing: 0,
             justifyContent: .start,
             alignItems: .center,
-            children: [ countArea, infoInset ]
+            children: [ countArea, infoInsetSpac ]
         )
         
         let foregroundNode = ASStackLayoutSpec(
@@ -280,15 +284,17 @@ final class CounterCellNode: ASCellNode {
             children: [ counterInfoStack, buttonStack ]
         )
         
+        let bottomInset: CGFloat = isSE ? 15 * scale : 15
         let foregroundInsetSpec = ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 15.0, right: 0.0),
+            insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: bottomInset, right: 0.0),
             child: foregroundNode
         )
         
         let bgSpec = ASBackgroundLayoutSpec(child: foregroundInsetSpec, background: counterBackground)
         
+        let sideInset: CGFloat = isSE ? 20.0 : (20.0 * StaticValues.scale)
         return ASInsetLayoutSpec(
-            insets: UIEdgeInsets(top: 0.0, left: StaticValues.scale * 20.0, bottom: 0.0, right: StaticValues.scale * 20.0),
+            insets: UIEdgeInsets(top: 0.0, left: sideInset, bottom: 0.0, right: sideInset),
             child: bgSpec
         )
     }

@@ -39,12 +39,7 @@ final class CountArea: ASDisplayNode {
         
         setLabel()
     }
-    
-//    override func didLoad() {
-//        super.didLoad()
-//        
-//        self.backgroundColor = Colors.countColor[self.type.rawValue][.background]
-//    }
+
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         
@@ -54,6 +49,6 @@ final class CountArea: ASDisplayNode {
             child: countLabel
         )
                 
-        return ASRatioLayoutSpec(ratio: 7 / 6, child: centerSpec)
+        return ASRatioLayoutSpec(ratio: 7.0 / 6.0, child: centerSpec)
     }
 }

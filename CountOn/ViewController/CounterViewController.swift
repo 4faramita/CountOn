@@ -58,12 +58,13 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .tap
             .subscribe(onNext: { [weak self] _ in
                 let title = SearchAddBarView.shared.searchField.text ?? ""
-                SearchAddBarView.shared.searchField.clear()
-                CounterStore.shared.reset()
-                self?.tableNode.reloadData()
             
                 let detailVC = DetailViewController(with: title)
-                self?.present(detailVC, animated: true, completion: nil)
+                self?.present(detailVC, animated: true) {
+                    SearchAddBarView.shared.searchField.clear()
+                    CounterStore.shared.reset()
+                    self?.tableNode.reloadData()
+                }
             })
             .disposed(by: disposeBag)
         
