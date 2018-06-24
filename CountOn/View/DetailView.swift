@@ -34,8 +34,14 @@ class DetailView: ASDisplayNode {
         })
     }()
     
+    var absoluteDate = false {
+        didSet {
+            setupHistoryTable()
+        }
+    }
     var historyTable: HistoryTableNode?
     let bottomTitle = ASTextNode()
+    let statusTitle = ASTextNode()
 
     let centerParagraphStyle = NSMutableParagraphStyle()
     let multiLineParagraphStyle = NSMutableParagraphStyle()
@@ -90,6 +96,7 @@ class DetailView: ASDisplayNode {
         self.title = counter.title
         self.note = counter.note
         self.type = StaticValues.counterType[counter.type]
+        self.status = counter.status
         
         setupFields()
     }
@@ -169,7 +176,19 @@ class DetailView: ASDisplayNode {
     }
     
     private func setupHistoryTable() {
-        self.historyTable = HistoryTableNode(with: self.counter!.history)
+        self.historyTable = HistoryTableNode(with: self.counter!.history, absoluteDate: self.absoluteDate)
+//        self.historyTable?.reloadData()
+    }
+    
+    private func setupStatusTitle() {
+        statusTitle.attributedText = NSAttributedString(
+            string: R.string.localizable.currentStatus() + ": \(status)",
+            attributes: [
+                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
+                NSAttributedStringKey.foregroundColor: R.color.title()!,
+                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
+            ]
+        )
     }
     
     private func initBottom() {
@@ -183,6 +202,7 @@ class DetailView: ASDisplayNode {
         )
         
         if isInEditMode {
+            setupStatusTitle()
             setupHistoryTable()
         } else {
             initStatusNode()
@@ -252,7 +272,7 @@ class DetailView: ASDisplayNode {
             direction: .vertical,
             spacing: 5,
             justifyContent: .start,
-            alignItems: .start,
+            alignItems: .stretch,
             children: [ titleTitle, titleNode ]
         )
         
@@ -260,18 +280,26 @@ class DetailView: ASDisplayNode {
             direction: .vertical,
             spacing: 5,
             justifyContent: .start,
-            alignItems: .start,
+            alignItems: .stretch,
             children: [ noteTitle, noteView ]
         )
         
         let bottom = isInEditMode ? historyTable! : statusNode
         
+        let bottomTitleStack = ASStackLayoutSpec(
+            direction: .horizontal,
+            spacing: 10,
+            justifyContent: .spaceBetween,
+            alignItems: .start,
+            children: [ bottomTitle, statusTitle ]
+        )
+        
         let bottomStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: 5,
             justifyContent: .start,
-            alignItems: .start,
-            children: [ bottomTitle, bottom ]
+            alignItems: .stretch,
+            children: [ bottomTitleStack, bottom ]
         )
         
         let infoStack = ASStackLayoutSpec(

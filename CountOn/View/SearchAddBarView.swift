@@ -73,12 +73,4 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         searchField.resignFirstResponder()
         return true
     }
-    
-    func hide() {
-        self.isHidden = true
-    }
-    
-    func show() {
-        self.isHidden = false
-    }
 }

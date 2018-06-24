@@ -16,8 +16,11 @@ class HistoryTableNode: ASTableNode {
     
     var historyArray: [History]
     
-    init(with historyList: List<History>) {
+    let absoluteDate: Bool
+    
+    init(with historyList: List<History>, absoluteDate: Bool = false) {
         historyArray = Array(historyList)
+        self.absoluteDate = absoluteDate
         
         super.init(style: .plain)
         
@@ -27,7 +30,7 @@ class HistoryTableNode: ASTableNode {
         contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         
 //        view.separatorStyle = .none
-        view.allowsSelection = false
+//        view.allowsSelection = true
     }
     
     override func didLoad() {
@@ -45,7 +48,7 @@ extension HistoryTableNode: ASTableDataSource, ASTableDelegate, ASCommonTableDat
         
         let history = historyArray[indexPath.row]
         
-        let node = HistoryCellNode(with: history)
+        let node = HistoryCellNode(with: history, absoluteDate: self.absoluteDate)
         
         node.style.height = ASDimensionMake(30)
         

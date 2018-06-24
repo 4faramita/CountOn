@@ -15,7 +15,7 @@ import RealmSwift
 
 class DoneCancelBarView: UIImageView {
     
-//    static let shared = DoneCancelBarView()
+    static let shared = DoneCancelBarView()
     
     let disposeBag = DisposeBag()
     
@@ -94,6 +94,26 @@ class DoneCancelBarView: UIImageView {
             make.height.equalTo(50)
             make.trailing.equalToSuperview().inset(5)
             make.width.equalTo(cancelButton)
+        }
+    }
+    
+    func show() {
+        UIView.animate(withDuration: 0.25, animations: {
+            DoneCancelBarView.shared.alpha = 1
+        }) { (done) in
+            if done {
+                DoneCancelBarView.shared.isUserInteractionEnabled = true
+            }
+        }
+    }
+    
+    func hide() {
+        UIView.animate(withDuration: 0.25, animations: {
+            DoneCancelBarView.shared.alpha = 0
+        }) { (done) in
+            if done {
+                DoneCancelBarView.shared.isUserInteractionEnabled = false
+            }
         }
     }
 }

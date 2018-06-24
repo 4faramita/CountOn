@@ -213,12 +213,12 @@ final class CounterCellNode: ASCellNode {
         // Set message title, body, and icon. Here, we're overriding the default warning
         // image with an emoji character.
         let iconText = ["🤷‍♂️", "🤷‍♀️"].sm_random()!
-        let sentence = (forZero ? "Do not want to go negative." : "Cannot go over 999.")
-        view.configureContent(title: "Warning", body: sentence, iconText: iconText)
+        let sentence = (forZero ? R.string.localizable.doNotWantToGoNegative() : R.string.localizable.cannotGoOver999())
+        view.configureContent(title: R.string.localizable.warning(), body: sentence, iconText: iconText)
         
         // Hide when button tapped
         view.buttonTapHandler = { _ in SwiftMessages.hide() }
-        view.button?.setTitle("OK", for: .normal)
+        view.button?.setTitle(R.string.localizable.oK(), for: .normal)
         
         // Hide when message view tapped
         view.tapHandler = { _ in SwiftMessages.hide() }

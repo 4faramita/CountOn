@@ -16,7 +16,7 @@ import SwifterSwift
 
 class DetailViewController: ASViewController<ASDisplayNode> {
 
-    let doneCancelBar = DoneCancelBarView()
+    let doneCancelBar = DoneCancelBarView.shared
     
     let disposeBag = DisposeBag()
     
@@ -73,8 +73,8 @@ class DetailViewController: ASViewController<ASDisplayNode> {
 //            })
 //            .disposed(by: disposeBag)
         
-        node.view.addSubview(doneCancelBar)
-        doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
+//        node.view.addSubview(doneCancelBar)
+//        doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
         
         
 //        MARK: Title, note and status
@@ -96,16 +96,29 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
+//        detailNode.historyTable?.view.rx
+//            .tapGesture(configuration: { gestureRecognizer, delegate in
+//                delegate.simultaneousRecognitionPolicy = .never
+//            })
+//            .when(.recognized)
+//            .subscribe(onNext: { [weak self] _ in
+//                print(">>> tap")
+//                if let node = self?.detailNode {
+//                    node.absoluteDate = !node.absoluteDate
+//                }
+//            })
+//            .disposed(by: disposeBag)
+        
         
 //        MARK: SearchAddBar hide and show
         
-        SearchAddBarView.shared.hide()
+        doneCancelBar.show()
         
         doneCancelBar.cancelButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
-                SearchAddBarView.shared.show()
+                self?.doneCancelBar.hide()
             })
             .disposed(by: disposeBag)
 
@@ -117,7 +130,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             .subscribe(onNext: { [weak self] _ in
                 self?.detailNode.save()
                 self?.dismiss(animated: true, completion: nil)
-                SearchAddBarView.shared.show()
+                self?.doneCancelBar.hide()
             })
             .disposed(by: disposeBag)
     
@@ -140,7 +153,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                         SearchAddBarView.shared.searchField.clear()
 //                CounterStore.shared.reset()
                         
-                        SearchAddBarView.shared.show()
+                        self?.doneCancelBar.hide()
                     }
                     alert.addAction(cancelAction)
                     alert.addAction(yesAction)
@@ -148,7 +161,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 } else {
                     self?.dismiss(animated: true, completion: nil)
                     SearchAddBarView.shared.searchField.clear()
-                    SearchAddBarView.shared.show()
+                    self?.doneCancelBar.hide()
                 }
             })
             .disposed(by: disposeBag)

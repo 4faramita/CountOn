@@ -13,7 +13,13 @@ class HistoryCellNode: ASCellNode {
     let type = ASTextNode()
     let date = ASTextNode()
     
-    init(with history: History) {
+    let absoluteDateString: String
+    let relativeDateString: String
+    
+    init(with history: History, absoluteDate: Bool = false) {
+        absoluteDateString = history.date.dateTimeString()
+        relativeDateString = history.date.timeAgoSinceNow
+        
         super.init()
         
         automaticallyManagesSubnodes = true
@@ -32,8 +38,6 @@ class HistoryCellNode: ASCellNode {
             fatalError()
         }
         
-        let dateString = history.date.timeAgoSinceNow
-        
         type.attributedText = NSAttributedString(
             string: typeString,
             attributes: [
@@ -42,14 +46,26 @@ class HistoryCellNode: ASCellNode {
                 ]
         )
         
+        setDateString(to: absoluteDate ? absoluteDateString : relativeDateString)
+    }
+    
+    private func setDateString(to value: String) {
         date.attributedText = NSAttributedString(
-            string: dateString,
+            string: value,
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2),
                 NSAttributedStringKey.foregroundColor: UIColor.lightGray,
                 ]
         )
     }
+    
+//    func changeDateStyle() {
+//        if type.attributedText?.string == relativeDateString {
+//            setDateString(to: absoluteDateString)
+//        } else {
+//            setDateString(to: relativeDateString)
+//        }
+//    }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         

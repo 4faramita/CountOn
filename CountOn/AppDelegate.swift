@@ -30,8 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let searchAddBar = SearchAddBarView.shared
         searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40)
         
+        let doneCancelBar = DoneCancelBarView.shared
+        doneCancelBar.isUserInteractionEnabled = false
+        doneCancelBar.alpha = 0
+        doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
+        
         window.addSubview(searchAddBar)
-        window.bringSubview(toFront: searchAddBar)
+        window.addSubview(doneCancelBar)
+        window.bringSubview(toFront: doneCancelBar)
         
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { keyboardVisibleHeight in

@@ -21,11 +21,17 @@
 
 "Start from" = "Start from";
 "History" = "History";
+"Current status" = "Current status";
 
 "Cancel" = "Cancel";
 "Done" = "Done";
 "Delete" = "Delete";
 "Yes" = "Yes";
+"OK" = "OK";
+"Warning" = "Warning";
+
+"Do not want to go negative." = "Do not want to go negative.";
+"Cannot go over 999." = "Cannot go over 999.";
 
 "This counter is about to be deleted" = "This counter is about to be deleted.";
 "This cannot be undone. Are you sure?" = "This cannot be undone. Are you sure?";
