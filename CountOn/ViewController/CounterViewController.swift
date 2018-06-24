@@ -14,7 +14,7 @@ import RxCocoa
 //import RxRealm
 //import GTTexture_RxExtension
 
-final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
+final class CounterViewController:  ASViewController<ASDisplayNode> {
     
     let disposeBag = DisposeBag()
     
@@ -37,6 +37,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // MARK: Rx
         
@@ -108,50 +109,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
         }
     }
     
-    
-    // MARK: ASTableNode data source and delegate.
-    
-    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        // Should read the row count directly from table view but
-        // https://github.com/facebook/AsyncDisplayKit/issues/1159
-
-        let counter = CounterStore.shared.item(at: indexPath.row)
-        
-        let node = CounterCellNode(with: counter)
-        node.style.height = ASDimensionMake(UIScreen.main.bounds.size.width / 375 * 85)
-        
-        node.selectionStyle = .none
-        
-        return node
-    }
-    
-//    Disabled Swipe to delete.
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            CounterStore.shared.remove(at: indexPath.row)
-//        }
-//    }
-    
-    func numberOfSections(in tableNode: ASTableNode) -> Int {
-        return 1
-    }
-    
-    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return CounterStore.shared.count
-    }
-    
-    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
-        
-        // FIXME: Actually this is not my bug! How about that!
-        DispatchQueue.main.async { [weak self] in
-            self?.present(detailVC, animated: true, completion: {
-                CounterStore.shared.reset()
-                self?.tableNode.reloadData()
-            })
-        }
-    }
-    
     // MARK: Dummy Data
     
     func setupData() {
@@ -160,9 +117,20 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             autoreleasepool {
                 let realm = try! Realm()
                 realm.beginWrite()
-                for _ in 0 ..< 10 {
-                    realm.add(CounterViewController.generateCounter())
-                }
+                
+                let first = CounterViewController.generateCounter(R.string.localizable.clickHereToStart(), at: Date())
+                first.note = R.string.localizable.helloThisIsACounterItCanRepresentsTheHistoryOfAnActivityOrTheNumberOfAItemBasicallyAnythingYouWantClickDoneToCheckOtherCounters()
+                
+                let second = CounterViewController.generateCounter(R.string.localizable.takeAIbuprofenPill(), from: 0, of: 0)
+                second.note = R.string.localizable.thisCounterOnlyGoesUpMaybeForAActivityYouRegularlyDo() + R.string.localizable.youCanChangeTheDetailOfACounterButYouCannotChangeTheHistory()
+                
+                let third = CounterViewController.generateCounter(R.string.localizable.run5km100Times(), from: 100, of: 1)
+                third.note = R.string.localizable.thisCounterOnlyGoesDownMaybeForAGoalYouHopeToAchieve() + R.string.localizable.youCanChangeTheDetailOfACounterButYouCannotChangeTheHistory()
+                
+                let fourth = CounterViewController.generateCounter(R.string.localizable.slapBetBank(), from: 5, of: 2)
+                fourth.note = R.string.localizable.thisCounterCanGoUpAndDownMaybeForKeepingTrackOfACertainKindOfItem() + R.string.localizable.youCanChangeTheDetailOfACounterButYouCannotChangeTheHistory()
+                realm.add([first, second, third, fourth])
+                
                 try! realm.commitWrite()
             }
         }
@@ -205,5 +173,48 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     
     class func randomDate() -> Date {
         return Date(timeInterval: TimeInterval(arc4random() % 3600), since: 1.hours.earlier)
+    }
+}
+
+extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTableDataSource {
+    func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
+        // Should read the row count directly from table view but
+        // https://github.com/facebook/AsyncDisplayKit/issues/1159
+        
+        let counter = CounterStore.shared.item(at: indexPath.row)
+        
+        let node = CounterCellNode(with: counter)
+        node.style.height = ASDimensionMake(UIScreen.main.bounds.size.width / 375 * 85)
+        
+        node.selectionStyle = .none
+        
+        return node
+    }
+    
+    //    Disabled Swipe to delete.
+    //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    //        if editingStyle == .delete {
+    //            CounterStore.shared.remove(at: indexPath.row)
+    //        }
+    //    }
+    
+    func numberOfSections(in tableNode: ASTableNode) -> Int {
+        return 1
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
+        return CounterStore.shared.count
+    }
+    
+    func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
+        
+        // FIXME: Actually this is not my bug! How about that!
+        DispatchQueue.main.async { [weak self] in
+            self?.present(detailVC, animated: true, completion: {
+                CounterStore.shared.reset()
+                self?.tableNode.reloadData()
+            })
+        }
     }
 }

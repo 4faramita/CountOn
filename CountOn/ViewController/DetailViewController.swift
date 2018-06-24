@@ -93,24 +93,26 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
+        if let relativeHistoryTable = detailNode.relativeHistoryTable, let absoluteHistoryTable = detailNode.absoluteHistoryTable {
+            let relativeTapStream = relativeHistoryTable.view.rx
+                .tapGesture(configuration: { gestureRecognizer, delegate in
+                    delegate.simultaneousRecognitionPolicy = .never
+                })
+                .when(.recognized)
+            let absoluteTapStream = absoluteHistoryTable.view.rx
+                .tapGesture(configuration: { gestureRecognizer, delegate in
+                    delegate.simultaneousRecognitionPolicy = .never
+                })
+                .when(.recognized)
+            Observable.merge(relativeTapStream, absoluteTapStream)
+                .subscribe(onNext: { [weak self] _ in
+                    if let node = self?.detailNode {
+                        node.absoluteDate = !node.absoluteDate
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
         
-        let relativeTapStream = detailNode.relativeHistoryTable!.view.rx
-            .tapGesture(configuration: { gestureRecognizer, delegate in
-                delegate.simultaneousRecognitionPolicy = .never
-            })
-            .when(.recognized)
-        let absoluteTapStream = detailNode.absoluteHistoryTable!.view.rx
-            .tapGesture(configuration: { gestureRecognizer, delegate in
-                delegate.simultaneousRecognitionPolicy = .never
-            })
-            .when(.recognized)
-        Observable.merge(relativeTapStream, absoluteTapStream)
-            .subscribe(onNext: { [weak self] _ in
-                if let node = self?.detailNode {
-                    node.absoluteDate = !node.absoluteDate
-                }
-            })
-            .disposed(by: disposeBag)
         
         
 //        MARK: SearchAddBar hide and show

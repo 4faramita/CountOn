@@ -35,3 +35,17 @@
 
 "This counter is about to be deleted" = "This counter is about to be deleted.";
 "This cannot be undone. Are you sure?" = "This cannot be undone. Are you sure?";
+
+"Click here to start." = "Click here to start.";
+"Hello! This is a counter, it can represents the history of an activity, or the number of a item, basically anything you want! Click \"Done\" to check other counters." = "Hello! This is a counter, it can represents the history of an activity, or the number of a item, basically anything you want! Click \"Done\" to check other counters.";
+
+"You can change the detail of a counter, but you cannot change the history." = "You can change the detail of a counter, but you cannot change the history.";
+
+"Take a Ibuprofen pill" = "Take a Ibuprofen pill";
+"This counter only goes up, maybe for a activity you regularly do." = "This counter only goes up, maybe for a activity you regularly do.";
+
+"Run 5km 100 times!" = "Run 5km 100 times!";
+"This counter only goes down, maybe for a goal you hope to achieve." = "This counter only goes down, maybe for a goal you hope to achieve.";
+
+"Slap bet bank" = "Slap bet bank";
+"This counter can go up and down, maybe for keeping track of a certain kind of item." = "This counter can go up and down, maybe for keeping track of a certain kind of item.";
