@@ -56,7 +56,7 @@ final class CounterCellNode: ASCellNode {
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
             ]
         )
-        title.style.width = ASDimensionMake(128.0 * StaticValues.scale)
+
         title.maximumNumberOfLines = 1
         title.truncationMode = .byTruncatingTail
         
@@ -67,7 +67,7 @@ final class CounterCellNode: ASCellNode {
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
             ]
         )
-        lastLaunch.style.width = ASDimensionMake(128.0 * StaticValues.scale)
+
         lastLaunch.maximumNumberOfLines = 1
         lastLaunch.truncationMode = .byTruncatingTail
         
@@ -231,12 +231,17 @@ final class CounterCellNode: ASCellNode {
         let isSE = (StaticValues.scale < 1)
         let scale: CGFloat = 6.0 / 7.0
         
+        let infoWidth = isSE ? 83 : (128.0 * StaticValues.scale)
+        title.style.width = ASDimensionMake(infoWidth)
+        lastLaunch.style.width = ASDimensionMake(infoWidth)
+
+        
         let spacing: CGFloat = isSE ? (7 * scale) : 7
         let infoStack = ASStackLayoutSpec(
             direction: .vertical,
             spacing: spacing,
             justifyContent: .center,
-            alignItems: .center,
+            alignItems: .start,
             children: [ title, lastLaunch ]
         )
         
@@ -284,7 +289,7 @@ final class CounterCellNode: ASCellNode {
             children: [ counterInfoStack, buttonStack ]
         )
         
-        let bottomInset: CGFloat = isSE ? 15 * scale : 15
+        let bottomInset: CGFloat = isSE ? 10 : 15
         let foregroundInsetSpec = ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: bottomInset, right: 0.0),
             child: foregroundNode
@@ -292,7 +297,7 @@ final class CounterCellNode: ASCellNode {
         
         let bgSpec = ASBackgroundLayoutSpec(child: foregroundInsetSpec, background: counterBackground)
         
-        let sideInset: CGFloat = isSE ? 20.0 : (20.0 * StaticValues.scale)
+        let sideInset: CGFloat = isSE ? 30.0 : (20.0 * StaticValues.scale)
         return ASInsetLayoutSpec(
             insets: UIEdgeInsets(top: 0.0, left: sideInset, bottom: 0.0, right: sideInset),
             child: bgSpec
