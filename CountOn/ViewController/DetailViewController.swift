@@ -73,9 +73,6 @@ class DetailViewController: ASViewController<ASDisplayNode> {
 //            })
 //            .disposed(by: disposeBag)
         
-//        node.view.addSubview(doneCancelBar)
-//        doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
-        
         
 //        MARK: Title, note and status
 //        TODO: This does not have to emit according to change
@@ -96,18 +93,24 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-//        detailNode.historyTable?.view.rx
-//            .tapGesture(configuration: { gestureRecognizer, delegate in
-//                delegate.simultaneousRecognitionPolicy = .never
-//            })
-//            .when(.recognized)
-//            .subscribe(onNext: { [weak self] _ in
-//                print(">>> tap")
-//                if let node = self?.detailNode {
-//                    node.absoluteDate = !node.absoluteDate
-//                }
-//            })
-//            .disposed(by: disposeBag)
+        
+        let relativeTapStream = detailNode.relativeHistoryTable!.view.rx
+            .tapGesture(configuration: { gestureRecognizer, delegate in
+                delegate.simultaneousRecognitionPolicy = .never
+            })
+            .when(.recognized)
+        let absoluteTapStream = detailNode.absoluteHistoryTable!.view.rx
+            .tapGesture(configuration: { gestureRecognizer, delegate in
+                delegate.simultaneousRecognitionPolicy = .never
+            })
+            .when(.recognized)
+        Observable.merge(relativeTapStream, absoluteTapStream)
+            .subscribe(onNext: { [weak self] _ in
+                if let node = self?.detailNode {
+                    node.absoluteDate = !node.absoluteDate
+                }
+            })
+            .disposed(by: disposeBag)
         
         
 //        MARK: SearchAddBar hide and show

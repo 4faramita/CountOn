@@ -18,9 +18,10 @@ class HistoryTableNode: ASTableNode {
     
     let absoluteDate: Bool
     
-    init(with historyList: List<History>, absoluteDate: Bool = false) {
-        historyArray = Array(historyList)
+    init(with historyList: List<History>, absoluteDate: Bool) {
+        
         self.absoluteDate = absoluteDate
+        historyArray = Array(historyList)
         
         super.init(style: .plain)
         

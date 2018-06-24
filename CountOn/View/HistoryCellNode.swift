@@ -16,7 +16,7 @@ class HistoryCellNode: ASCellNode {
     let absoluteDateString: String
     let relativeDateString: String
     
-    init(with history: History, absoluteDate: Bool = false) {
+    init(with history: History, absoluteDate: Bool) {
         absoluteDateString = history.date.dateTimeString()
         relativeDateString = history.date.timeAgoSinceNow
         
@@ -46,7 +46,8 @@ class HistoryCellNode: ASCellNode {
                 ]
         )
         
-        setDateString(to: absoluteDate ? absoluteDateString : relativeDateString)
+        setDateString(to: (absoluteDate ? absoluteDateString : relativeDateString))
+        
     }
     
     private func setDateString(to value: String) {
@@ -58,14 +59,6 @@ class HistoryCellNode: ASCellNode {
                 ]
         )
     }
-    
-//    func changeDateStyle() {
-//        if type.attributedText?.string == relativeDateString {
-//            setDateString(to: absoluteDateString)
-//        } else {
-//            setDateString(to: relativeDateString)
-//        }
-//    }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         

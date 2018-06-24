@@ -38,7 +38,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //    MARK: Rx
+        // MARK: Rx
         
         SearchAddBarView.shared.searchField.rx
             .text
@@ -75,7 +75,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
             .disposed(by: disposeBag)
 
         
-//        MARK: table
+        // MARK: table
         
         tableNode.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 80, right: 0)
         tableNode.view.separatorStyle = .none
@@ -143,7 +143,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode>, ASTableData
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
         
-//        FIXME: Actually this is not my bug! How about that!
+        // FIXME: Actually this is not my bug! How about that!
         DispatchQueue.main.async { [weak self] in
             self?.present(detailVC, animated: true, completion: {
                 CounterStore.shared.reset()

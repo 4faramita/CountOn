@@ -36,10 +36,17 @@ class DetailView: ASDisplayNode {
     
     var absoluteDate = false {
         didSet {
-            setupHistoryTable()
+            if absoluteDate {
+                // FIXME: The content offset for the first time is buggy
+                absoluteHistoryTable?.setContentOffset(relativeHistoryTable?.contentOffset ?? .zero, animated: false)
+            } else {
+                relativeHistoryTable?.setContentOffset(absoluteHistoryTable?.contentOffset ?? .zero, animated: false)
+            }
+            setNeedsLayout()
         }
     }
-    var historyTable: HistoryTableNode?
+    var absoluteHistoryTable: HistoryTableNode?
+    var relativeHistoryTable: HistoryTableNode?
     let bottomTitle = ASTextNode()
     let statusTitle = ASTextNode()
 
@@ -176,7 +183,8 @@ class DetailView: ASDisplayNode {
     }
     
     private func setupHistoryTable() {
-        self.historyTable = HistoryTableNode(with: self.counter!.history, absoluteDate: self.absoluteDate)
+        self.relativeHistoryTable = HistoryTableNode(with: self.counter!.history, absoluteDate: false)
+        self.absoluteHistoryTable = HistoryTableNode(with: self.counter!.history, absoluteDate: true)
 //        self.historyTable?.reloadData()
     }
     
@@ -266,7 +274,8 @@ class DetailView: ASDisplayNode {
         statusNode.style.height = ASDimensionMake(statusPicker.frame.height)
         noteView.style.height = ASDimensionMake(96)
         typePicker.style.height = ASDimensionMake(typePickerView.frame.height)
-        historyTable?.style.height = ASDimensionMake(StaticValues.screenHeight - 330)
+        relativeHistoryTable?.style.height = ASDimensionMake(StaticValues.screenHeight - 330)
+        absoluteHistoryTable?.style.height = ASDimensionMake(StaticValues.screenHeight - 330)
         
         let titleStack = ASStackLayoutSpec(
             direction: .vertical,
@@ -283,6 +292,8 @@ class DetailView: ASDisplayNode {
             alignItems: .stretch,
             children: [ noteTitle, noteView ]
         )
+        
+        let historyTable = absoluteDate ? absoluteHistoryTable : relativeHistoryTable
         
         let bottom = isInEditMode ? historyTable! : statusNode
         
