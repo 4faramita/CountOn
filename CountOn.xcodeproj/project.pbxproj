@@ -26,6 +26,7 @@
 		B499CF71208395250054125D /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF70208395250054125D /* Counter.swift */; };
 		B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7DB0720D6A1E30074660D /* StaticValues.swift */; };
 		B4C7063420E0DF5E002E5422 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7063320E0DF5E002E5422 /* R.generated.swift */; };
+		B4C7063620E13A5D002E5422 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C7063520E13A5D002E5422 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		B499CF70208395250054125D /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		B4B7DB0720D6A1E30074660D /* StaticValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValues.swift; sourceTree = "<group>"; };
 		B4C7063320E0DF5E002E5422 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		B4C7063520E13A5D002E5422 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		B68A1A77EB30B936EF16B8C4 /* Pods-CountOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.release.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.release.xcconfig"; sourceTree = "<group>"; };
 		C1E76756C02A9625949EF240 /* Pods_CountOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1BAE92AA37E8BB7F85D50D5 /* Pods-CountOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				B46A199420DB954500FF7A81 /* View */,
 				B46A199520DB957500FF7A81 /* Model */,
 				B499CF5D20832AD20054125D /* Assets.xcassets */,
+				B4C7063520E13A5D002E5422 /* Launch Screen.storyboard */,
 				B436700D20DEAE8700A9237E /* Storyboard.storyboard */,
 				B499CF6220832AD20054125D /* Info.plist */,
 				B499CF5620832AC80054125D /* AppDelegate.swift */,
@@ -217,6 +220,7 @@
 			files = (
 				B499CF5E20832AD20054125D /* Assets.xcassets in Resources */,
 				B436701320DEB00600A9237E /* Localizable.strings in Resources */,
+				B4C7063620E13A5D002E5422 /* Launch Screen.storyboard in Resources */,
 				B436700E20DEAE8700A9237E /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

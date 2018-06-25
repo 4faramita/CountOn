@@ -82,7 +82,14 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         
         tableNode.view.keyboardDismissMode = .interactive
         
-        if CounterStore.shared.count == 0 { setupData() }
+        
+        // MARK: First launch
+        
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if !launchedBefore {
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            setupData()
+        }
         
         // Set results notification block
         self.notificationToken = CounterStore.shared.items.observe { (changes: RealmCollectionChange) in
