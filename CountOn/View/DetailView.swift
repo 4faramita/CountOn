@@ -358,7 +358,7 @@ class DetailView: ASDisplayNode {
             
             CounterStore.shared.insert(item: counter)
             
-            return true
+            return false
         }
     }
     
