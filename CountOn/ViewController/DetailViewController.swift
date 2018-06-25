@@ -68,9 +68,20 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         DoneCancelBarView.shared.doneButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
+                let keyword = SearchAddBarView.shared.searchField.text ?? ""
+                if detailNode.isInEditMode  {
+                    SearchAddBarView.shared.searchField.clear()
+                    CounterStore.shared.reset()
+                    (self?.presentingViewController as! CounterViewController).tableNode.reloadData()
+                } else {
+                    SearchAddBarView.shared.searchField.text = keyword
+                }
+                
                 detailNode.save()
-                self?.dismiss(animated: true, completion: nil)
+                
                 DoneCancelBarView.shared.hide()
+                
+                self?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     
@@ -79,6 +90,8 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         DoneCancelBarView.shared.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
+                let title = SearchAddBarView.shared.searchField.text ?? ""
+                
                 if detailNode.isInEditMode {
                     let alert = UIAlertController(title: R.string.localizable.thisCounterIsAboutToBeDeleted(), message: R.string.localizable.thisCannotBeUndoneAreYouSure(), preferredStyle: UIAlertControllerStyle.alert)
                     let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: UIAlertActionStyle.cancel, handler: nil)
@@ -86,22 +99,17 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                         
                         detailNode.delete()
                         
-                        self?.dismiss(animated: true, completion: nil)
-//                TODO: Now I clear search field
-//                      to prevent crash when deleteing from the search result.
-//                      But hopefully I do not have to do that
-                        SearchAddBarView.shared.searchField.clear()
-//                CounterStore.shared.reset()
+                        SearchAddBarView.shared.searchField.text = title
                         
                         DoneCancelBarView.shared.hide()
+                        self?.dismiss(animated: true, completion: nil)
                     }
                     alert.addAction(cancelAction)
                     alert.addAction(yesAction)
                     self?.present(alert, animated: true, completion: nil)
                 } else {
-                    self?.dismiss(animated: true, completion: nil)
-                    SearchAddBarView.shared.searchField.clear()
                     DoneCancelBarView.shared.hide()
+                    self?.dismiss(animated: true, completion: nil)
                 }
             })
             .disposed(by: disposeBag)

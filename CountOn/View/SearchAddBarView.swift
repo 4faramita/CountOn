@@ -51,7 +51,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             ]
         )
         searchField.delegate = self
-        searchField.clearButtonMode = UITextFieldViewMode.whileEditing
+        searchField.clearButtonMode = UITextFieldViewMode.always
         
         self.addSubview(searchField)
         searchField.snp.makeConstraints { (make) in

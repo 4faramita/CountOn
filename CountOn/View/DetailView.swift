@@ -335,10 +335,12 @@ class DetailView: ASDisplayNode {
             guard let counter = realm.resolve(counterRef) else {
                 return // entity was deleted
             }
-            try! realm.write {
-                counter.title = title
-                counter.note = note
-                counter.type = type.rawValue
+            if !(counter.title == title && counter.note == note && counter.type == type.rawValue) {
+                try! realm.write {
+                    counter.title = title
+                    counter.note = note
+                    counter.type = type.rawValue
+                }
             }
         } else {
             let counter = Counter()

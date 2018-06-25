@@ -58,12 +58,9 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .tap
             .subscribe(onNext: { [weak self] _ in
                 let title = SearchAddBarView.shared.searchField.text ?? ""
-            
                 let detailVC = DetailViewController(with: title)
-                self?.present(detailVC, animated: true) {
-                    SearchAddBarView.shared.searchField.clear()
-                    CounterStore.shared.reset()
-                    self?.tableNode.reloadData()
+                DispatchQueue.main.async {
+                    self?.present(detailVC, animated: true)
                 }
             })
             .disposed(by: disposeBag)
@@ -213,8 +210,7 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
         // FIXME: Actually this is not my bug! How about that!
         DispatchQueue.main.async { [weak self] in
             self?.present(detailVC, animated: true, completion: {
-                CounterStore.shared.reset()
-                self?.tableNode.reloadData()
+                self?.tableNode.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             })
         }
     }
