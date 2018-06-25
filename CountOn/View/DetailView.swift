@@ -9,12 +9,16 @@
 import UIKit
 import AsyncDisplayKit
 import RealmSwift
-import RxSwift
-import RxCocoa
 import SwifterSwift
 import DateToolsSwift
+import RxSwift
+import RxCocoa
+import RxKeyboard
+import RxGesture
 
 class DetailView: ASDisplayNode {
+    
+    let disposeBag = DisposeBag()
     
     let titleTitle = ASTextNode()
     var titleField = UITextField()
@@ -116,6 +120,101 @@ class DetailView: ASDisplayNode {
         setupFields()
     }
     
+    override func didLoad() {
+        super.didLoad()
+        
+        
+        // MARK: Danamically change the UISegmentedControl's tint color
+        
+        typePickerView.rx
+            .selectedSegmentIndex
+            .distinctUntilChanged()
+            .filter({ [0, 1, 2].contains($0) })
+            .subscribe(onNext: { [weak self] index in
+                self?.type = StaticValues.counterType[index]
+                self?.typePickerView.tintColor = Colors.countColor[index][.foreground]
+            })
+            .disposed(by: disposeBag)
+        
+        
+        // MARK: Title, note and status
+        // TODO: This does not have to emit according to change
+        
+        titleField.rx
+            .text.orEmpty
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] newTitle in
+                self?.title = newTitle.trimmed
+            })
+            .disposed(by: disposeBag)
+        
+        noteView.textView.rx
+            .text.orEmpty
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] newNote in
+                self?.note = newNote
+            })
+            .disposed(by: disposeBag)
+        
+        
+        // MARK: History table exchange
+        if let relativeHistoryTable = relativeHistoryTable, let absoluteHistoryTable = absoluteHistoryTable {
+            let relativeTapStream = relativeHistoryTable.view.rx
+                .tapGesture(configuration: { gestureRecognizer, delegate in
+                    delegate.simultaneousRecognitionPolicy = .never
+                })
+                .when(.recognized)
+            let absoluteTapStream = absoluteHistoryTable.view.rx
+                .tapGesture(configuration: { gestureRecognizer, delegate in
+                    delegate.simultaneousRecognitionPolicy = .never
+                })
+                .when(.recognized)
+            Observable.merge(relativeTapStream, absoluteTapStream)
+                .subscribe(onNext: { [weak self] _ in
+                    if let absoluteDate = self?.absoluteDate {
+                        self?.absoluteDate = !absoluteDate
+                    }
+                })
+                .disposed(by: disposeBag)
+        }
+        
+        
+        // MARK: click to dismiss keyboard
+        
+//        node.view.rx
+//            .tapGesture()
+//            .when(.recognized)
+//            .subscribe(onNext: { [weak self] _ in
+//                self?.dismissKeyboard()
+//            })
+//            .disposed(by: disposeBag)
+        
+        
+        // MARK: swipe doneCancelBar down to dismiss keyboard
+        
+        DoneCancelBarView.shared.rx
+            .swipeGesture([.down])
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissKeyboard()
+            })
+            .disposed(by: disposeBag)
+        
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { keyboardVisibleHeight in
+                DoneCancelBarView.shared.center = CGPoint(
+                    x: StaticValues.screenWidth / 2,
+                    y: StaticValues.screenHeight - 40 - keyboardVisibleHeight
+                )
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func dismissKeyboard() {
+        titleField.resignFirstResponder()
+        noteView.resignFirstResponder()
+    }
+    
     
 //    MARK: Setup UI
     
@@ -185,7 +284,6 @@ class DetailView: ASDisplayNode {
     private func setupHistoryTable() {
         self.relativeHistoryTable = HistoryTableNode(with: self.counter!.history, absoluteDate: false)
         self.absoluteHistoryTable = HistoryTableNode(with: self.counter!.history, absoluteDate: true)
-//        self.historyTable?.reloadData()
     }
     
     private func setupStatusTitle() {

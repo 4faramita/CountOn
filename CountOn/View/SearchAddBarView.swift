@@ -8,9 +8,6 @@
 
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
-import RxGesture
 import RealmSwift
 import AsyncDisplayKit
 
@@ -21,9 +18,7 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
     
     let addButton = UIButton()
     let searchField = UITextField()
-    
-    let disposeBag = DisposeBag()
-    
+        
     convenience init() {
         self.init(image: R.image.bar())
         

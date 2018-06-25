@@ -192,12 +192,12 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
         return node
     }
     
-    //    Disabled Swipe to delete.
-    //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    //        if editingStyle == .delete {
-    //            CounterStore.shared.remove(at: indexPath.row)
-    //        }
-    //    }
+//    Disabled Swipe to delete.
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            CounterStore.shared.remove(at: indexPath.row)
+//        }
+//    }
     
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1

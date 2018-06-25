@@ -109,6 +109,24 @@ final class CounterCellNode: ASCellNode {
         minusButton.setAttributedTitle(minusButtonHighlightedTitle, for: .highlighted)
         
         
+        switch StaticValues.counterType[counter.type] {
+        case .increase:
+            counterBackground.image = R.image.counter_increase()
+        case .decrease:
+            counterBackground.image = R.image.counter_decrease()
+        case .twoWays:
+            counterBackground.image = R.image.counter_both()
+        }
+        
+        if StaticValues.scale < 1 {
+            counterBackground.contentMode = .scaleAspectFit
+        }
+//        counterBackground.contentMode = .scaleToFill
+    }
+    
+    override func didLoad() {
+        super.didLoad()
+        
         let addStream = addButton.rx
             .tap
             .map { [weak self] _ -> Int in
@@ -116,12 +134,12 @@ final class CounterCellNode: ASCellNode {
                     return 1
                 }
                 return 2
-            }
+        }
         
         let validAddStream = addStream
             .filter { number in
                 number == 1
-            }
+        }
         
         let minusStream = minusButton.rx
             .tap
@@ -130,12 +148,12 @@ final class CounterCellNode: ASCellNode {
                     return -1
                 }
                 return -2
-            }
+        }
         
         let validMinuseStream = minusStream
             .filter { number in
                 number == -1
-            }
+        }
         
         let editStream = Observable.of(validAddStream, validMinuseStream)
             .merge()
@@ -152,7 +170,7 @@ final class CounterCellNode: ASCellNode {
             .take(1)
         
         historyResult.subscribe(onNext: { [weak self] historyList in
-//            FIXME: counter edit
+            //            FIXME: counter edit
             let realm = try! Realm()
             let counterRef = ThreadSafeReference(to: (self?.counter)!)
             guard let counter = realm.resolve(counterRef) else {
@@ -185,20 +203,6 @@ final class CounterCellNode: ASCellNode {
                 SwiftMessages.show(view: (self?.generateWarning(forZero: true))!)
             })
             .disposed(by: disposeBag)
-        
-        switch StaticValues.counterType[counter.type] {
-        case .increase:
-            counterBackground.image = R.image.counter_increase()
-        case .decrease:
-            counterBackground.image = R.image.counter_decrease()
-        case .twoWays:
-            counterBackground.image = R.image.counter_both()
-        }
-        
-        if StaticValues.scale < 1 {
-            counterBackground.contentMode = .scaleAspectFit
-        }
-//        counterBackground.contentMode = .scaleToFill
     }
     
     private func generateWarning(forZero: Bool) -> UIView {

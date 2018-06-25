@@ -8,17 +8,12 @@
 
 import UIKit
 import SnapKit
-import RxSwift
-import RxCocoa
-import RxGesture
 import RealmSwift
 
 class DoneCancelBarView: UIImageView {
     
     static let shared = DoneCancelBarView()
-    
-    let disposeBag = DisposeBag()
-    
+        
     let cancelButton = UIButton()
     let doneButton = UIButton()
     let deleteButton = UIButton()
