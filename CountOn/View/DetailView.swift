@@ -345,6 +345,7 @@ class DetailView: ASDisplayNode {
             }
             return false
         } else {
+            // MARK: Add new
             let counter = Counter()
             counter.title = title
             counter.note = note
@@ -357,7 +358,7 @@ class DetailView: ASDisplayNode {
             
             CounterStore.shared.insert(item: counter)
             
-            return false
+            return true
         }
     }
     
