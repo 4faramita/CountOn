@@ -69,15 +69,15 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             .tap
             .subscribe(onNext: { [weak self] _ in
                 let keyword = SearchAddBarView.shared.searchField.text ?? ""
-                if detailNode.isInEditMode  {
+                
+                let changed = detailNode.save()
+                if changed  {
                     SearchAddBarView.shared.searchField.clear()
                     CounterStore.shared.reset()
                     (self?.presentingViewController as! CounterViewController).tableNode.reloadData()
                 } else {
                     SearchAddBarView.shared.searchField.text = keyword
                 }
-                
-                detailNode.save()
                 
                 DoneCancelBarView.shared.hide()
                 
