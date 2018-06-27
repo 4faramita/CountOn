@@ -123,17 +123,17 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
                 let realm = try! Realm()
                 realm.beginWrite()
                 
-                let first = CounterViewController.generateCounter(R.string.localizable.clickHereToStart(), at: Date())
+                let first = CounterViewController.generateCounter(R.string.localizable.clickHereToStart(), at: Date(), from: 42)
                 first.note = R.string.localizable.helloThisIsACounterItCanRepresentsTheHistoryOfAnActivityOrTheNumberOfAItemBasicallyAnythingYouWantClickDoneToCheckOtherCounters()
                 
                 let second = CounterViewController.generateCounter(R.string.localizable.takeAIbuprofenPill(), from: 0, of: 0)
                 second.note = R.string.localizable.thisCounterOnlyGoesUpMaybeForAActivityYouRegularlyDo() + R.string.localizable.youCanChangeTheDetailOfACounterButYouCannotChangeTheHistory()
                 
                 let third = CounterViewController.generateCounter(R.string.localizable.run5km100Times(), from: 100, of: 1)
-                third.note = R.string.localizable.thisCounterOnlyGoesDownMaybeForAGoalYouHopeToAchieve() + R.string.localizable.youCanChangeTheDetailOfACounterButYouCannotChangeTheHistory()
+                third.note = R.string.localizable.thisCounterOnlyGoesDownMaybeForAGoalYouHopeToAchieve() + R.string.localizable.youCanTapOnTheHistoryListToChangeBetweenRelativeAndAbsoluteTime()
                 
                 let fourth = CounterViewController.generateCounter(R.string.localizable.slapBetBank(), from: 5, of: 2)
-                fourth.note = R.string.localizable.thisCounterCanGoUpAndDownMaybeForKeepingTrackOfACertainKindOfItem() + R.string.localizable.youCanChangeTheDetailOfACounterButYouCannotChangeTheHistory()
+                fourth.note = R.string.localizable.thisCounterCanGoUpAndDownMaybeForKeepingTrackOfACertainKindOfItem() + R.string.localizable.atAnyTimeYouCanSwipeDownOnTheBottomBarToDismissTheKeyboard()
                 realm.add([first, second, third, fourth])
                 
                 try! realm.commitWrite()

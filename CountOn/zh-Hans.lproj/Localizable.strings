@@ -37,7 +37,7 @@
 "This cannot be undone. Are you sure?" = "删除操作无法撤销，是否确定删除？";
 
 "Click here to start." = "点击此处开始";
-"Hello! This is a counter, it can represents the history of an activity, or the number of a item, basically anything you want! Click \"Done\" to check other counters." = "你好! 这是一个计数器，它可以用来代表一个活动的历史、一件物品的数量等等，或者是你想记录的任何东西! 点击 \"完成\" 来查看其他计数器。";
+"Hello! This is a counter, it can represents the history of an activity, or the number of a item, basically anything you want! Click \"Done\" to check other counters." = "你好! 这是一个计数器，它可以用来代表一个活动的历史、一件物品的数量等等，或者是你想记录的任何东西! 点击「完成」来查看其他计数器。";
 
 "You can change the detail of a counter, but you cannot change the history." = "你可以改变计数器的各种信息，但是你无法改变历史。";
 
@@ -46,6 +46,8 @@
 
 "Run 5km 100 times!" = "100 个 5 公里!";
 "This counter only goes down, maybe for a goal you hope to achieve." = "这种计数器的数量只会下降，你可能会想用它来记录一个希望达成的目标。";
+"You can tap on the history list to change between relative and absolute time." = "你可以通过点击历史列表来切换绝对或相对时间显示模式。";
 
-"Slap bet bank" = "巴尼叔叔的耳光";
+"Slap bet bank" = "洗面奶库存";
 "This counter can go up and down, maybe for keeping track of a certain kind of item." = "这种计数器的数量可增可减，你可能会想用它来记录某一个物品的数量增减变化。";
+"At any time, you can swipe down on the bottom bar to dismiss the keyboard." = "在任何时候，你都可以通过下滑底部操作条来收起键盘。";
