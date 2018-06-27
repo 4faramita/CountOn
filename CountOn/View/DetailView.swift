@@ -327,25 +327,28 @@ class DetailView: ASDisplayNode {
     
 //    MARK: Save
     
-    func save() -> Bool {
+    func save(insert: (Bool) -> Void) {
         let realm = try! Realm()
         
         if isInEditMode {
             let counterRef = ThreadSafeReference(to: counter!)
             guard let counter = realm.resolve(counterRef) else {
-                return false// entity was deleted
+                return // entity was deleted
             }
             if !(counter.title == title && counter.note == note && counter.type == type.rawValue) {
+                insert(true)
+                
                 try! realm.write {
                     counter.title = title
                     counter.note = note
                     counter.type = type.rawValue
                 }
-                return true
+            } else {
+                insert(false)
             }
-            return false
         } else {
             // MARK: Add new
+            insert(true)
             let counter = Counter()
             counter.title = title
             counter.note = note
@@ -357,8 +360,6 @@ class DetailView: ASDisplayNode {
             counter.last = (counter.history.first?.date)!
             
             CounterStore.shared.insert(item: counter)
-            
-            return false
         }
     }
     
