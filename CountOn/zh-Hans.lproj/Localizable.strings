@@ -19,7 +19,7 @@
 "Description" = "描述";
 "Describe the counter" = "描述一下这个计数器";
 
-"Start from" = "计数起始于";
+"Set the counter to" = "将计数器设为";
 "History" = "历史记录数";
 "Current status" = "目前状态";
 
@@ -29,6 +29,8 @@
 "Yes" = "是";
 "OK" = "好";
 "Warning" = "警告";
+
+"Reset" = "重设";
 
 "Do not want to go negative." = "计数器无法设为负数";
 "Cannot go over 999." = "计数无法超过 999";

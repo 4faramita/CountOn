@@ -19,7 +19,7 @@
 "Description" = "Description";
 "Describe the counter" = "Describe the counter";
 
-"Start from" = "Start from";
+"Set the counter to" = "Set the counter to";
 "History" = "History";
 "Current status" = "Current status";
 
@@ -29,6 +29,8 @@
 "Yes" = "Yes";
 "OK" = "OK";
 "Warning" = "Warning";
+
+"Reset" = "Reset";
 
 "Do not want to go negative." = "Do not want to go negative.";
 "Cannot go over 999." = "Cannot go over 999.";

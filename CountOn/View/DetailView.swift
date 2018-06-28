@@ -53,6 +53,7 @@ class DetailView: ASDisplayNode {
     var relativeHistoryTable: HistoryTableNode?
     let bottomTitle = ASTextNode()
     let statusTitle = ASTextNode()
+    let resetButton = ASButtonNode()
 
     let centerParagraphStyle = NSMutableParagraphStyle()
     let multiLineParagraphStyle = NSMutableParagraphStyle()
@@ -60,7 +61,9 @@ class DetailView: ASDisplayNode {
     
 
     
-    var isInEditMode: Bool {
+    var isInEditMode: Bool
+    
+    var isFromTable: Bool {
         if let _ = counter {
             return true
         } else {
@@ -80,11 +83,13 @@ class DetailView: ASDisplayNode {
     var title = ""
     var note = ""
     var type = CountType.increase
-    var status = 0  // only for new
+    var status = 0
     
     var counter: Counter?
     
     override init() {
+        isInEditMode = true
+        
         super.init()
         
         centerParagraphStyle.alignment = .center
@@ -114,6 +119,7 @@ class DetailView: ASDisplayNode {
     
     convenience init(with title: String) {
         self.init()
+        isInEditMode = false
         
         self.title = title
         
@@ -128,7 +134,6 @@ class DetailView: ASDisplayNode {
         
         typePickerView.rx
             .selectedSegmentIndex
-            .distinctUntilChanged()
             .filter({ [0, 1, 2].contains($0) })
             .subscribe(onNext: { [weak self] index in
                 self?.type = StaticValues.counterType[index]
@@ -142,7 +147,6 @@ class DetailView: ASDisplayNode {
         
         titleField.rx
             .text.orEmpty
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newTitle in
                 self?.title = newTitle.trimmed
             })
@@ -150,9 +154,17 @@ class DetailView: ASDisplayNode {
         
         noteView.textView.rx
             .text.orEmpty
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] newNote in
                 self?.note = newNote
+            })
+            .disposed(by: disposeBag)
+        
+        resetButton.rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.isInEditMode = false
+                self?.initBottom()
+                self?.setNeedsLayout()
             })
             .disposed(by: disposeBag)
         
@@ -210,6 +222,12 @@ class DetailView: ASDisplayNode {
             .disposed(by: disposeBag)
     }
     
+    override func layout() {
+        super.layout()
+        
+        resetButton.cornerRadius = resetButton.frame.height / 2
+    }
+    
     private func dismissKeyboard() {
         titleField.resignFirstResponder()
         noteView.resignFirstResponder()
@@ -224,7 +242,6 @@ class DetailView: ASDisplayNode {
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
-                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
         
@@ -244,7 +261,6 @@ class DetailView: ASDisplayNode {
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
-                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
         
@@ -279,6 +295,9 @@ class DetailView: ASDisplayNode {
     private func initStatusNode() {
         statusPicker.delegate = self
         statusPicker.dataSource = self
+        statusPicker.selectRow(status % 10, inComponent: 2, animated: true)
+        statusPicker.selectRow((status / 10) % 10, inComponent: 1, animated: true)
+        statusPicker.selectRow((status / 100) % 10, inComponent: 0, animated: true)
     }
     
     private func setupHistoryTable() {
@@ -292,23 +311,36 @@ class DetailView: ASDisplayNode {
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
-                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
     }
     
+    private func setupResetButton() {
+        let resetTitle = NSAttributedString(
+            string: R.string.localizable.reset(),
+            attributes: [
+                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
+                NSAttributedStringKey.foregroundColor: R.color.delete()!,
+            ]
+        )
+        resetButton.setAttributedTitle(resetTitle, for: UIControlState.normal)
+        resetButton.borderWidth = 1 / UIScreen.main.nativeScale
+        resetButton.borderColor = R.color.delete()!.cgColor
+        resetButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+    }
+    
     private func initBottom() {
         bottomTitle.attributedText = NSAttributedString(
-            string: isInEditMode ? R.string.localizable.history() + ": \(counter!.history.count)" : R.string.localizable.startFrom(),
+            string: isInEditMode ? R.string.localizable.history() + ": \(counter!.history.count)" : R.string.localizable.setTheCounterTo(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
-                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
             ]
         )
         
         if isInEditMode {
             setupStatusTitle()
+            setupResetButton()
             setupHistoryTable()
         } else {
             initStatusNode()
@@ -330,18 +362,26 @@ class DetailView: ASDisplayNode {
     func save(insert: (Bool) -> Void) {
         let realm = try! Realm()
         
-        if isInEditMode {
-            let counterRef = ThreadSafeReference(to: counter!)
+        if let counter = counter {
+            let counterRef = ThreadSafeReference(to: counter)
             guard let counter = realm.resolve(counterRef) else {
                 return // entity was deleted
             }
-            if !(counter.title == title && counter.note == note && counter.type == type.rawValue) {
+            if !(counter.title == title && counter.note == note && counter.type == type.rawValue && counter.status == status) {
                 insert(true)
                 
                 try! realm.write {
                     counter.title = title
                     counter.note = note
                     counter.type = type.rawValue
+                    
+                    if counter.status != status {
+                        counter.status = status
+                        
+                        let history = History(from: status)
+                        counter.history.insert(history, at: 0)
+                        counter.last = (counter.history.first?.date)!
+                    }
                 }
             } else {
                 insert(false)
@@ -349,6 +389,7 @@ class DetailView: ASDisplayNode {
         } else {
             // MARK: Add new
             insert(true)
+            
             let counter = Counter()
             counter.title = title
             counter.note = note
@@ -366,8 +407,8 @@ class DetailView: ASDisplayNode {
     func delete() {
         let realm = try! Realm()
         
-        if isInEditMode {
-            let counterRef = ThreadSafeReference(to: counter!)
+        if let counter = counter {
+            let counterRef = ThreadSafeReference(to: counter)
             guard let counter = realm.resolve(counterRef) else {
                 return // entity was deleted
             }
@@ -402,13 +443,14 @@ class DetailView: ASDisplayNode {
         let historyTable = absoluteDate ? absoluteHistoryTable : relativeHistoryTable
         
         let bottom = isInEditMode ? historyTable! : statusNode
+        let bottomTitles = isInEditMode ? [ bottomTitle, statusTitle, resetButton ] : [ bottomTitle ]
         
         let bottomTitleStack = ASStackLayoutSpec(
             direction: .horizontal,
             spacing: 10,
             justifyContent: .spaceBetween,
             alignItems: .start,
-            children: [ bottomTitle, statusTitle ]
+            children: bottomTitles
         )
         
         let bottomStack = ASStackLayoutSpec(

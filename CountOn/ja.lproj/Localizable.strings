@@ -19,7 +19,7 @@
 "Description" = "説明";
 "Describe the counter" = "カウンターを説明しましょう";
 
-"Start from" = "どこから始まりますか";
+"Set the counter to" = "カウンターの設置";
 "History" = "歴史";
 "Current status" = "今";
 
@@ -29,6 +29,8 @@
 "Yes" = "はい";
 "OK" = "わかりました";
 "Warning" = "警告";
+
+"Reset" = "リセット";
 
 "Do not want to go negative." = "Do not want to go negative.";
 "Cannot go over 999." = "Cannot go over 999.";

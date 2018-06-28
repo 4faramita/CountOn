@@ -94,7 +94,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             .subscribe(onNext: { [weak self] _ in
                 let title = SearchAddBarView.shared.searchField.text ?? ""
                 
-                if detailNode.isInEditMode {
+                if detailNode.isFromTable {
                     let alert = UIAlertController(title: R.string.localizable.thisCounterIsAboutToBeDeleted(), message: R.string.localizable.thisCannotBeUndoneAreYouSure(), preferredStyle: UIAlertControllerStyle.alert)
                     let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: UIAlertActionStyle.cancel, handler: nil)
                     let yesAction = UIAlertAction(title: R.string.localizable.yes(), style: UIAlertActionStyle.destructive) { _ in

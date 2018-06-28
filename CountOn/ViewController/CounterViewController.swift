@@ -44,7 +44,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         SearchAddBarView.shared.searchField.rx
             .text
             .orEmpty
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] keyword in
                 if keyword.isEmpty {
                     CounterStore.shared.reset()
