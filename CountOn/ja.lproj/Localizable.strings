@@ -29,6 +29,9 @@
 "Yes" = "はい";
 "OK" = "わかりました";
 "Warning" = "警告";
+"Tip" = "ヒント";
+
+"Swipe down the bar to dismiss keyboard." = "バーを下にスワイプしてキーボードを隠す。";
 
 "Reset" = "リセット";
 

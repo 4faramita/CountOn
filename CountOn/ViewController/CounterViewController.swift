@@ -68,6 +68,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .swipeGesture([.down])
             .when(.recognized)
             .subscribe(onNext: { _ in
+                UserDefaults.standard.set(true, forKey: "knowSwipeDownOnSearch")
                 SearchAddBarView.shared.searchField.resignFirstResponder()
             })
             .disposed(by: disposeBag)

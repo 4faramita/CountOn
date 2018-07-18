@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		25BC1821E47757B3657E3810 /* Pods_CountOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E76756C02A9625949EF240 /* Pods_CountOn.framework */; };
+		B408351320FF16B100F82948 /* UndoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B408351220FF16B100F82948 /* UndoBarView.swift */; };
 		B436700E20DEAE8700A9237E /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B436700D20DEAE8700A9237E /* Storyboard.storyboard */; };
 		B436701320DEB00600A9237E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B436701520DEB00600A9237E /* Localizable.strings */; };
 		B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B408351220FF16B100F82948 /* UndoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBarView.swift; sourceTree = "<group>"; };
 		B436700D20DEAE8700A9237E /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		B436701420DEB00600A9237E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B436701620DEB00A00A9237E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
 				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
 				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
+				B408351220FF16B100F82948 /* UndoBarView.swift */,
 				B499CF6E208347A30054125D /* CountArea.swift */,
 				B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */,
 				B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */,
@@ -331,6 +334,7 @@
 				B499CF71208395250054125D /* Counter.swift in Sources */,
 				B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */,
 				B46A198F20DAA1C500FF7A81 /* DetailView.swift in Sources */,
+				B408351320FF16B100F82948 /* UndoBarView.swift in Sources */,
 				B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */,
 				B499CF6F208347A30054125D /* CountArea.swift in Sources */,
 				B46A198D20DA98A400FF7A81 /* DetailViewController.swift in Sources */,

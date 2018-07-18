@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 import AsyncDisplayKit
+import SwiftMessages
 
 class SearchAddBarView: UIImageView, UITextFieldDelegate {
     
@@ -66,6 +67,24 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let knowSwipeDown = UserDefaults.standard.bool(forKey: "knowSwipeDownOnSearch")
+        if !knowSwipeDown {
+            let view = MessageView.viewFromNib(layout: .cardView)
+            view.configureTheme(.info)
+            view.configureDropShadow()
+            let iconText = "🙂"
+            let sentence = R.string.localizable.swipeDownTheBarToDismissKeyboard()
+            view.configureContent(title: R.string.localizable.tip(), body: sentence, iconText: iconText)
+            view.buttonTapHandler = { _ in SwiftMessages.hide() }
+            view.button?.setTitle(R.string.localizable.oK(), for: .normal)
+            view.tapHandler = { _ in SwiftMessages.hide() }
+            SwiftMessages.show(view: view)
+        }
+        
         return true
     }
 }

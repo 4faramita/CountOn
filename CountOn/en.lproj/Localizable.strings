@@ -29,6 +29,9 @@
 "Yes" = "Yes";
 "OK" = "OK";
 "Warning" = "Warning";
+"Tip" = "Tip";
+
+"Swipe down the bar to dismiss keyboard." = "Swipe down the bar to dismiss keyboard";
 
 "Reset" = "Reset";
 
