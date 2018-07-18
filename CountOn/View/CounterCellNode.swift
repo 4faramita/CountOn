@@ -61,7 +61,7 @@ final class CounterCellNode: ASCellNode {
         title.truncationMode = .byTruncatingTail
         
         lastLaunch.attributedText = NSAttributedString(
-            string: "\(counter.history.first!.date.timeAgoSinceNow)",
+            string: "\(counter.history.first?.date.timeAgoSinceNow ?? "")",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,

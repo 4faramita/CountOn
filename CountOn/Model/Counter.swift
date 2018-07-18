@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import IceCream
 
 final class Counter: Object {
     @objc dynamic var id = UUID().uuidString
@@ -15,9 +16,14 @@ final class Counter: Object {
     @objc dynamic var note = ""
     @objc dynamic var type = 0 // { 0: increase, 1: decrease, 2: both }
     @objc dynamic var status = 0
+    @objc dynamic var isDeleted = false
     var history = List<History>() // insert from head
     
     @objc dynamic var last = Date()  // for sorting
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 class History: Object {
@@ -37,4 +43,12 @@ class History: Object {
         self.action = action
 //        self.status = status + action
     }
+}
+
+extension Counter: CKRecordConvertible {
+    // Yep, leave it blank!
+}
+
+extension Counter: CKRecordRecoverable {
+    // Leave it blank, too.
 }

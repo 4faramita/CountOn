@@ -4,6 +4,8 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
     - Texture (~> 2.6)
+  - IceCream (1.5.0):
+    - RealmSwift
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -22,12 +24,12 @@ PODS:
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
-  - Realm (3.7.2):
-    - Realm/Headers (= 3.7.2)
-  - Realm/Headers (3.7.2)
-  - RealmSwift (3.7.2):
-    - Realm (= 3.7.2)
-  - Reveal-SDK (15)
+  - Realm (3.7.4):
+    - Realm/Headers (= 3.7.4)
+  - Realm/Headers (3.7.4)
+  - RealmSwift (3.7.4):
+    - Realm (= 3.7.4)
+  - Reveal-SDK (16)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
   - RxGesture (1.2.1):
@@ -38,21 +40,23 @@ PODS:
     - RxSwift (>= 4.1.0)
   - RxSwift (4.2.0)
   - SnapKit (4.0.0)
-  - SwifterSwift (4.3.0):
-    - SwifterSwift/AppKit (= 4.3.0)
-    - SwifterSwift/CoreGraphics (= 4.3.0)
-    - SwifterSwift/CoreLocation (= 4.3.0)
-    - SwifterSwift/Foundation (= 4.3.0)
-    - SwifterSwift/MapKit (= 4.3.0)
-    - SwifterSwift/SwiftStdlib (= 4.3.0)
-    - SwifterSwift/UIKit (= 4.3.0)
-  - SwifterSwift/AppKit (4.3.0)
-  - SwifterSwift/CoreGraphics (4.3.0)
-  - SwifterSwift/CoreLocation (4.3.0)
-  - SwifterSwift/Foundation (4.3.0)
-  - SwifterSwift/MapKit (4.3.0)
-  - SwifterSwift/SwiftStdlib (4.3.0)
-  - SwifterSwift/UIKit (4.3.0)
+  - SwifterSwift (4.4.0):
+    - SwifterSwift/AppKit (= 4.4.0)
+    - SwifterSwift/CoreGraphics (= 4.4.0)
+    - SwifterSwift/CoreLocation (= 4.4.0)
+    - SwifterSwift/Foundation (= 4.4.0)
+    - SwifterSwift/MapKit (= 4.4.0)
+    - SwifterSwift/SpriteKit (= 4.4.0)
+    - SwifterSwift/SwiftStdlib (= 4.4.0)
+    - SwifterSwift/UIKit (= 4.4.0)
+  - SwifterSwift/AppKit (4.4.0)
+  - SwifterSwift/CoreGraphics (4.4.0)
+  - SwifterSwift/CoreLocation (4.4.0)
+  - SwifterSwift/Foundation (4.4.0)
+  - SwifterSwift/MapKit (4.4.0)
+  - SwifterSwift/SpriteKit (4.4.0)
+  - SwifterSwift/SwiftStdlib (4.4.0)
+  - SwifterSwift/UIKit (4.4.0)
   - SwiftMessages (4.1.4):
     - SwiftMessages/App (= 4.1.4)
   - SwiftMessages/App (4.1.4)
@@ -67,6 +71,7 @@ PODS:
 DEPENDENCIES:
   - DateToolsSwift
   - GTTexture-RxExtension
+  - IceCream (~> 1.5.0)
   - R.swift
   - RealmSwift
   - Reveal-SDK
@@ -83,6 +88,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DateToolsSwift
     - GTTexture-RxExtension
+    - IceCream
     - PINCache
     - PINOperation
     - PINRemoteImage
@@ -103,23 +109,24 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
   GTTexture-RxExtension: 1093ac89fc8d1cf4c8cf7e12c3998ae7052c2ac3
+  IceCream: 8c2d37f5de8341e5016b30f54ddd4489b8e707a8
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  Realm: dd18c3014e8d90df300b83c6da740067436089c5
-  RealmSwift: 79917cae59a0c43ef8118b233a5978891dd50b4a
-  Reveal-SDK: 25e21896c478b60b948f876043f91570d368d23d
+  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
+  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
+  Reveal-SDK: ed36bdbb3cbf90b94ae5da0dbcb3c7ae6738c51f
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxKeyboard: e5efbaa109c35be909dd888e53de0f0efdf5169e
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SwifterSwift: f3fce2b9fc5b9d8fda6eec33825e5243c60aebba
+  SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: 0fe0e902bbb44c32c52625d31cc591e8173a039f
+PODFILE CHECKSUM: 1337e70e9ffc45b390c605041f4762381eb1378a
 
 COCOAPODS: 1.5.3

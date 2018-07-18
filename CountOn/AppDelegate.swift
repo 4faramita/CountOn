@@ -11,12 +11,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import IceCream
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let disposeBag = DisposeBag()
+    
+    var syncEngine: SyncEngine?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -47,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40 - keyboardVisibleHeight)
             })
             .disposed(by: disposeBag)
+        
+        syncEngine = SyncEngine(objects: [ SyncObject<Counter>() ])
+        application.registerForRemoteNotifications()
         
         return true
     }

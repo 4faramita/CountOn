@@ -25,6 +25,8 @@ target 'CountOn' do
     pod 'SwiftMessages'
 
     pod 'R.swift'
+    
+    pod 'IceCream', '~> 1.5.0'
 
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
