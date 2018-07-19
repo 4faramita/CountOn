@@ -16,10 +16,9 @@ class HistoryTableNode: ASTableNode {
     
     let absoluteDate: Bool
     
-    init(with historyList: List<History>, absoluteDate: Bool) {
-        
+    init(with historyList: [History], absoluteDate: Bool) {
         self.absoluteDate = absoluteDate
-        historyArray = Array(historyList)
+        historyArray = historyList
         
         super.init(style: .plain)
         

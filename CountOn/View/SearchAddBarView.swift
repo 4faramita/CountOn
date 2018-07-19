@@ -79,9 +79,15 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
             let iconText = "🙂"
             let sentence = R.string.localizable.swipeDownTheBarToDismissKeyboard()
             view.configureContent(title: R.string.localizable.tip(), body: sentence, iconText: iconText)
-            view.buttonTapHandler = { _ in SwiftMessages.hide() }
+            view.buttonTapHandler = { _ in
+                UserDefaults.standard.set(true, forKey: "knowSwipeDownOnSearch")
+                SwiftMessages.hide()
+            }
             view.button?.setTitle(R.string.localizable.oK(), for: .normal)
-            view.tapHandler = { _ in SwiftMessages.hide() }
+            view.tapHandler = { _ in
+                UserDefaults.standard.set(true, forKey: "knowSwipeDownOnSearch")
+                SwiftMessages.hide()
+            }
             SwiftMessages.show(view: view)
         }
         

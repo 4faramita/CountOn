@@ -61,7 +61,7 @@ final class CounterCellNode: ASCellNode {
         title.truncationMode = .byTruncatingTail
         
         lastLaunch.attributedText = NSAttributedString(
-            string: "\(counter.history.first?.date.timeAgoSinceNow ?? "")",
+            string: "\(counter.last.timeAgoSinceNow)",
             attributes: [
                 NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
                 NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
@@ -159,8 +159,10 @@ final class CounterCellNode: ASCellNode {
             .merge()
         
         let historyResult = editStream
-            .map { number in
-                return History(typeOf: number)
+            .map { [weak self] number in
+                let history = History(typeOf: number)
+                history.owner = self?.counter
+                return history
             }
             .scan(List<History>(), accumulator: { (oldList: List<History>, newValue: History) -> List<History> in
                 oldList.insert(newValue, at: 0)
@@ -170,16 +172,16 @@ final class CounterCellNode: ASCellNode {
             .take(1)
         
         historyResult.subscribe(onNext: { [weak self] historyList in
-            //            FIXME: counter edit
+            // FIXME: counter edit
             let realm = try! Realm()
             let counterRef = ThreadSafeReference(to: (self?.counter)!)
             guard let counter = realm.resolve(counterRef) else {
                 return // entity was deleted
             }
             try! realm.write {
-                counter.history.insert(contentsOf: historyList, at: 0)
+                realm.add(historyList)
                 counter.status = (self?.countArea.countValue)!
-                counter.last = (counter.history.first?.date)!
+                counter.last = (historyList.first?.date)!
             }
         }).disposed(by: disposeBag)
         

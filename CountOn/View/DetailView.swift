@@ -301,8 +301,15 @@ class DetailView: ASDisplayNode {
     }
     
     private func setupHistoryTable() {
-        self.relativeHistoryTable = HistoryTableNode(with: self.counter!.history, absoluteDate: false)
-        self.absoluteHistoryTable = HistoryTableNode(with: self.counter!.history, absoluteDate: true)
+        let realm = try! Realm()
+        let histories = realm.objects(History.self).filter { (history) -> Bool in
+            return history.owner?.id == self.counter!.id
+            }
+            .sorted { (lhs, rhs) -> Bool in
+                lhs.date > rhs.date
+            }
+        self.relativeHistoryTable = HistoryTableNode(with: histories, absoluteDate: false)
+        self.absoluteHistoryTable = HistoryTableNode(with: histories, absoluteDate: true)
     }
     
     private func setupStatusTitle() {
@@ -376,11 +383,13 @@ class DetailView: ASDisplayNode {
                     counter.type = type.rawValue
                     
                     if counter.status != status {
+                        // Reset
                         counter.status = status
                         
                         let history = History(from: status)
-                        counter.history.insert(history, at: 0)
-                        counter.last = (counter.history.first?.date)!
+                        history.owner = counter
+                        realm.add(history)
+                        counter.last = history.date
                     }
                 }
             } else {
@@ -397,8 +406,12 @@ class DetailView: ASDisplayNode {
             counter.status = status
             
             let history = History(from: status)
-            counter.history.insert(history, at: 0)
-            counter.last = (counter.history.first?.date)!
+            history.owner = counter
+            counter.last = history.date
+            
+            try! realm.write {
+                realm.add(history)
+            }
             
             CounterStore.shared.insert(item: counter)
         }

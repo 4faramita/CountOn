@@ -14,7 +14,9 @@ class CounterStore {
     let realm = try! Realm()
     
     private let allItems = try! Realm().objects(Counter.self)
+        .filter("isDeleted = false")
         .sorted(byKeyPath: "last", ascending: false)
+    
     
     private(set) var items: Results<Counter>
     
@@ -53,28 +55,28 @@ class CounterStore {
 
     func remove(item: Counter) {
         try! realm.write {
-//            item.isDeleted = true
-            realm.delete(item)
+            item.isDeleted = true
+//            realm.delete(item)
         }
     }
 
     func remove(at index: Int) {
         try! realm.write {
-//            items[index].isDeleted = true
-            realm.delete(items[index])
+            items[index].isDeleted = true
+//            realm.delete(items[index])
         }
     }
     
     func removeAll() {
         try! realm.write {
-            while !items.isEmpty {
-                if let item = items.first {
-                    realm.delete(item)
-                }
-            }
-//            for item in items {
-//                item.isDeleted = true
+//            while !items.isEmpty {
+//                if let item = items.first {
+//                    realm.delete(item)
+//                }
 //            }
+            for item in items {
+                item.isDeleted = true
+            }
         }
     }
 

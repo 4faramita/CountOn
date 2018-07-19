@@ -92,7 +92,8 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         DoneCancelBarView.shared.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-                let title = SearchAddBarView.shared.searchField.text ?? ""
+//                let title = SearchAddBarView.shared.searchField.text ?? ""
+                SearchAddBarView.shared.searchField.clear()
                 
                 if detailNode.isFromTable {
                     let alert = UIAlertController(title: R.string.localizable.thisCounterIsAboutToBeDeleted(), message: R.string.localizable.thisCannotBeUndoneAreYouSure(), preferredStyle: UIAlertControllerStyle.alert)
@@ -100,8 +101,8 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                     let yesAction = UIAlertAction(title: R.string.localizable.yes(), style: UIAlertActionStyle.destructive) { _ in
                         
                         detailNode.delete()
-                        
-                        SearchAddBarView.shared.searchField.text = title
+                        // FIXME: Resume after deletion
+//                        SearchAddBarView.shared.searchField.text = title
                         
                         DoneCancelBarView.shared.hide()
                         self?.dismiss(animated: true, completion: nil)

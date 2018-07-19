@@ -24,7 +24,6 @@ class ButtonWithRoundedCornor: ASButtonNode {
 //        maskLayer.path = path.cgPath
 //        layer.mask = maskLayer
         
-        print(">>> \(frame.height)")
         borderWidth = 1 / UIScreen.main.nativeScale
         borderColor = R.color.delete()!.cgColor
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)

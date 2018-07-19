@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             .disposed(by: disposeBag)
         
-        syncEngine = SyncEngine(objects: [ SyncObject<Counter>() ])
+        syncEngine = SyncEngine(objects: [ SyncObject<Counter>(), SyncObject<History>() ])
         application.registerForRemoteNotifications()
         
         return true

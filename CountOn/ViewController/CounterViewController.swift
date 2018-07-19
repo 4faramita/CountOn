@@ -11,8 +11,6 @@ import AsyncDisplayKit
 import RealmSwift
 import RxSwift
 import RxCocoa
-//import RxRealm
-//import GTTexture_RxExtension
 
 final class CounterViewController:  ASViewController<ASDisplayNode> {
     
@@ -84,12 +82,14 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         
         
         // MARK: First launch
-        
-        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        if !launchedBefore {
-            UserDefaults.standard.set(true, forKey: "launchedBefore")
-            setupData()
-        }
+        // FIXME
+//        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//        if !launchedBefore {
+//            UserDefaults.standard.set(true, forKey: "launchedBefore")
+//            setupData()
+//        }
+//        CounterStore.shared.removeAll()
+//        setupData()
         
         // Set results notification block
         self.notificationToken = CounterStore.shared.items.observe { (changes: RealmCollectionChange) in
@@ -161,9 +161,15 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         counter.type = type ?? counter.status % 3
         
         let history = History(from: status ?? Int(arc4random()) % 100)
+        
         history.date = date ?? CounterViewController.randomDate()
+        history.owner = counter
+        let realm = try! Realm()
+        try! realm.write {
+            realm.add(history)
+        }
+        
         counter.last = history.date
-        counter.history.append(history)
         
         return counter
     }
@@ -187,7 +193,7 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
         // https://github.com/facebook/AsyncDisplayKit/issues/1159
         
         let counter = CounterStore.shared.item(at: indexPath.row)
-        
+
         let node = CounterCellNode(with: counter)
         node.style.height = ASDimensionMake(UIScreen.main.bounds.size.width / 375 * 85)
         
