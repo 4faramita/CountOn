@@ -45,45 +45,45 @@ class CounterStore {
         }
     }
     
-//    func append(item: ToDoItem) {
-//        items.append(item)
-//    }
-
-//    func append(newItems: [ToDoItem]) {
-//        items.append(contentsOf: newItems)
-//    }
+    // func append(item: ToDoItem) {
+    //     items.append(item)
+    // }
+    
+    // func append(newItems: [ToDoItem]) {
+    //     items.append(contentsOf: newItems)
+    // }
 
     func remove(item: Counter) {
         try! realm.write {
             item.isDeleted = true
-//            realm.delete(item)
+            // realm.delete(item)
         }
     }
 
     func remove(at index: Int) {
         try! realm.write {
             items[index].isDeleted = true
-//            realm.delete(items[index])
+            // realm.delete(items[index])
         }
     }
     
     func removeAll() {
         try! realm.write {
-//            while !items.isEmpty {
-//                if let item = items.first {
-//                    realm.delete(item)
-//                }
-//            }
+            // while !items.isEmpty {
+            //     if let item = items.first {
+            //         realm.delete(item)
+            //     }
+            // }
             for item in items {
                 item.isDeleted = true
             }
         }
     }
 
-//    func edit(original: ToDoItem, new: ToDoItem) {
-//        guard let index = items.index(of: original) else { return }
-//        items[index] = new
-//    }
+    // func edit(original: ToDoItem, new: ToDoItem) {
+    //     guard let index = items.index(of: original) else { return }
+    //     items[index] = new
+    // }
 
     var count: Int {
         return items.count

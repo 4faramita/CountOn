@@ -121,7 +121,7 @@ final class CounterCellNode: ASCellNode {
         if StaticValues.scale < 1 {
             counterBackground.contentMode = .scaleAspectFit
         }
-//        counterBackground.contentMode = .scaleToFill
+        // counterBackground.contentMode = .scaleToFill
     }
     
     override func didLoad() {

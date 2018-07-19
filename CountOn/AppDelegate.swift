@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import AsyncDisplayKit
+// import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         doneCancelBar.alpha = 0
         doneCancelBar.center = CGPoint(x: StaticValues.screenWidth / 2, y: StaticValues.screenHeight - 40)
         
-//        let undoBar = UndoBarView.shared
-//        searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40)
+        // let undoBar = UndoBarView.shared
+        // searchAddBar.center = CGPoint(x: window.frame.width / 2, y: window.frame.height - 40)
         
         window.addSubview(searchAddBar)
         window.addSubview(doneCancelBar)

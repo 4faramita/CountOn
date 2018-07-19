@@ -192,14 +192,15 @@ class DetailView: ASDisplayNode {
         
         
         // MARK: click to dismiss keyboard
+        // FIXME
         
-//        node.view.rx
-//            .tapGesture()
-//            .when(.recognized)
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.dismissKeyboard()
-//            })
-//            .disposed(by: disposeBag)
+        // node.view.rx
+        //     .tapGesture()
+        //     .when(.recognized)
+        //     .subscribe(onNext: { [weak self] _ in
+        //         self?.dismissKeyboard()
+        //     })
+        //     .disposed(by: disposeBag)
         
         
         // MARK: swipe doneCancelBar down to dismiss keyboard
@@ -234,7 +235,7 @@ class DetailView: ASDisplayNode {
     }
     
     
-//    MARK: Setup UI
+    // MARK: Setup UI
     
     private func initTitleField() {
         titleTitle.attributedText = NSAttributedString(
@@ -364,7 +365,7 @@ class DetailView: ASDisplayNode {
     }
     
     
-//    MARK: Save
+    // MARK: Save
     
     func save(insert: (Bool) -> Void) {
         let realm = try! Realm()

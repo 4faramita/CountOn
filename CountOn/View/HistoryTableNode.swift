@@ -27,8 +27,8 @@ class HistoryTableNode: ASTableNode {
         
         contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
         
-//        view.separatorStyle = .none
-//        view.allowsSelection = true
+        // view.separatorStyle = .none
+        // view.allowsSelection = true
     }
     
     override func didLoad() {

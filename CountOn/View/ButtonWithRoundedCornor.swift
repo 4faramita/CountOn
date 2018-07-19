@@ -14,21 +14,21 @@ class ButtonWithRoundedCornor: ASButtonNode {
     override func layout() {
         super.layout()
         
-//        let path = UIBezierPath(roundedRect: frame, cornerRadius: frame.height / 2)
-//        path.lineWidth = 1 / UIScreen.main.nativeScale
-//        R.color.delete()!.setStroke()
-//        path.stroke()
+        // let path = UIBezierPath(roundedRect: frame, cornerRadius: frame.height / 2)
+        // path.lineWidth = 1 / UIScreen.main.nativeScale
+        // R.color.delete()!.setStroke()
+        // path.stroke()
         
-//        let maskLayer = CAShapeLayer()
-//        maskLayer.frame = frame
-//        maskLayer.path = path.cgPath
-//        layer.mask = maskLayer
+        // let maskLayer = CAShapeLayer()
+        // maskLayer.frame = frame
+        // maskLayer.path = path.cgPath
+        // layer.mask = maskLayer
         
         borderWidth = 1 / UIScreen.main.nativeScale
         borderColor = R.color.delete()!.cgColor
         contentEdgeInsets = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
         cornerRadius = frame.height / 2
-//        clipsToBounds = true
+        // clipsToBounds = true
         print(contentEdgeInsets)
     }
 }

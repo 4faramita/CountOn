@@ -28,7 +28,7 @@ class DoneCancelBarView: UIImageView {
         addSubview(doneButton)
         addSubview(deleteButton)
         
-//        MARK: Cancel button
+        // MARK: Cancel button
         
         let cancelLabel = NSAttributedString(
             string: R.string.localizable.cancel(),
@@ -38,7 +38,7 @@ class DoneCancelBarView: UIImageView {
                 ]
         )
         cancelButton.setAttributedTitle(cancelLabel, for: UIControlState.normal)
-//        cancelButton.backgroundColor = UIColor(hexString: "9B9B9B", transparency: 0.2)!
+        // cancelButton.backgroundColor = UIColor(hexString: "9B9B9B", transparency: 0.2)!
         
         cancelButton.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -48,7 +48,7 @@ class DoneCancelBarView: UIImageView {
         }
         
         
-//        MARK: Done button
+        // MARK: Done button
         
         let doneLabel = NSAttributedString(
             string: R.string.localizable.done(),
@@ -58,7 +58,7 @@ class DoneCancelBarView: UIImageView {
             ]
         )
         doneButton.setAttributedTitle(doneLabel, for: UIControlState.normal)
-//        doneButton.backgroundColor = UIColor(hexString: "B8E986", transparency: 0.2)!
+        // doneButton.backgroundColor = UIColor(hexString: "B8E986", transparency: 0.2)!
         
         
         
@@ -70,7 +70,7 @@ class DoneCancelBarView: UIImageView {
         }
         
         
-//        MARK: Delete button
+        // MARK: Delete button
         
         let deleteLabel = NSAttributedString(
             string: R.string.localizable.delete(),
@@ -80,7 +80,7 @@ class DoneCancelBarView: UIImageView {
             ]
         )
         deleteButton.setAttributedTitle(deleteLabel, for: UIControlState.normal)
-//        deleteButton.backgroundColor = UIColor(hexString: "D0021B", transparency: 0.2)!
+        // deleteButton.backgroundColor = UIColor(hexString: "D0021B", transparency: 0.2)!
         
         
         deleteButton.snp.makeConstraints { (make) in

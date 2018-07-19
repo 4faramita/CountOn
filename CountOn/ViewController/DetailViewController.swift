@@ -39,18 +39,18 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         
         let detailNode = node as! DetailView
         
-//        MARK: Swipe down to dismiss VC
+        // MARK: Swipe down to dismiss VC
         
-//        detailNode.view.rx
-//            .swipeGesture(.down)
-//            .when(.recognized)
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.dismiss(animated: true, completion: nil)
-//            })
-//            .disposed(by: disposeBag)
-
+        // detailNode.view.rx
+        //     .swipeGesture(.down)
+        //     .when(.recognized)
+        //     .subscribe(onNext: { [weak self] _ in
+        //         self?.dismiss(animated: true, completion: nil)
+        //     })
+        //     .disposed(by: disposeBag)
         
-//        MARK: SearchAddBar hide and show
+        
+        // MARK: SearchAddBar hide and show
         
         DoneCancelBarView.shared.show()
         
@@ -63,7 +63,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             .disposed(by: disposeBag)
 
 
-//        MARK: Done and save
+        // MARK: Done and save
 
         DoneCancelBarView.shared.doneButton.rx
             .tap
@@ -87,12 +87,12 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
     
-//        MARK: Delete
+        // MARK: Delete
         
         DoneCancelBarView.shared.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
-//                let title = SearchAddBarView.shared.searchField.text ?? ""
+                // let title = SearchAddBarView.shared.searchField.text ?? ""
                 SearchAddBarView.shared.searchField.clear()
                 
                 if detailNode.isFromTable {
@@ -102,7 +102,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                         
                         detailNode.delete()
                         // FIXME: Resume after deletion
-//                        SearchAddBarView.shared.searchField.text = title
+                        // SearchAddBarView.shared.searchField.text = title
                         
                         DoneCancelBarView.shared.hide()
                         self?.dismiss(animated: true, completion: nil)
