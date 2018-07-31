@@ -17,7 +17,7 @@ final class Counter: Object {
     @objc dynamic var type = 0 // { 0: increase, 1: decrease, 2: both }
     @objc dynamic var status = 0
     @objc dynamic var isDeleted = false
-    let history = LinkingObjects(fromType: History.self, property: "owner").sorted(byKeyPath: "date", ascending: false)
+    let historyLink = LinkingObjects(fromType: History.self, property: "owner").sorted(byKeyPath: "date", ascending: false)
     
     @objc dynamic var last = Date()  // for sorting
     

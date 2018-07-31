@@ -339,7 +339,7 @@ class DetailView: ASDisplayNode {
     
     private func initBottom() {
         bottomTitle.attributedText = NSAttributedString(
-            string: isInEditMode ? R.string.localizable.history() + ": \(counter!.history.count)" : R.string.localizable.setTheCounterTo(),
+            string: isInEditMode ? R.string.localizable.history() + ": \(counter!.historyLink.count)" : R.string.localizable.setTheCounterTo(),
             attributes: [
                 NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
                 NSAttributedStringKey.foregroundColor: R.color.title()!,
