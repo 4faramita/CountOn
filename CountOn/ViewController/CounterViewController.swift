@@ -11,6 +11,7 @@ import AsyncDisplayKit
 import RealmSwift
 import RxSwift
 import RxCocoa
+import EasyTipView
 
 final class CounterViewController:  ASViewController<ASDisplayNode> {
     
@@ -36,8 +37,27 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var preferences = EasyTipView.Preferences()
+        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        preferences.drawing.foregroundColor = UIColor.white
+        preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
+        EasyTipView.globalPreferences = preferences
+        
+        let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard(), preferences: preferences)
         
         // MARK: Rx
+        
+        SearchAddBarView.shared.searchField.rx
+            .controlEvent(UIControlEvents.editingDidBegin)
+            .delay(1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: {
+                let knowSwipeDown = UserDefaults.standard.bool(forKey: "knowSwipeDownOnSearch")
+                if !knowSwipeDown {
+                    tipView.show(forView: SearchAddBarView.shared)
+                }
+            })
+            .disposed(by: disposeBag)
         
         SearchAddBarView.shared.searchField.rx
             .text
@@ -49,7 +69,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
                     CounterStore.shared.filter(with: keyword)
                 }
                 self?.tableNode.reloadData()
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         SearchAddBarView.shared.addButton.rx
             .tap
@@ -67,6 +88,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .when(.recognized)
             .subscribe(onNext: { _ in
                 UserDefaults.standard.set(true, forKey: "knowSwipeDownOnSearch")
+                tipView.dismiss()
                 SearchAddBarView.shared.searchField.resignFirstResponder()
             })
             .disposed(by: disposeBag)
@@ -83,13 +105,11 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         
         // MARK: First launch
         // FIXME
-        // let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-        // if !launchedBefore {
-        //     UserDefaults.standard.set(true, forKey: "launchedBefore")
-        //     setupData()
-        // }
-        // CounterStore.shared.removeAll()
-        // setupData()
+         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+         if !launchedBefore {
+             UserDefaults.standard.set(true, forKey: "launchedBefore")
+             setupData()
+         }
         
         // Set results notification block
         self.notificationToken = CounterStore.shared.items.observe { (changes: RealmCollectionChange) in
@@ -220,11 +240,16 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailViewController(of: CounterStore.shared.item(at: indexPath.row))
         
-        // FIXME: Actually this is not my bug! How about that!
         DispatchQueue.main.async { [weak self] in
             self?.present(detailVC, animated: true, completion: {
                 self?.tableNode.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             })
         }
+    }
+}
+
+extension CounterViewController: EasyTipViewDelegate {
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        
     }
 }

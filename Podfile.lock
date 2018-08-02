@@ -1,5 +1,6 @@
 PODS:
   - DateToolsSwift (4.0.0)
+  - EasyTipView (1.0.2)
   - GTTexture-RxExtension (1.2.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
@@ -70,6 +71,7 @@ PODS:
 
 DEPENDENCIES:
   - DateToolsSwift
+  - EasyTipView (~> 1.0.2)
   - GTTexture-RxExtension
   - IceCream (~> 1.5.0)
   - R.swift
@@ -87,6 +89,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - DateToolsSwift
+    - EasyTipView
     - GTTexture-RxExtension
     - IceCream
     - PINCache
@@ -108,6 +111,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
+  EasyTipView: b93a19be981cc2221d6d7191d49872f547e0bebf
   GTTexture-RxExtension: 1093ac89fc8d1cf4c8cf7e12c3998ae7052c2ac3
   IceCream: 8c2d37f5de8341e5016b30f54ddd4489b8e707a8
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
@@ -127,6 +131,6 @@ SPEC CHECKSUMS:
   SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: 1337e70e9ffc45b390c605041f4762381eb1378a
+PODFILE CHECKSUM: f57c744e24cce665989ac3c1e9802e5eab90bbe1
 
 COCOAPODS: 1.5.3

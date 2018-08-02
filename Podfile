@@ -5,6 +5,7 @@ target 'CountOn' do
 	pod 'Texture'
     
 	pod 'RealmSwift'
+	pod 'IceCream', '~> 1.5.0'
     
 	pod 'DateToolsSwift'
     
@@ -26,7 +27,7 @@ target 'CountOn' do
 
     pod 'R.swift'
     
-    pod 'IceCream', '~> 1.5.0'
+	pod 'EasyTipView', '~> 1.0.2'
 
     pod 'Reveal-SDK', :configurations => ['Debug']
 end
