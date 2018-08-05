@@ -7,9 +7,11 @@
 //
 
 import Foundation
+
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    static let knowSwipeDown = DefaultsKey<Bool>("knowSwipeDown")
+    static let knowSwipeDownSearch = DefaultsKey<Bool>("knowSwipeDownSearch")
+    static let knowSwipeDownDetail = DefaultsKey<Bool>("knowSwipeDownDetail")
     static let launchedBefore = DefaultsKey<Bool>("launchedBefore")
 }

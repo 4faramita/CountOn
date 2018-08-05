@@ -7,12 +7,15 @@
 //
 
 import UIKit
+
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
 import RxGesture
 import SwifterSwift
+import EasyTipView
+import SwiftyUserDefaults
 
 class DetailViewController: ASViewController<ASDisplayNode> {
     
@@ -37,17 +40,78 @@ class DetailViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
+        
+        // MARK: click to dismiss keyboard
+        // FIXME
+        //
+        // node.view.rx
+        //     .tapGesture()
+        //     .when(.recognized)
+        //     .subscribe(onNext: { [weak self] _ in
+        //         self?.dismissKeyboard()
+        //     })
+        //     .disposed(by: disposeBag)
+        
+        
+        // MARK: swipe doneCancelBar down to dismiss keyboard
+        
+        DoneCancelBarView.shared.rx
+            .swipeGesture([.down])
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                tipView.dismiss()
+                Defaults[.knowSwipeDownDetail] = true
+                self?.dismissKeyboard()
+            })
+            .disposed(by: disposeBag)
+        
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { keyboardVisibleHeight in
+                DoneCancelBarView.shared.center = CGPoint(
+                    x: StaticValues.screenWidth / 2,
+                    y: StaticValues.screenHeight - 40 - keyboardVisibleHeight
+                )
+            })
+            .disposed(by: disposeBag)
+        
         let detailNode = node as! DetailView
+        
+        detailNode.noteView.textView.rx
+            .didBeginEditing
+            .delay(1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: {
+                if !Defaults[.knowSwipeDownDetail] {
+                    tipView.show(forView: DoneCancelBarView.shared)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        detailNode.titleField.rx
+            .controlEvent(UIControlEvents.editingDidBegin)
+            .delay(1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: {
+                if !Defaults[.knowSwipeDownDetail] {
+                    tipView.show(forView: DoneCancelBarView.shared)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         
         // MARK: Swipe down to dismiss VC
         
-        // detailNode.view.rx
-        //     .swipeGesture(.down)
-        //     .when(.recognized)
-        //     .subscribe(onNext: { [weak self] _ in
-        //         self?.dismiss(animated: true, completion: nil)
-        //     })
-        //     .disposed(by: disposeBag)
+         detailNode.view.rx
+            .swipeGesture(
+                .down,
+                configuration: { gestureRecognizer, delegate in
+                    delegate.simultaneousRecognitionPolicy = .never
+                }
+            )
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
         
         
         // MARK: SearchAddBar hide and show
@@ -116,5 +180,18 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func dismissKeyboard() {
+        let detailNode = node as! DetailView
+        
+        detailNode.titleField.resignFirstResponder()
+        detailNode.noteView.resignFirstResponder()
+    }
+}
+
+extension DetailViewController: EasyTipViewDelegate {
+    func easyTipViewDidDismiss(_ tipView: EasyTipView) {
+        Defaults[.knowSwipeDownDetail] = true
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import AsyncDisplayKit
 import RealmSwift
 import SwifterSwift
@@ -189,49 +190,12 @@ class DetailView: ASDisplayNode {
                 })
                 .disposed(by: disposeBag)
         }
-        
-        
-        // MARK: click to dismiss keyboard
-        // FIXME
-        //
-        // node.view.rx
-        //     .tapGesture()
-        //     .when(.recognized)
-        //     .subscribe(onNext: { [weak self] _ in
-        //         self?.dismissKeyboard()
-        //     })
-        //     .disposed(by: disposeBag)
-        
-        
-        // MARK: swipe doneCancelBar down to dismiss keyboard
-        
-        DoneCancelBarView.shared.rx
-            .swipeGesture([.down])
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                self?.dismissKeyboard()
-            })
-            .disposed(by: disposeBag)
-        
-        RxKeyboard.instance.visibleHeight
-            .drive(onNext: { keyboardVisibleHeight in
-                DoneCancelBarView.shared.center = CGPoint(
-                    x: StaticValues.screenWidth / 2,
-                    y: StaticValues.screenHeight - 40 - keyboardVisibleHeight
-                )
-            })
-            .disposed(by: disposeBag)
     }
     
     override func layout() {
         super.layout()
         
         resetButton.cornerRadius = resetButton.frame.height / 2
-    }
-    
-    private func dismissKeyboard() {
-        titleField.resignFirstResponder()
-        noteView.resignFirstResponder()
     }
     
     

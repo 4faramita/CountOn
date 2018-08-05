@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import AsyncDisplayKit
 import RealmSwift
 import RxSwift
@@ -45,7 +46,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
         EasyTipView.globalPreferences = preferences
         
-        let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard(), preferences: preferences)
+        let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
         
         
         // MARK: Rx
@@ -54,7 +55,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .controlEvent(UIControlEvents.editingDidBegin)
             .delay(1, scheduler: MainScheduler.instance)
             .subscribe(onNext: {
-                if !Defaults[.knowSwipeDown] {
+                if !Defaults[.knowSwipeDownSearch] {
                     tipView.show(forView: SearchAddBarView.shared)
                 }
             })
@@ -88,7 +89,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .swipeGesture([.down])
             .when(.recognized)
             .subscribe(onNext: { _ in
-                Defaults[.knowSwipeDown] = true
+                Defaults[.knowSwipeDownSearch] = true
                 tipView.dismiss()
                 SearchAddBarView.shared.searchField.resignFirstResponder()
             })
@@ -250,6 +251,6 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
 
 extension CounterViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
-        Defaults[.knowSwipeDown] = true
+        Defaults[.knowSwipeDownSearch] = true
     }
 }
