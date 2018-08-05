@@ -61,6 +61,7 @@ PODS:
   - SwiftMessages (4.1.4):
     - SwiftMessages/App (= 4.1.4)
   - SwiftMessages/App (4.1.4)
+  - SwiftyUserDefaults (4.0.0-alpha.1)
   - Texture (2.7):
     - Texture/PINRemoteImage (= 2.7)
   - Texture/Core (2.7)
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
   - SwifterSwift
   - SwiftMessages
+  - SwiftyUserDefaults (= 4.0.0-alpha.1)
   - Texture
 
 SPEC REPOS:
@@ -107,6 +109,7 @@ SPEC REPOS:
     - SnapKit
     - SwifterSwift
     - SwiftMessages
+    - SwiftyUserDefaults
     - Texture
 
 SPEC CHECKSUMS:
@@ -129,8 +132,9 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
   SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
+  SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
 
-PODFILE CHECKSUM: f57c744e24cce665989ac3c1e9802e5eab90bbe1
+PODFILE CHECKSUM: ccccd6ba286e25316f910a03b73ddcf83d80fc27
 
 COCOAPODS: 1.5.3

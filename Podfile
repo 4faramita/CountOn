@@ -29,5 +29,7 @@ target 'CountOn' do
     
 	pod 'EasyTipView', '~> 1.0.2'
 
+	pod 'SwiftyUserDefaults', '4.0.0-alpha.1'
+
     pod 'Reveal-SDK', :configurations => ['Debug']
 end

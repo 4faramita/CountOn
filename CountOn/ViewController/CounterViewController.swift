@@ -12,6 +12,7 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 import EasyTipView
+import SwiftyUserDefaults
 
 final class CounterViewController:  ASViewController<ASDisplayNode> {
     
@@ -46,14 +47,14 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         
         let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard(), preferences: preferences)
         
+        
         // MARK: Rx
         
         SearchAddBarView.shared.searchField.rx
             .controlEvent(UIControlEvents.editingDidBegin)
             .delay(1, scheduler: MainScheduler.instance)
             .subscribe(onNext: {
-                let knowSwipeDown = UserDefaults.standard.bool(forKey: "knowSwipeDownOnSearch")
-                if !knowSwipeDown {
+                if !Defaults[.knowSwipeDown] {
                     tipView.show(forView: SearchAddBarView.shared)
                 }
             })
@@ -87,7 +88,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .swipeGesture([.down])
             .when(.recognized)
             .subscribe(onNext: { _ in
-                UserDefaults.standard.set(true, forKey: "knowSwipeDownOnSearch")
+                Defaults[.knowSwipeDown] = true
                 tipView.dismiss()
                 SearchAddBarView.shared.searchField.resignFirstResponder()
             })
@@ -105,10 +106,9 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         
         // MARK: First launch
         // FIXME
-         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
-         if !launchedBefore {
-             UserDefaults.standard.set(true, forKey: "launchedBefore")
+         if !Defaults[.launchedBefore] {
              setupData()
+            Defaults[.launchedBefore] = true
          }
         
         // Set results notification block
@@ -250,6 +250,6 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
 
 extension CounterViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
-        
+        Defaults[.knowSwipeDown] = true
     }
 }
