@@ -6,15 +6,16 @@
 //  Copyright © 2018年 4faramita. All rights reserved.
 //
 
-import AsyncDisplayKit
 import UIKit
+
+import AsyncDisplayKit
 import RealmSwift
 import DateToolsSwift
 import SwifterSwift
 import RxSwift
 import RxCocoa
 import GTTexture_RxExtension
-import SwiftMessages
+import Whisper
 
 final class CounterCellNode: ASCellNode {
     
@@ -192,8 +193,10 @@ final class CounterCellNode: ASCellNode {
         addStream
             .filter { $0 != 1 }
             .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                SwiftMessages.show(view: (self?.generateWarning(forZero: false))!)
+            .subscribe(onNext: { _ in
+                Whisper.show(
+                    whistle: Murmur(title: R.string.localizable.cannotGoOver999(), backgroundColor: .orange),
+                    action: .show(1))
             })
             .disposed(by: disposeBag)
         
@@ -201,35 +204,12 @@ final class CounterCellNode: ASCellNode {
         minusStream
             .filter { $0 != -1 }
             .throttle(0.5, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
-                SwiftMessages.show(view: (self?.generateWarning(forZero: true))!)
+            .subscribe(onNext: { _ in
+                Whisper.show(
+                    whistle: Murmur(title: R.string.localizable.doNotWantToGoNegative(), backgroundColor: .orange),
+                    action: .show(1))
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func generateWarning(forZero: Bool) -> UIView {
-        let view = MessageView.viewFromNib(layout: .cardView)
-        
-        // Theme message elements with the warning style.
-        view.configureTheme(.warning)
-        
-        // Add a drop shadow.
-        view.configureDropShadow()
-        
-        // Set message title, body, and icon. Here, we're overriding the default warning
-        // image with an emoji character.
-        let iconText = ["🤷‍♂️", "🤷‍♀️"].sm_random()!
-        let sentence = (forZero ? R.string.localizable.doNotWantToGoNegative() : R.string.localizable.cannotGoOver999())
-        view.configureContent(title: R.string.localizable.warning(), body: sentence, iconText: iconText)
-        
-        // Hide when button tapped
-        view.buttonTapHandler = { _ in SwiftMessages.hide() }
-        view.button?.setTitle(R.string.localizable.oK(), for: .normal)
-        
-        // Hide when message view tapped
-        view.tapHandler = { _ in SwiftMessages.hide() }
-        
-        return view
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

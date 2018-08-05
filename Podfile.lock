@@ -58,9 +58,6 @@ PODS:
   - SwifterSwift/SpriteKit (4.4.0)
   - SwifterSwift/SwiftStdlib (4.4.0)
   - SwifterSwift/UIKit (4.4.0)
-  - SwiftMessages (4.1.4):
-    - SwiftMessages/App (= 4.1.4)
-  - SwiftMessages/App (4.1.4)
   - SwiftyUserDefaults (4.0.0-alpha.1)
   - Texture (2.7):
     - Texture/PINRemoteImage (= 2.7)
@@ -69,6 +66,7 @@ PODS:
     - PINRemoteImage/iOS (= 3.0.0-beta.13)
     - PINRemoteImage/PINCache
     - Texture/Core
+  - Whisper (6.0.2)
 
 DEPENDENCIES:
   - DateToolsSwift
@@ -84,9 +82,9 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SnapKit (~> 4.0.0)
   - SwifterSwift
-  - SwiftMessages
   - SwiftyUserDefaults (= 4.0.0-alpha.1)
   - Texture
+  - Whisper
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -108,9 +106,9 @@ SPEC REPOS:
     - RxSwift
     - SnapKit
     - SwifterSwift
-    - SwiftMessages
     - SwiftyUserDefaults
     - Texture
+    - Whisper
 
 SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
@@ -131,10 +129,10 @@ SPEC CHECKSUMS:
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
-  SwiftMessages: 2c33fdee8b8f38dfc7e1036684456b505891da8c
   SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
+  Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: ccccd6ba286e25316f910a03b73ddcf83d80fc27
+PODFILE CHECKSUM: e69edfc87242d07140d1314428a0561c0fd0f4c5
 
 COCOAPODS: 1.5.3

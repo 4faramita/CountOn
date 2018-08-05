@@ -23,7 +23,8 @@ target 'CountOn' do
 
 #    pod 'AnimatedCollectionViewLayout'
 
-    pod 'SwiftMessages'
+#    pod 'SwiftMessages'
+	pod 'Whisper'
 
     pod 'R.swift'
     
