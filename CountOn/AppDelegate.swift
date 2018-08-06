@@ -12,6 +12,7 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 import IceCream
+import Peek
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,8 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
         _ = try! Realm()
-        
+
         let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        window.peek.enabled = true
+        
         window.backgroundColor = .white
         window.rootViewController = CounterViewController()
         window.makeKeyAndVisible()

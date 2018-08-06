@@ -101,15 +101,13 @@ class DetailViewController: ASViewController<ASDisplayNode> {
         // MARK: Swipe down to dismiss VC
         
          detailNode.view.rx
-            .swipeGesture(
-                .down,
-                configuration: { gestureRecognizer, delegate in
+            .swipeGesture(.down) { gestureRecognizer, delegate in
                     delegate.simultaneousRecognitionPolicy = .never
-                }
-            )
+            }
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
+                DoneCancelBarView.shared.hide()
             })
             .disposed(by: disposeBag)
         

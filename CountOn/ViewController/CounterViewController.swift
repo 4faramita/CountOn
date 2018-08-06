@@ -14,19 +14,21 @@ import RxSwift
 import RxCocoa
 import EasyTipView
 import SwiftyUserDefaults
+import SideMenu
 
 final class CounterViewController:  ASViewController<ASDisplayNode> {
     
     let disposeBag = DisposeBag()
     
-    var tableNode: ASTableNode {
-        return node as! ASTableNode
-    }
+    var tableNode: ASTableNode
     
     var notificationToken: NotificationToken?
     
     init() {
-        super.init(node: ASTableNode())
+        let tableNode = ArrowASTableNode()
+        self.tableNode = tableNode
+        
+        super.init(node: tableNode)
         
         tableNode.delegate = self
         tableNode.dataSource = self
@@ -38,6 +40,13 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let menuViewConreoller = MenuViewController()
+        let menuRightNavigationController = UISideMenuNavigationController(rootViewController: menuViewConreoller)
+        SideMenuManager.default.menuRightNavigationController = menuRightNavigationController
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: tableNode.view)
+        SideMenuManager.default.menuPresentMode = .viewSlideInOut
+        SideMenuManager.default.menuFadeStatusBar = false
         
         var preferences = EasyTipView.Preferences()
         preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
@@ -254,3 +263,27 @@ extension CounterViewController: EasyTipViewDelegate {
         Defaults[.knowSwipeDownSearch] = true
     }
 }
+
+extension CounterViewController: UISideMenuNavigationControllerDelegate {
+    func sideMenuWillAppear(menu: UISideMenuNavigationController, animated: Bool) {
+        UIApplication.shared.windows.first?.bringSubview(toFront: SearchAddBarView.shared)
+        UIApplication.shared.windows.first?.bringSubview(toFront: DoneCancelBarView.shared)
+    }
+    
+    // func sideMenuDidAppear(menu: UISideMenuNavigationController, animated: Bool) {
+    //     print("SideMenu Appeared! (animated: \(animated))")
+    // }
+    
+    // func sideMenuWillDisappear(menu: UISideMenuNavigationController, animated: Bool) {
+    //     print("SideMenu Disappearing! (animated: \(animated))")
+    // }
+    
+    func sideMenuDidDisappear(menu: UISideMenuNavigationController, animated: Bool) {
+        StaticValues.mainWindow?.bringSubview(toFront: SearchAddBarView.shared)
+        StaticValues.mainWindow?.bringSubview(toFront: DoneCancelBarView.shared)
+    }
+}
+
+
+
+

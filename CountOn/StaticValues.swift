@@ -15,4 +15,6 @@ struct StaticValues {
     static let counterType: [CountType] = [.increase, .decrease, .twoWays]
     
     static let backgroundAlpha: CGFloat = 0.06
+    
+    static let mainWindow = UIApplication.shared.windows.first
 }

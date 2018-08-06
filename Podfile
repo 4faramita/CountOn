@@ -32,5 +32,9 @@ target 'CountOn' do
 
 	pod 'SwiftyUserDefaults', '4.0.0-alpha.1'
 
-    pod 'Reveal-SDK', :configurations => ['Debug']
+#	pod 'SideMenuSwift'
+	pod 'SideMenu'
+
+#    pod 'Reveal-SDK', :configurations => ['Debug']
+	pod 'Peek', :configurations => ['Debug']
 end
