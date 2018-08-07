@@ -20,15 +20,20 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     
     let disposeBag = DisposeBag()
     
-    var tableNode: ASTableNode
+    var arrowedNode: ArrowedNode {
+        return node as! ArrowedNode
+    }
+    
+    var tableNode: ASTableNode {
+        return arrowedNode.tableNode
+    }
     
     var notificationToken: NotificationToken?
     
-    init() {
-        let tableNode = ArrowASTableNode()
-        self.tableNode = tableNode
-        
-        super.init(node: tableNode)
+    let dismissKeyboardTipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
+    
+    init() {        
+        super.init(node: ArrowedNode())
         
         tableNode.delegate = self
         tableNode.dataSource = self
@@ -40,7 +45,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // MARK: Side menu
         let menuViewConreoller = MenuViewController()
         let menuRightNavigationController = UISideMenuNavigationController(rootViewController: menuViewConreoller)
         SideMenuManager.default.menuRightNavigationController = menuRightNavigationController
@@ -48,24 +54,38 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         SideMenuManager.default.menuPresentMode = .viewSlideInOut
         SideMenuManager.default.menuFadeStatusBar = false
         
-        var preferences = EasyTipView.Preferences()
-        preferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
-        preferences.drawing.foregroundColor = UIColor.white
-        preferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
-        preferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
-        EasyTipView.globalPreferences = preferences
+        // MARK: Tip
+        var downPointingTipPreferences = EasyTipView.Preferences()
+        downPointingTipPreferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        downPointingTipPreferences.drawing.foregroundColor = UIColor.white
+        downPointingTipPreferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+        downPointingTipPreferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
+        EasyTipView.globalPreferences = downPointingTipPreferences
         
-        let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
-        
+        // FIXME: Arrow tip
+        //
+        // var rightPointingTipPreferences = EasyTipView.Preferences()
+        // rightPointingTipPreferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        // rightPointingTipPreferences.drawing.foregroundColor = UIColor.white
+        // rightPointingTipPreferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+        // rightPointingTipPreferences.drawing.arrowPosition = EasyTipView.ArrowPosition.right
+        //
+        // var sideMenuTipView = EasyTipView(text: "Slide to right to open menu", preferences: rightPointingTipPreferences)
+        //
+        // if !Defaults[.knowSideMenu] {
+        //     print(">>> doesn't know side menu")
+        //
+        //     sideMenuTipView.show(forView: arrowedNode.arrow.view)
+        // }
         
         // MARK: Rx
         
         SearchAddBarView.shared.searchField.rx
             .controlEvent(UIControlEvents.editingDidBegin)
             .delay(1, scheduler: MainScheduler.instance)
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
                 if !Defaults[.knowSwipeDownSearch] {
-                    tipView.show(forView: SearchAddBarView.shared)
+                    self?.dismissKeyboardTipView.show(forView: SearchAddBarView.shared)
                 }
             })
             .disposed(by: disposeBag)
@@ -97,9 +117,9 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         SearchAddBarView.shared.rx
             .swipeGesture([.down])
             .when(.recognized)
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { [weak self] _ in
                 Defaults[.knowSwipeDownSearch] = true
-                tipView.dismiss()
+                self?.dismissKeyboardTipView.dismiss()
                 SearchAddBarView.shared.searchField.resignFirstResponder()
             })
             .disposed(by: disposeBag)
@@ -117,7 +137,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         // MARK: First launch
         // FIXME
          if !Defaults[.launchedBefore] {
-             setupData()
+            setupData()
             Defaults[.launchedBefore] = true
          }
         
@@ -260,7 +280,9 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
 
 extension CounterViewController: EasyTipViewDelegate {
     func easyTipViewDidDismiss(_ tipView: EasyTipView) {
-        Defaults[.knowSwipeDownSearch] = true
+        if tipView == self.dismissKeyboardTipView {
+            Defaults[.knowSwipeDownSearch] = true
+        }
     }
 }
 
@@ -270,9 +292,11 @@ extension CounterViewController: UISideMenuNavigationControllerDelegate {
         UIApplication.shared.windows.first?.bringSubview(toFront: DoneCancelBarView.shared)
     }
     
-    // func sideMenuDidAppear(menu: UISideMenuNavigationController, animated: Bool) {
-    //     print("SideMenu Appeared! (animated: \(animated))")
-    // }
+     func sideMenuDidAppear(menu: UISideMenuNavigationController, animated: Bool) {
+        self.arrowedNode.rotateArrow(to: .right)
+        
+        Defaults[.knowSideMenu] = true
+    }
     
     // func sideMenuWillDisappear(menu: UISideMenuNavigationController, animated: Bool) {
     //     print("SideMenu Disappearing! (animated: \(animated))")
@@ -281,6 +305,8 @@ extension CounterViewController: UISideMenuNavigationControllerDelegate {
     func sideMenuDidDisappear(menu: UISideMenuNavigationController, animated: Bool) {
         StaticValues.mainWindow?.bringSubview(toFront: SearchAddBarView.shared)
         StaticValues.mainWindow?.bringSubview(toFront: DoneCancelBarView.shared)
+
+        self.arrowedNode.rotateArrow(to: .left)
     }
 }
 

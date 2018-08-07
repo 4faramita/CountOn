@@ -14,4 +14,5 @@ extension DefaultsKeys {
     static let knowSwipeDownSearch = DefaultsKey<Bool>("knowSwipeDownSearch")
     static let knowSwipeDownDetail = DefaultsKey<Bool>("knowSwipeDownDetail")
     static let launchedBefore = DefaultsKey<Bool>("launchedBefore")
+    static let knowSideMenu = DefaultsKey<Bool>("knowSideMenu")
 }

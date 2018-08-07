@@ -32,7 +32,7 @@
 		B4C7063420E0DF5E002E5422 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C7063320E0DF5E002E5422 /* R.generated.swift */; };
 		B4C7063620E13A5D002E5422 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4C7063520E13A5D002E5422 /* Launch Screen.storyboard */; };
 		B4E325DF2118445500931F62 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E325DE2118445500931F62 /* MenuViewController.swift */; };
-		B4E325E121184C3500931F62 /* ArrowASTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E325E021184C3500931F62 /* ArrowASTableNode.swift */; };
+		B4E325E121184C3500931F62 /* ArrowedNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E325E021184C3500931F62 /* ArrowedNode.swift */; };
 		B4F5FD852116AA7200B9E8A1 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F5FD842116AA7200B9E8A1 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,7 +67,7 @@
 		B4C7063520E13A5D002E5422 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		B4C7063720E1432A002E5422 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4E325DE2118445500931F62 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		B4E325E021184C3500931F62 /* ArrowASTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowASTableNode.swift; sourceTree = "<group>"; };
+		B4E325E021184C3500931F62 /* ArrowedNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowedNode.swift; sourceTree = "<group>"; };
 		B4F5FD842116AA7200B9E8A1 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		B68A1A77EB30B936EF16B8C4 /* Pods-CountOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CountOn.release.xcconfig"; path = "Pods/Target Support Files/Pods-CountOn/Pods-CountOn.release.xcconfig"; sourceTree = "<group>"; };
 		C1E76756C02A9625949EF240 /* Pods_CountOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CountOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +108,7 @@
 		B46A199420DB954500FF7A81 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B4E325E021184C3500931F62 /* ArrowASTableNode.swift */,
+				B4E325E021184C3500931F62 /* ArrowedNode.swift */,
 				B46A198E20DAA1C500FF7A81 /* DetailView.swift */,
 				B48B8FB820E4C628001AAB5A /* ButtonWithRoundedCornor.swift */,
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
@@ -376,7 +376,7 @@
 				B4F5FD852116AA7200B9E8A1 /* UserDefaults.swift in Sources */,
 				B499CF6F208347A30054125D /* CountArea.swift in Sources */,
 				B46A198D20DA98A400FF7A81 /* DetailViewController.swift in Sources */,
-				B4E325E121184C3500931F62 /* ArrowASTableNode.swift in Sources */,
+				B4E325E121184C3500931F62 /* ArrowedNode.swift in Sources */,
 				B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */,
 				B46A199320DAA7C500FF7A81 /* DoneCancelBarView.swift in Sources */,
 				B499CF5720832AC80054125D /* AppDelegate.swift in Sources */,
