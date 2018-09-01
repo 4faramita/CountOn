@@ -15,4 +15,5 @@ extension DefaultsKeys {
     static let knowSwipeDownDetail = DefaultsKey<Bool>("knowSwipeDownDetail")
     static let launchedBefore = DefaultsKey<Bool>("launchedBefore")
     static let knowSideMenu = DefaultsKey<Bool>("knowSideMenu")
+    static let iCloudSync = DefaultsKey<Bool>("iCloudSync")
 }

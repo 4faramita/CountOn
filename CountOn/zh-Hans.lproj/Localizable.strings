@@ -57,3 +57,5 @@
 "Slap bet bank" = "洗面奶库存";
 "This counter can go up and down, maybe for keeping track of a certain kind of item." = "这种计数器的数量可增可减，你可能会想用它来记录某一个物品的数量增减变化。";
 "At any time, you can swipe down on the bottom bar to dismiss the keyboard." = "在任何时候，你都可以通过下滑底部操作条来收起键盘。";
+
+"Sync with iCloud" = "通过 iCloud 同步";

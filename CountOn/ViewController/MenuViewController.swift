@@ -8,12 +8,45 @@
 
 import UIKit
 
+import SnapKit
+import SwiftyUserDefaults
+import RxSwift
+
 class MenuViewController: UIViewController {
+    
+    let disposeBag = DisposeBag()
+    
+    let iCloudSyncSwitch = UISwitch()
+    let iCloudSyncLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .darkGray
+        view.backgroundColor = .white
         title = R.string.localizable.settings()
+        
+        iCloudSyncSwitch.setOn(Defaults[.iCloudSync], animated: true)
+        view.addSubview(iCloudSyncSwitch)
+        iCloudSyncSwitch.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        
+        view.addSubview(iCloudSyncLabel)
+        iCloudSyncLabel.text = R.string.localizable.syncWithICloud()
+        iCloudSyncLabel.textColor = .darkGray
+        iCloudSyncLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(iCloudSyncSwitch.snp.top).offset(-10)
+            make.centerX.equalToSuperview()
+        }
+        
+        
+        // MARK: Rx
+        
+        iCloudSyncSwitch.rx
+            .value
+            .subscribe(onNext: { value in
+                Defaults[.iCloudSync] = value
+            })
+            .disposed(by: disposeBag)
     }
 }

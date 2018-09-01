@@ -13,6 +13,7 @@ import RxCocoa
 import RxKeyboard
 import IceCream
 import Peek
+import SwiftyUserDefaults
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -80,8 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
             .disposed(by: disposeBag)
         
-        syncEngine = SyncEngine(objects: [ SyncObject<Counter>(), SyncObject<History>() ])
-        application.registerForRemoteNotifications()
+        if Defaults[.iCloudSync] {
+            syncEngine = SyncEngine(objects: [ SyncObject<Counter>(), SyncObject<History>() ])
+            application.registerForRemoteNotifications()
+        }
         
         return true
     }
