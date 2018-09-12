@@ -30,7 +30,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     
     var notificationToken: NotificationToken?
     
-    let dismissKeyboardTipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
+    var dismissKeyboardTipView: EasyTipView?
     
     init() {        
         super.init(node: ArrowedNode())
@@ -61,22 +61,8 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         downPointingTipPreferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
         downPointingTipPreferences.drawing.arrowPosition = EasyTipView.ArrowPosition.bottom
         EasyTipView.globalPreferences = downPointingTipPreferences
-        
-        // FIXME: Arrow tip
-        //
-        // var rightPointingTipPreferences = EasyTipView.Preferences()
-        // rightPointingTipPreferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
-        // rightPointingTipPreferences.drawing.foregroundColor = UIColor.white
-        // rightPointingTipPreferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
-        // rightPointingTipPreferences.drawing.arrowPosition = EasyTipView.ArrowPosition.right
-        //
-        // var sideMenuTipView = EasyTipView(text: "Slide to right to open menu", preferences: rightPointingTipPreferences)
-        //
-        // if !Defaults[.knowSideMenu] {
-        //     print(">>> doesn't know side menu")
-        //
-        //     sideMenuTipView.show(forView: arrowedNode.arrow.view)
-        // }
+
+        self.dismissKeyboardTipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard(), preferences: downPointingTipPreferences)
         
         // MARK: Rx
         
@@ -85,7 +71,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .delay(1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 if !Defaults[.knowSwipeDownSearch] {
-                    self?.dismissKeyboardTipView.show(forView: SearchAddBarView.shared)
+                    self?.dismissKeyboardTipView?.show(forView: SearchAddBarView.shared)
                 }
             })
             .disposed(by: disposeBag)
@@ -119,7 +105,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
             .when(.recognized)
             .subscribe(onNext: { [weak self] _ in
                 Defaults[.knowSwipeDownSearch] = true
-                self?.dismissKeyboardTipView.dismiss()
+                self?.dismissKeyboardTipView?.dismiss()
                 SearchAddBarView.shared.searchField.resignFirstResponder()
             })
             .disposed(by: disposeBag)

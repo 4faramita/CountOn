@@ -9,6 +9,8 @@
 import UIKit
 import AsyncDisplayKit
 import SwifterSwift
+// import EasyTipView
+// import SwiftyUserDefaults
 
 class ArrowedNode: ASDisplayNode {
     var arrow = ASImageNode()
@@ -26,6 +28,22 @@ class ArrowedNode: ASDisplayNode {
         arrowPlate.isUserInteractionEnabled = false
         
         arrow.image = R.image.left_arrow()
+        
+        // FIXME: Slide to open menu tip
+        //
+        // var rightPointingTipPreferences = EasyTipView.Preferences()
+        // rightPointingTipPreferences.drawing.font = UIFont(name: "Futura-Medium", size: 13)!
+        // rightPointingTipPreferences.drawing.foregroundColor = UIColor.white
+        // rightPointingTipPreferences.drawing.backgroundColor = UIColor(hue:0.46, saturation:0.99, brightness:0.6, alpha:1)
+        // rightPointingTipPreferences.drawing.arrowPosition = EasyTipView.ArrowPosition.right
+        //
+        // let sideMenuTipView = EasyTipView(text: "Slide to open menu", preferences: rightPointingTipPreferences)
+        //
+        // if !Defaults[.knowSideMenu] {
+        //     print(">>> doesn't know side menu")
+        //
+        // sideMenuTipView.show(forView: arrow.view, withinSuperview: self.view)
+        // }
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

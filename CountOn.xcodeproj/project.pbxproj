@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		25BC1821E47757B3657E3810 /* Pods_CountOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E76756C02A9625949EF240 /* Pods_CountOn.framework */; };
 		B408351320FF16B100F82948 /* UndoBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B408351220FF16B100F82948 /* UndoBarView.swift */; };
+		B41A05032148F0A300ED82D5 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B41A05022148F0A200ED82D5 /* Settings.bundle */; };
 		B436700E20DEAE8700A9237E /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B436700D20DEAE8700A9237E /* Storyboard.storyboard */; };
 		B436701320DEB00600A9237E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B436701520DEB00600A9237E /* Localizable.strings */; };
 		B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		B408351220FF16B100F82948 /* UndoBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoBarView.swift; sourceTree = "<group>"; };
 		B408351420FF3C7900F82948 /* CountOn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CountOn.entitlements; sourceTree = "<group>"; };
+		B41A05022148F0A200ED82D5 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B436700D20DEAE8700A9237E /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		B436701420DEB00600A9237E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B436701620DEB00A00A9237E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		B499CF5520832AC80054125D /* CountOn */ = {
 			isa = PBXGroup;
 			children = (
+				B41A05022148F0A200ED82D5 /* Settings.bundle */,
 				B408351420FF3C7900F82948 /* CountOn.entitlements */,
 				B436701520DEB00600A9237E /* Localizable.strings */,
 				B46A199620DB959000FF7A81 /* ViewController */,
@@ -257,6 +260,7 @@
 			files = (
 				B499CF5E20832AD20054125D /* Assets.xcassets in Resources */,
 				B436701320DEB00600A9237E /* Localizable.strings in Resources */,
+				B41A05032148F0A300ED82D5 /* Settings.bundle in Resources */,
 				B4C7063620E13A5D002E5422 /* Launch Screen.storyboard in Resources */,
 				B436700E20DEAE8700A9237E /* Storyboard.storyboard in Resources */,
 			);
@@ -530,7 +534,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOnDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -551,7 +555,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOnDev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

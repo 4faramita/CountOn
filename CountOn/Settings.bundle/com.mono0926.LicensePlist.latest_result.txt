@@ -1,0 +1,101 @@
+name: DateToolsSwift, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.0
+
+name: EasyTipView, nameSpecified: 
+body: The MIT License (MIT…
+version: 1.0.2
+
+name: GTTexture-RxExtension, nameSpecified: 
+body: Copyright (c) 2018 G…
+version: 1.2.0
+
+name: IceCream, nameSpecified: 
+body: Copyright (c) 2017 c…
+version: 1.5.0
+
+name: Peek, nameSpecified: 
+body: Copyright (c) 2016 S…
+version: 5.1.0
+
+name: PINCache, nameSpecified: 
+body:                     …
+version: 
+
+name: PINOperation, nameSpecified: 
+body: Apache License
+     …
+version: 1.1.1
+
+name: PINRemoteImage, nameSpecified: 
+body: Apache License
+     …
+version: 
+
+name: R.swift, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.0
+
+name: R.swift.Library, nameSpecified: 
+body: The MIT License (MIT…
+version: 4.0.0
+
+name: Realm, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 3.7.4
+
+name: RealmSwift, nameSpecified: 
+body: TABLE OF CONTENTS
+
+1…
+version: 3.7.4
+
+name: RxCocoa, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.2.0
+
+name: RxGesture, nameSpecified: 
+body: Copyright (c) RxSwif…
+version: 1.2.1
+
+name: RxKeyboard, nameSpecified: 
+body: The MIT License (MIT…
+version: 0.8.3
+
+name: RxSwift, nameSpecified: 
+body: **The MIT License**
+…
+version: 4.2.0
+
+name: SideMenu, nameSpecified: 
+body: Copyright (c) 2015 J…
+version: 4.0.0
+
+name: SnapKit, nameSpecified: 
+body: Copyright (c) 2011-P…
+version: 4.0.0
+
+name: SwifterSwift, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 4.4.0
+
+name: SwiftyUserDefaults, nameSpecified: 
+body: The MIT License (MIT…
+version: 
+
+name: Texture, nameSpecified: 
+body: The Texture project …
+version: 2.7
+
+name: Whisper, nameSpecified: 
+body: Licensed under the *…
+version: 6.0.2
+
+add-version-numbers: false
+
+LicensePlist Version: 1.8.3

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 import IceCream
-import Peek
+// import Peek
 import SwiftyUserDefaults
 
 @UIApplicationMain
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         
-        window.peek.enabled = true
+        // window.peek.enabled = true
         
         window.backgroundColor = .white
         window.rootViewController = CounterViewController()
