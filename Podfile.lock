@@ -7,7 +7,6 @@ PODS:
     - Texture (~> 2.6)
   - IceCream (1.5.0):
     - RealmSwift
-  - Peek (5.1.0)
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
     - PINCache/Core (= 3.0.1-beta.6)
@@ -74,7 +73,6 @@ DEPENDENCIES:
   - EasyTipView (~> 1.0.2)
   - GTTexture-RxExtension
   - IceCream (~> 1.5.0)
-  - Peek
   - R.swift
   - RealmSwift
   - RxCocoa (~> 4.0)
@@ -94,7 +92,6 @@ SPEC REPOS:
     - EasyTipView
     - GTTexture-RxExtension
     - IceCream
-    - Peek
     - PINCache
     - PINOperation
     - PINRemoteImage
@@ -118,7 +115,6 @@ SPEC CHECKSUMS:
   EasyTipView: b93a19be981cc2221d6d7191d49872f547e0bebf
   GTTexture-RxExtension: 1093ac89fc8d1cf4c8cf7e12c3998ae7052c2ac3
   IceCream: 8c2d37f5de8341e5016b30f54ddd4489b8e707a8
-  Peek: 452c6789d786321f9865d67c61c930d3b9ef3bb6
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
@@ -137,6 +133,6 @@ SPEC CHECKSUMS:
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 7f94dddf84810c15fed0810352ec728db60b1e32
+PODFILE CHECKSUM: 0e7450b7154a5bdc90a2f571ccb68194768fc6c2
 
 COCOAPODS: 1.5.3

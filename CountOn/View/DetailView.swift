@@ -205,13 +205,13 @@ class DetailView: ASDisplayNode {
         titleTitle.attributedText = NSAttributedString(
             string: R.string.localizable.title(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: R.color.title()!,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote),
+                NSAttributedString.Key.foregroundColor: R.color.title()!,
             ]
         )
         
         titleField.enablesReturnKeyAutomatically = true
-        titleField.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
+        titleField.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
         titleField.textColor = UIColor.darkGray
         titleField.placeholder = R.string.localizable.nameOfTheCounter()
     }
@@ -224,25 +224,25 @@ class DetailView: ASDisplayNode {
         noteTitle.attributedText = NSAttributedString(
             string: R.string.localizable.description(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: R.color.title()!,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote),
+                NSAttributedString.Key.foregroundColor: R.color.title()!,
             ]
         )
         
         noteView.attributedPlaceholderText = NSAttributedString(
             string: R.string.localizable.describeTheCounter(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
-                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body),
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+                NSAttributedString.Key.paragraphStyle: multiLineParagraphStyle
                 ]
         )
         noteView.scrollEnabled = true
 
         noteView.typingAttributes = [
-            NSAttributedStringKey.font.rawValue: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkGray,
-            NSAttributedStringKey.paragraphStyle.rawValue: multiLineParagraphStyle
+            NSAttributedString.Key.font.rawValue: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body),
+            NSAttributedString.Key.foregroundColor.rawValue: UIColor.darkGray,
+            NSAttributedString.Key.paragraphStyle.rawValue: multiLineParagraphStyle
         ]
     }
     
@@ -250,9 +250,9 @@ class DetailView: ASDisplayNode {
         noteView.attributedText = NSAttributedString(
             string: self.note,
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
-                NSAttributedStringKey.paragraphStyle: multiLineParagraphStyle
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body),
+                NSAttributedString.Key.foregroundColor: UIColor.darkGray,
+                NSAttributedString.Key.paragraphStyle: multiLineParagraphStyle
             ]
         )
     }
@@ -281,8 +281,8 @@ class DetailView: ASDisplayNode {
         statusTitle.attributedText = NSAttributedString(
             string: R.string.localizable.currentStatus() + ": \(status)",
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: R.color.title()!,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote),
+                NSAttributedString.Key.foregroundColor: R.color.title()!,
             ]
         )
     }
@@ -291,11 +291,11 @@ class DetailView: ASDisplayNode {
         let resetTitle = NSAttributedString(
             string: R.string.localizable.reset(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: R.color.delete()!,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote),
+                NSAttributedString.Key.foregroundColor: R.color.delete()!,
             ]
         )
-        resetButton.setAttributedTitle(resetTitle, for: UIControlState.normal)
+        resetButton.setAttributedTitle(resetTitle, for: UIControl.State.normal)
         resetButton.borderWidth = 1 / UIScreen.main.nativeScale
         resetButton.borderColor = R.color.delete()!.cgColor
         resetButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
@@ -305,8 +305,8 @@ class DetailView: ASDisplayNode {
         bottomTitle.attributedText = NSAttributedString(
             string: isInEditMode ? R.string.localizable.history() + ": \(counter!.historyLink.count)" : R.string.localizable.setTheCounterTo(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.footnote),
-                NSAttributedStringKey.foregroundColor: R.color.title()!,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote),
+                NSAttributedString.Key.foregroundColor: R.color.title()!,
             ]
         )
         

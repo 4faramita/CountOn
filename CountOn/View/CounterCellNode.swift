@@ -53,8 +53,8 @@ final class CounterCellNode: ASCellNode {
         title.attributedText = NSAttributedString(
             string: counter.title,
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13),
+                NSAttributedString.Key.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
             ]
         )
 
@@ -64,8 +64,8 @@ final class CounterCellNode: ASCellNode {
         lastLaunch.attributedText = NSAttributedString(
             string: "\(counter.last.timeAgoSinceNow)",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-                NSAttributedStringKey.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13),
+                NSAttributedString.Key.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
             ]
         )
 
@@ -75,8 +75,8 @@ final class CounterCellNode: ASCellNode {
         let addButtonNormalTitle = NSAttributedString(
             string: "+",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
             ]
         )
         addButton.setAttributedTitle(addButtonNormalTitle, for: .normal)
@@ -84,8 +84,8 @@ final class CounterCellNode: ASCellNode {
         let addButtonHighlightedTitle = NSAttributedString(
             string: "+",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedString.Key.foregroundColor: UIColor.darkGray,
             ]
         )
         addButton.setAttributedTitle(addButtonHighlightedTitle, for: .highlighted)
@@ -94,17 +94,17 @@ final class CounterCellNode: ASCellNode {
         let minusButtonNormalTitle = NSAttributedString(
             string: "-",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
             ]
         )
-        minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControlState.normal)
+        minusButton.setAttributedTitle(minusButtonNormalTitle, for: UIControl.State.normal)
         
         let minusButtonHighlightedTitle = NSAttributedString(
             string: "-",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: UIColor.darkGray,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedString.Key.foregroundColor: UIColor.darkGray,
                 ]
         )
         minusButton.setAttributedTitle(minusButtonHighlightedTitle, for: .highlighted)

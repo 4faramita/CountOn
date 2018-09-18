@@ -23,8 +23,8 @@ final class CountArea: ASDisplayNode {
         countLabel.attributedText = NSAttributedString(
             string: "\(self.countValue)",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 23),
-                NSAttributedStringKey.foregroundColor: Colors.countColor[self.type.rawValue][.foreground]!
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23),
+                NSAttributedString.Key.foregroundColor: Colors.countColor[self.type.rawValue][.foreground]!
             ]
         )
     }

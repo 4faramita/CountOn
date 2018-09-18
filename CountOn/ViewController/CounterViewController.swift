@@ -67,7 +67,7 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         // MARK: Rx
         
         SearchAddBarView.shared.searchField.rx
-            .controlEvent(UIControlEvents.editingDidBegin)
+            .controlEvent(UIControl.Event.editingDidBegin)
             .delay(1, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 if !Defaults[.knowSwipeDownSearch] {
@@ -254,7 +254,7 @@ extension CounterViewController: ASTableDataSource, ASTableDelegate, ASCommonTab
         
         DispatchQueue.main.async { [weak self] in
             self?.present(detailVC, animated: true, completion: {
-                self?.tableNode.reloadRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+                self?.tableNode.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             })
         }
     }
@@ -270,8 +270,8 @@ extension CounterViewController: EasyTipViewDelegate {
 
 extension CounterViewController: UISideMenuNavigationControllerDelegate {
     func sideMenuWillAppear(menu: UISideMenuNavigationController, animated: Bool) {
-        UIApplication.shared.windows.first?.bringSubview(toFront: SearchAddBarView.shared)
-        UIApplication.shared.windows.first?.bringSubview(toFront: DoneCancelBarView.shared)
+        UIApplication.shared.windows.first?.bringSubviewToFront(SearchAddBarView.shared)
+        UIApplication.shared.windows.first?.bringSubviewToFront(DoneCancelBarView.shared)
     }
     
      func sideMenuDidAppear(menu: UISideMenuNavigationController, animated: Bool) {
@@ -285,8 +285,8 @@ extension CounterViewController: UISideMenuNavigationControllerDelegate {
     // }
     
     func sideMenuDidDisappear(menu: UISideMenuNavigationController, animated: Bool) {
-        StaticValues.mainWindow?.bringSubview(toFront: SearchAddBarView.shared)
-        StaticValues.mainWindow?.bringSubview(toFront: DoneCancelBarView.shared)
+        StaticValues.mainWindow?.bringSubviewToFront(SearchAddBarView.shared)
+        StaticValues.mainWindow?.bringSubviewToFront(DoneCancelBarView.shared)
 
         self.arrowedNode.rotateArrow(to: .left)
     }

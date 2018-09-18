@@ -24,11 +24,11 @@ class UndoBarView: UIImageView {
         let undoLabel = NSAttributedString(
             string: "Undo",
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: R.color.undo()!.darken(),
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+                NSAttributedString.Key.foregroundColor: R.color.undo()!.darken(),
                 ]
         )
-        undoButton.setAttributedTitle(undoLabel, for: UIControlState.normal)
+        undoButton.setAttributedTitle(undoLabel, for: UIControl.State.normal)
         
         undoButton.snp.makeConstraints { (make) in
             make.top.equalToSuperview()

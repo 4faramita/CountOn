@@ -41,8 +41,8 @@ class HistoryCellNode: ASCellNode {
         type.attributedText = NSAttributedString(
             string: typeString,
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1),
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
                 ]
         )
         
@@ -54,8 +54,8 @@ class HistoryCellNode: ASCellNode {
         date.attributedText = NSAttributedString(
             string: value,
             attributes: [
-                NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2),
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
                 ]
         )
     }

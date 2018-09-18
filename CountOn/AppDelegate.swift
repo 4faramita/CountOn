@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var syncEngine: SyncEngine?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         let config = Realm.Configuration(
@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window.addSubview(searchAddBar)
         window.addSubview(doneCancelBar)
-        window.bringSubview(toFront: doneCancelBar)
+        window.bringSubviewToFront(doneCancelBar)
         
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { keyboardVisibleHeight in

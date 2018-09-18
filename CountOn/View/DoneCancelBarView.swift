@@ -33,11 +33,11 @@ class DoneCancelBarView: UIImageView {
         let cancelLabel = NSAttributedString(
             string: R.string.localizable.cancel(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: R.color.cancel()!,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+                NSAttributedString.Key.foregroundColor: R.color.cancel()!,
                 ]
         )
-        cancelButton.setAttributedTitle(cancelLabel, for: UIControlState.normal)
+        cancelButton.setAttributedTitle(cancelLabel, for: UIControl.State.normal)
         // cancelButton.backgroundColor = UIColor(hexString: "9B9B9B", transparency: 0.2)!
         
         cancelButton.snp.makeConstraints { (make) in
@@ -53,11 +53,11 @@ class DoneCancelBarView: UIImageView {
         let doneLabel = NSAttributedString(
             string: R.string.localizable.done(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: R.color.done()!,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+                NSAttributedString.Key.foregroundColor: R.color.done()!,
             ]
         )
-        doneButton.setAttributedTitle(doneLabel, for: UIControlState.normal)
+        doneButton.setAttributedTitle(doneLabel, for: UIControl.State.normal)
         // doneButton.backgroundColor = UIColor(hexString: "B8E986", transparency: 0.2)!
         
         
@@ -75,11 +75,11 @@ class DoneCancelBarView: UIImageView {
         let deleteLabel = NSAttributedString(
             string: R.string.localizable.delete(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
-                NSAttributedStringKey.foregroundColor: R.color.delete()!,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18),
+                NSAttributedString.Key.foregroundColor: R.color.delete()!,
             ]
         )
-        deleteButton.setAttributedTitle(deleteLabel, for: UIControlState.normal)
+        deleteButton.setAttributedTitle(deleteLabel, for: UIControl.State.normal)
         // deleteButton.backgroundColor = UIColor(hexString: "D0021B", transparency: 0.2)!
         
         

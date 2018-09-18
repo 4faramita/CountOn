@@ -88,7 +88,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             .disposed(by: disposeBag)
         
         detailNode.titleField.rx
-            .controlEvent(UIControlEvents.editingDidBegin)
+            .controlEvent(UIControl.Event.editingDidBegin)
             .delay(1, scheduler: MainScheduler.instance)
             .subscribe(onNext: {
                 if !Defaults[.knowSwipeDownDetail] {
@@ -158,9 +158,9 @@ class DetailViewController: ASViewController<ASDisplayNode> {
                 SearchAddBarView.shared.searchField.clear()
                 
                 if detailNode.isFromTable {
-                    let alert = UIAlertController(title: R.string.localizable.thisCounterIsAboutToBeDeleted(), message: R.string.localizable.thisCannotBeUndoneAreYouSure(), preferredStyle: UIAlertControllerStyle.alert)
-                    let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: UIAlertActionStyle.cancel, handler: nil)
-                    let yesAction = UIAlertAction(title: R.string.localizable.yes(), style: UIAlertActionStyle.destructive) { _ in
+                    let alert = UIAlertController(title: R.string.localizable.thisCounterIsAboutToBeDeleted(), message: R.string.localizable.thisCannotBeUndoneAreYouSure(), preferredStyle: UIAlertController.Style.alert)
+                    let cancelAction = UIAlertAction(title: R.string.localizable.cancel(), style: UIAlertAction.Style.cancel, handler: nil)
+                    let yesAction = UIAlertAction(title: R.string.localizable.yes(), style: UIAlertAction.Style.destructive) { _ in
                         
                         detailNode.delete()
                         // FIXME: Resume after deletion

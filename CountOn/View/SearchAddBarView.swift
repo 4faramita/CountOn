@@ -28,11 +28,11 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         let buttonLabel = NSAttributedString(
             string: R.string.localizable.add(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
-                NSAttributedStringKey.foregroundColor: R.color.title()!,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+                NSAttributedString.Key.foregroundColor: R.color.title()!,
             ]
         )
-        addButton.setAttributedTitle(buttonLabel, for: UIControlState.normal)
+        addButton.setAttributedTitle(buttonLabel, for: UIControl.State.normal)
         addButton.backgroundColor = R.color.title()!.withAlphaComponent(StaticValues.backgroundAlpha)
         
         self.addSubview(addButton)
@@ -47,12 +47,12 @@ class SearchAddBarView: UIImageView, UITextFieldDelegate {
         searchField.attributedPlaceholder = NSAttributedString(
             string: R.string.localizable.typeToSearchOrAdd(),
             attributes: [
-                NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
-                NSAttributedStringKey.foregroundColor: UIColor.lightGray,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
             ]
         )
         searchField.delegate = self
-        searchField.clearButtonMode = UITextFieldViewMode.always
+        searchField.clearButtonMode = UITextField.ViewMode.always
         
         self.addSubview(searchField)
         searchField.snp.makeConstraints { (make) in

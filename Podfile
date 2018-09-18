@@ -5,7 +5,7 @@ target 'CountOn' do
 	pod 'Texture'
     
 	pod 'RealmSwift'
-	pod 'IceCream', '~> 1.5.0'
+	pod 'IceCream', '~> 1.6.0'
     
 	pod 'DateToolsSwift'
     
@@ -36,6 +36,6 @@ target 'CountOn' do
 	pod 'SideMenu'
 
 #    pod 'Reveal-SDK', :configurations => ['Debug']
-	pod 'Peek', :configurations => ['Debug']
+#	pod 'Peek', :configurations => ['Debug']
 
 end
