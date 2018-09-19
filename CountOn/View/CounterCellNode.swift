@@ -11,7 +11,6 @@ import UIKit
 import AsyncDisplayKit
 import RealmSwift
 import DateToolsSwift
-import SwifterSwift
 import RxSwift
 import RxCocoa
 import GTTexture_RxExtension
@@ -54,7 +53,8 @@ final class CounterCellNode: ASCellNode {
             string: counter.title,
             attributes: [
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13),
-                NSAttributedString.Key.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
+//                NSAttributedString.Key.foregroundColor: UIColor(hexString: "273D52", transparency: 0.9)!,
+                NSAttributedString.Key.foregroundColor: UIColor.darkGray,
             ]
         )
 
@@ -65,7 +65,8 @@ final class CounterCellNode: ASCellNode {
             string: "\(counter.last.timeAgoSinceNow)",
             attributes: [
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13),
-                NSAttributedString.Key.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
+//                NSAttributedString.Key.foregroundColor: UIColor(hexString: "273D52", transparency: 0.5)!,
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray,
             ]
         )
 

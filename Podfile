@@ -28,7 +28,7 @@ target 'CountOn' do
 
     pod 'R.swift'
     
-	pod 'EasyTipView', '~> 1.0.2'
+	pod 'EasyTipView', '~> 2.0.0'
 
 	pod 'SwiftyUserDefaults', '4.0.0-alpha.1'
 

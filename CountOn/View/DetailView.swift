@@ -10,7 +10,6 @@ import UIKit
 
 import AsyncDisplayKit
 import RealmSwift
-import SwifterSwift
 import DateToolsSwift
 import RxSwift
 import RxCocoa
