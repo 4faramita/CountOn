@@ -36,6 +36,10 @@ final class CounterCellNode: ASCellNode {
     let minusButton = ASButtonNode()
     
     let counterBackground = ASImageNode()
+    
+//    let notification = UINotificationFeedbackGenerator()
+    let selection = UISelectionFeedbackGenerator()
+
 
     let types: [CountType] = [.increase, .decrease, .twoWays]
     
@@ -152,12 +156,12 @@ final class CounterCellNode: ASCellNode {
                 return -2
         }
         
-        let validMinuseStream = minusStream
+        let validMinusStream = minusStream
             .filter { number in
                 number == -1
         }
         
-        let editStream = Observable.of(validAddStream, validMinuseStream)
+        let editStream = Observable.of(validAddStream, validMinusStream)
             .merge()
         
         let historyResult = editStream
@@ -189,6 +193,8 @@ final class CounterCellNode: ASCellNode {
         
         editStream.subscribe(onNext: { [weak self] number in
             self?.countArea.countValue += number
+//            self?.notification.notificationOccurred(.error)
+            self?.selection.selectionChanged()
         }).disposed(by: disposeBag)
         
         addStream
