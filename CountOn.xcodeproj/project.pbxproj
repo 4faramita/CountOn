@@ -192,7 +192,7 @@
 			buildConfigurationList = B499CF6520832AD20054125D /* Build configuration list for PBXNativeTarget "CountOn" */;
 			buildPhases = (
 				30DA145C0B8FF700F5AA0FEC /* [CP] Check Pods Manifest.lock */,
-				B436700020DEA75E00A9237E /* ShellScript */,
+				B436700020DEA75E00A9237E /* R.swift */,
 				B499CF4F20832AC70054125D /* Sources */,
 				B499CF5020832AC70054125D /* Frameworks */,
 				B499CF5120832AC70054125D /* Resources */,
@@ -304,6 +304,7 @@
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework",
@@ -326,6 +327,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxKeyboard.framework",
@@ -342,18 +344,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CountOn/Pods-CountOn-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B436700020DEA75E00A9237E /* ShellScript */ = {
+		B436700020DEA75E00A9237E /* R.swift */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
 			);
+			name = R.swift;
 			outputPaths = (
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
