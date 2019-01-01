@@ -1,11 +1,11 @@
 PODS:
   - DateToolsSwift (4.0.0)
-  - EasyTipView (2.0.0)
+  - EasyTipView (2.0.1)
   - GTTexture-RxExtension (1.2.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
     - Texture (~> 2.6)
-  - IceCream (1.6.0):
+  - IceCream (1.7.2):
     - RealmSwift
   - PINCache (3.0.1-beta.6):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.6)
@@ -22,42 +22,44 @@ PODS:
   - PINRemoteImage/PINCache (3.0.0-beta.13):
     - PINCache (= 3.0.1-beta.6)
     - PINRemoteImage/Core
-  - R.swift (4.0.0):
-    - R.swift.Library (~> 4.0.0)
-  - R.swift.Library (4.0.0)
-  - Realm (3.9.0):
-    - Realm/Headers (= 3.9.0)
-  - Realm/Headers (3.9.0)
-  - RealmSwift (3.9.0):
-    - Realm (= 3.9.0)
-  - RxCocoa (4.3.0):
+  - R.swift (5.0.0):
+    - R.swift.Library (~> 5.0.0)
+  - R.swift.Library (5.0.0)
+  - Realm (3.13.0):
+    - Realm/Headers (= 3.13.0)
+  - Realm/Headers (3.13.0)
+  - RealmSwift (3.13.0):
+    - Realm (= 3.13.0)
+  - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
-  - RxGesture (1.2.1):
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
-  - RxKeyboard (0.8.3):
-    - RxCocoa (>= 4.1.0)
-    - RxSwift (>= 4.1.0)
-  - RxSwift (4.3.0)
-  - SideMenu (4.0.0)
+  - RxGesture (2.1.0):
+    - RxCocoa (~> 4.4.0)
+    - RxSwift (~> 4.4.0)
+  - RxKeyboard (0.9.0):
+    - RxCocoa (>= 4.3.1)
+    - RxSwift (>= 4.3.1)
+  - RxSwift (4.4.0):
+    - RxAtomic (~> 4.4)
+  - SideMenu (5.0.3)
   - SnapKit (4.0.1)
-  - SwifterSwift (4.4.0):
-    - SwifterSwift/AppKit (= 4.4.0)
-    - SwifterSwift/CoreGraphics (= 4.4.0)
-    - SwifterSwift/CoreLocation (= 4.4.0)
-    - SwifterSwift/Foundation (= 4.4.0)
-    - SwifterSwift/MapKit (= 4.4.0)
-    - SwifterSwift/SpriteKit (= 4.4.0)
-    - SwifterSwift/SwiftStdlib (= 4.4.0)
-    - SwifterSwift/UIKit (= 4.4.0)
-  - SwifterSwift/AppKit (4.4.0)
-  - SwifterSwift/CoreGraphics (4.4.0)
-  - SwifterSwift/CoreLocation (4.4.0)
-  - SwifterSwift/Foundation (4.4.0)
-  - SwifterSwift/MapKit (4.4.0)
-  - SwifterSwift/SpriteKit (4.4.0)
-  - SwifterSwift/SwiftStdlib (4.4.0)
-  - SwifterSwift/UIKit (4.4.0)
+  - SwifterSwift (4.6.0):
+    - SwifterSwift/AppKit (= 4.6.0)
+    - SwifterSwift/CoreGraphics (= 4.6.0)
+    - SwifterSwift/CoreLocation (= 4.6.0)
+    - SwifterSwift/Foundation (= 4.6.0)
+    - SwifterSwift/MapKit (= 4.6.0)
+    - SwifterSwift/SpriteKit (= 4.6.0)
+    - SwifterSwift/SwiftStdlib (= 4.6.0)
+    - SwifterSwift/UIKit (= 4.6.0)
+  - SwifterSwift/AppKit (4.6.0)
+  - SwifterSwift/CoreGraphics (4.6.0)
+  - SwifterSwift/CoreLocation (4.6.0)
+  - SwifterSwift/Foundation (4.6.0)
+  - SwifterSwift/MapKit (4.6.0)
+  - SwifterSwift/SpriteKit (4.6.0)
+  - SwifterSwift/SwiftStdlib (4.6.0)
+  - SwifterSwift/UIKit (4.6.0)
   - SwiftyUserDefaults (4.0.0-alpha.1)
   - Texture (2.7):
     - Texture/PINRemoteImage (= 2.7)
@@ -72,7 +74,7 @@ DEPENDENCIES:
   - DateToolsSwift
   - EasyTipView (~> 2.0.0)
   - GTTexture-RxExtension
-  - IceCream (~> 1.6.0)
+  - IceCream
   - R.swift
   - RealmSwift
   - RxCocoa (~> 4.0)
@@ -99,6 +101,7 @@ SPEC REPOS:
     - R.swift.Library
     - Realm
     - RealmSwift
+    - RxAtomic
     - RxCocoa
     - RxGesture
     - RxKeyboard
@@ -112,27 +115,28 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DateToolsSwift: 875d97ff9e3a5d54abdd67a269b3f51c757b71ab
-  EasyTipView: f24313ded34b20c6e63811e218016ee3baaa7ee5
+  EasyTipView: 1515544456d6e943240012e9be5d25d1bb766603
   GTTexture-RxExtension: 1093ac89fc8d1cf4c8cf7e12c3998ae7052c2ac3
-  IceCream: e1fc8ecfd19c7480018ead3c809d5f94f2291096
+  IceCream: 6123496d105c23189dc980d0ebab865095e6a9f2
   PINCache: d195fdba255283f7e9900a55e3cced377f431f9b
   PINOperation: a6219e6fc9db9c269eb7a7b871ac193bcf400aac
   PINRemoteImage: d6d51c5d2adda55f1ce30c96e850b6c4ebd2856a
-  R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
-  R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  Realm: 3d36f208bf3aff8335dc3298742140182bde4edb
-  RealmSwift: aa4d11917bfcfaa3ed51f219102a487ecd895447
-  RxCocoa: 71b9cce833fbcb89a8eec11816dd225830c2bd3c
-  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
-  RxKeyboard: e5efbaa109c35be909dd888e53de0f0efdf5169e
-  RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
-  SideMenu: 70ee5657df63ec3382660ec4ef470bf1cf5db07d
+  R.swift: f88c7d7d48a2be4dffa132dde1b3d389620310eb
+  R.swift.Library: 0bf390e729bc10bb2c9e4fb78bd043164a7be4ff
+  Realm: 5edd2ee65406aef591a4f9895de5a3440e51b3d8
+  RealmSwift: be5ebc7930e37cd3376b41cec7f21984528aaa16
+  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
+  RxGesture: 7f6dfb45dbde06e618c24442d38493e3144f2c95
+  RxKeyboard: 4f782303f499f41577b41c96c6a9a5d7acd51a47
+  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
-  SwifterSwift: 1ce0e31801ddd3a2bd3256626275425adb01067a
+  SwifterSwift: 812ffec6f301922f5430e75be3f2939ea3a80024
   SwiftyUserDefaults: cebe0ff9472f52699772a514b6f7155861d8069b
   Texture: 9d7e38965cf22ccd7cd9c249dd78b3f14e70ab6c
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 5cc06f52d95c50133422a264432b2465c0287482
+PODFILE CHECKSUM: 27828bc24134c5b3bee2deb0a42b097e5ddd3a6b
 
 COCOAPODS: 1.5.3

@@ -5,7 +5,7 @@ target 'CountOn' do
 	pod 'Texture'
     
 	pod 'RealmSwift'
-	pod 'IceCream', '~> 1.6.0'
+	pod 'IceCream'
     
 	pod 'DateToolsSwift'
     
