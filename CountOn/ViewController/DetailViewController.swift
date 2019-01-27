@@ -51,16 +51,18 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
         
         let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
         
+        
         // MARK: click to dismiss keyboard
-        // FIXME
-        //
-        // node.view.rx
-        //     .tapGesture()
-        //     .when(.recognized)
-        //     .subscribe(onNext: { [weak self] _ in
-        //         self?.dismissKeyboard()
-        //     })
-        //     .disposed(by: disposeBag)
+        
+        node.view.rx
+            .tapGesture() { gestureRecognizer, delegate in
+                delegate.simultaneousRecognitionPolicy = .never
+            }
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissKeyboard()
+            })
+            .disposed(by: disposeBag)
         
         
         // MARK: swipe doneCancelBar down to dismiss keyboard
