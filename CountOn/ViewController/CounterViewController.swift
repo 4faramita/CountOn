@@ -65,7 +65,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
         self.dismissKeyboardTipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard(), preferences: downPointingTipPreferences)
         
         // MARK: Rx
-        
         SearchAddBarView.shared.searchField.rx
             .controlEvent(UIControl.Event.editingDidBegin)
             .delay(1, scheduler: MainScheduler.instance)
@@ -151,7 +150,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     }
     
     // MARK: Dummy Data
-    
     func setupData() {
         DispatchQueue.global().async {
             // Get new realm and table since we are in a new thread
@@ -175,7 +173,6 @@ final class CounterViewController:  ASViewController<ASDisplayNode> {
     }
     
     // MARK: Helpers
-    
     static func generateCounter(
         _ title: String? = nil,
         at date: Date? = nil,
@@ -291,7 +288,3 @@ extension CounterViewController: UISideMenuNavigationControllerDelegate {
         self.arrowedNode.rotateArrow(to: .left)
     }
 }
-
-
-
-
