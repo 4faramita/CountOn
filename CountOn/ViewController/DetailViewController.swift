@@ -20,6 +20,16 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
     
     private let disposeBag = DisposeBag()
     
+    // Pan to dismiss
+    private var initialTouchPoint: CGPoint?
+    
+    override var modalPresentationStyle: UIModalPresentationStyle {
+        set { }
+        get {
+            return .overFullScreen
+        }
+    }
+    
     init(of counter: Counter) {
         super.init(node: DetailNode(of: counter))
         
@@ -97,16 +107,40 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
             .disposed(by: disposeBag)
         
         
-        // MARK: Swipe down to dismiss VC
+        // MARK: Pan downward to dismiss VC
         
-         detailNode.view.rx
-            .swipeGesture(.down) { gestureRecognizer, delegate in
-                    delegate.simultaneousRecognitionPolicy = .never
+        detailNode.view.rx
+            .panGesture() { gestureRecognizer, delegate in
+                delegate.simultaneousRecognitionPolicy = .never
             }
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                self?.dismiss(animated: true, completion: nil)
-                DoneCancelBarView.shared.hide()
+            .when(.began, .changed, .ended)
+            .subscribe(onNext: { [weak self] gesture in
+                let currentTouchPoint = gesture.location(in: self?.node?.view.window)
+                
+                switch (gesture.state) {
+                case .began:
+                    self?.initialTouchPoint = currentTouchPoint
+                case .changed:
+                    guard let self = self else { return }
+                    
+                    if let initialTouchPoint = self.initialTouchPoint, currentTouchPoint.y - initialTouchPoint.y > 0 {
+                        self.node.frame = CGRect(x: 0, y: currentTouchPoint.y - initialTouchPoint.y, width: self.node.frame.size.width, height: self.node.frame.size.height)
+                    }
+                case .ended, .cancelled:
+                    guard let self = self else { return }
+                    
+                    if let initialTouchPoint = self.initialTouchPoint, currentTouchPoint.y - initialTouchPoint.y > 100 {
+                        self.dismiss(animated: true)
+                        DoneCancelBarView.shared.hide()
+                    } else {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.node.frame = CGRect(x: 0, y: 0, width: self.node.frame.size.width, height: self.node.frame.size.height)
+                        })
+                    }
+                default:
+                    break
+                }
+                
             })
             .disposed(by: disposeBag)
         
