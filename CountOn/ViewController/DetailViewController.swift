@@ -49,11 +49,14 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        node.shadowColor = UIColor.black.cgColor
+        node.shadowOffset = CGSize(width: 5, height: 5) //shadowOffset阴影偏移,x向右偏移4，y向下偏移4，默认(0, -3),这个跟shadowRadius配合使用
+        node.shadowOpacity = 0.8
+        node.shadowRadius = 15
+        
         let tipView = EasyTipView(text: R.string.localizable.swipeDownTheBarToDismissKeyboard())
         
-        
         // MARK: click to dismiss keyboard
-        
         node.view.rx
             .tapGesture() { gestureRecognizer, delegate in
                 delegate.simultaneousRecognitionPolicy = .never
@@ -64,9 +67,7 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-        
         // MARK: swipe doneCancelBar down to dismiss keyboard
-        
         DoneCancelBarView.shared.rx
             .swipeGesture([.down])
             .when(.recognized)
@@ -108,9 +109,7 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-        
         // MARK: Pan downward to dismiss VC
-        
         detailNode.view.rx
             .panGesture() { gestureRecognizer, delegate in
                 delegate.simultaneousRecognitionPolicy = .never
@@ -146,9 +145,7 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-        
         // MARK: SearchAddBar hide and show
-        
         DoneCancelBarView.shared.show()
         
         DoneCancelBarView.shared.cancelButton.rx
@@ -159,9 +156,7 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
 
-
         // MARK: Done and save
-
         DoneCancelBarView.shared.doneButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
@@ -185,7 +180,6 @@ final class DetailViewController: ASViewController<ASDisplayNode> {
             .disposed(by: disposeBag)
     
         // MARK: Delete
-        
         DoneCancelBarView.shared.deleteButton.rx
             .tap
             .subscribe(onNext: { [weak self] _ in
