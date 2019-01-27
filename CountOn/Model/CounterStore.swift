@@ -8,10 +8,10 @@
 
 import RealmSwift
 
-class CounterStore {
+final class CounterStore {
     static let shared = CounterStore()
     
-    let realm = try! Realm()
+    private let realm = try! Realm()
     
     private let allItems = try! Realm().objects(Counter.self)
         .filter("isDeleted = false")

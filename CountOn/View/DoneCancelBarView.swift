@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class DoneCancelBarView: UIImageView {
+final class DoneCancelBarView: UIImageView {
     
     static let shared = DoneCancelBarView()
         

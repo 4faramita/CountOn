@@ -14,18 +14,18 @@
 		B436701320DEB00600A9237E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B436701520DEB00600A9237E /* Localizable.strings */; };
 		B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */; };
 		B46A198D20DA98A400FF7A81 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A198C20DA98A400FF7A81 /* DetailViewController.swift */; };
-		B46A198F20DAA1C500FF7A81 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A198E20DAA1C500FF7A81 /* DetailView.swift */; };
+		B46A198F20DAA1C500FF7A81 /* DetailNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A198E20DAA1C500FF7A81 /* DetailNode.swift */; };
 		B46A199320DAA7C500FF7A81 /* DoneCancelBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */; };
 		B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46BAEFA20D819A000524DB8 /* Colors.swift */; };
 		B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46BAEFC20D9501700524DB8 /* CounterStore.swift */; };
 		B47FEFAA20DE5BD400028825 /* HistoryTableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */; };
 		B47FEFAC20DE606A00028825 /* HistoryCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */; };
-		B48B8FB920E4C629001AAB5A /* ButtonWithRoundedCornor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B8FB820E4C628001AAB5A /* ButtonWithRoundedCornor.swift */; };
+		B48B8FB920E4C629001AAB5A /* RoundCornorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48B8FB820E4C628001AAB5A /* RoundCornorButton.swift */; };
 		B499CF5720832AC80054125D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5620832AC80054125D /* AppDelegate.swift */; };
 		B499CF5920832AC80054125D /* CounterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF5820832AC80054125D /* CounterViewController.swift */; };
 		B499CF5E20832AD20054125D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B499CF5D20832AD20054125D /* Assets.xcassets */; };
 		B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6C20833CD40054125D /* CounterCellNode.swift */; };
-		B499CF6F208347A30054125D /* CountArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6E208347A30054125D /* CountArea.swift */; };
+		B499CF6F208347A30054125D /* CountAreaNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF6E208347A30054125D /* CountAreaNode.swift */; };
 		B499CF71208395250054125D /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B499CF70208395250054125D /* Counter.swift */; };
 		B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B7DB0720D6A1E30074660D /* StaticValues.swift */; };
 		B4C665E420FF3CAD00F078AB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4C665E320FF3CAD00F078AB /* CloudKit.framework */; };
@@ -47,20 +47,20 @@
 		B436701920DEB36900A9237E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddBarView.swift; sourceTree = "<group>"; };
 		B46A198C20DA98A400FF7A81 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		B46A198E20DAA1C500FF7A81 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		B46A198E20DAA1C500FF7A81 /* DetailNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNode.swift; sourceTree = "<group>"; };
 		B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneCancelBarView.swift; sourceTree = "<group>"; };
 		B46BAEFA20D819A000524DB8 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B46BAEFC20D9501700524DB8 /* CounterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterStore.swift; sourceTree = "<group>"; };
 		B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableNode.swift; sourceTree = "<group>"; };
 		B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCellNode.swift; sourceTree = "<group>"; };
-		B48B8FB820E4C628001AAB5A /* ButtonWithRoundedCornor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithRoundedCornor.swift; sourceTree = "<group>"; };
+		B48B8FB820E4C628001AAB5A /* RoundCornorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundCornorButton.swift; sourceTree = "<group>"; };
 		B499CF5320832AC80054125D /* CountOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B499CF5620832AC80054125D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B499CF5820832AC80054125D /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
 		B499CF5D20832AD20054125D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B499CF6220832AD20054125D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B499CF6C20833CD40054125D /* CounterCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCellNode.swift; sourceTree = "<group>"; };
-		B499CF6E208347A30054125D /* CountArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountArea.swift; sourceTree = "<group>"; };
+		B499CF6E208347A30054125D /* CountAreaNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountAreaNode.swift; sourceTree = "<group>"; };
 		B499CF70208395250054125D /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		B4B7DB0720D6A1E30074660D /* StaticValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticValues.swift; sourceTree = "<group>"; };
 		B4C665E320FF3CAD00F078AB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -111,13 +111,13 @@
 			isa = PBXGroup;
 			children = (
 				B4E325E021184C3500931F62 /* ArrowedNode.swift */,
-				B46A198E20DAA1C500FF7A81 /* DetailView.swift */,
-				B48B8FB820E4C628001AAB5A /* ButtonWithRoundedCornor.swift */,
+				B46A198E20DAA1C500FF7A81 /* DetailNode.swift */,
+				B48B8FB820E4C628001AAB5A /* RoundCornorButton.swift */,
 				B499CF6C20833CD40054125D /* CounterCellNode.swift */,
 				B44BE6D520D4F48300143B03 /* SearchAddBarView.swift */,
 				B46A199220DAA7C400FF7A81 /* DoneCancelBarView.swift */,
 				B408351220FF16B100F82948 /* UndoBarView.swift */,
-				B499CF6E208347A30054125D /* CountArea.swift */,
+				B499CF6E208347A30054125D /* CountAreaNode.swift */,
 				B47FEFA920DE5BD400028825 /* HistoryTableNode.swift */,
 				B47FEFAB20DE606A00028825 /* HistoryCellNode.swift */,
 			);
@@ -372,17 +372,17 @@
 				B44BE6D620D4F48300143B03 /* SearchAddBarView.swift in Sources */,
 				B4C7063420E0DF5E002E5422 /* R.generated.swift in Sources */,
 				B46BAEFB20D819A000524DB8 /* Colors.swift in Sources */,
-				B48B8FB920E4C629001AAB5A /* ButtonWithRoundedCornor.swift in Sources */,
+				B48B8FB920E4C629001AAB5A /* RoundCornorButton.swift in Sources */,
 				B47FEFAA20DE5BD400028825 /* HistoryTableNode.swift in Sources */,
 				B499CF5920832AC80054125D /* CounterViewController.swift in Sources */,
 				B499CF71208395250054125D /* Counter.swift in Sources */,
 				B46BAEFD20D9501700524DB8 /* CounterStore.swift in Sources */,
-				B46A198F20DAA1C500FF7A81 /* DetailView.swift in Sources */,
+				B46A198F20DAA1C500FF7A81 /* DetailNode.swift in Sources */,
 				B4E325DF2118445500931F62 /* MenuViewController.swift in Sources */,
 				B408351320FF16B100F82948 /* UndoBarView.swift in Sources */,
 				B4B7DB0820D6A1E40074660D /* StaticValues.swift in Sources */,
 				B4F5FD852116AA7200B9E8A1 /* UserDefaults.swift in Sources */,
-				B499CF6F208347A30054125D /* CountArea.swift in Sources */,
+				B499CF6F208347A30054125D /* CountAreaNode.swift in Sources */,
 				B46A198D20DA98A400FF7A81 /* DetailViewController.swift in Sources */,
 				B4E325E121184C3500931F62 /* ArrowedNode.swift in Sources */,
 				B499CF6D20833CD40054125D /* CounterCellNode.swift in Sources */,
@@ -538,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOnDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -559,7 +559,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.geebox.CountOnDev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -11,9 +11,10 @@ import AsyncDisplayKit
 // import EasyTipView
 // import SwiftyUserDefaults
 
-class ArrowedNode: ASDisplayNode {
-    var arrow = ASImageNode()
-    let arrowPlate = ASDisplayNode()
+final class ArrowedNode: ASDisplayNode {
+    private var arrow = ASImageNode()
+    private let arrowPlate = ASDisplayNode()
+    
     var tableNode = ASTableNode()
     
     override func didLoad() {

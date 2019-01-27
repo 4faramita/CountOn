@@ -10,11 +10,11 @@ import UIKit
 import AsyncDisplayKit
 import RealmSwift
 
-class HistoryTableNode: ASTableNode {
+final class HistoryTableNode: ASTableNode {
     
-    var historyArray: [History]
+    private var historyArray: [History]
     
-    let absoluteDate: Bool
+    private let absoluteDate: Bool
     
     init(with historyList: [History], absoluteDate: Bool) {
         self.absoluteDate = absoluteDate

@@ -10,10 +10,10 @@ import UIKit
 import SnapKit
 import SwifterSwift
 
-class UndoBarView: UIImageView {
+final class UndoBarView: UIImageView {
     static let shared = UndoBarView()
     
-    let undoButton = UIButton()
+    private let undoButton = UIButton()
     
     convenience init() {
         self.init(image: R.image.undo_bar())

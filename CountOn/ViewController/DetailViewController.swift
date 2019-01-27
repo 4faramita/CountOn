@@ -16,18 +16,18 @@ import RxGesture
 import EasyTipView
 import SwiftyUserDefaults
 
-class DetailViewController: ASViewController<ASDisplayNode> {
+final class DetailViewController: ASViewController<ASDisplayNode> {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     init(of counter: Counter) {
-        super.init(node: DetailView(of: counter))
+        super.init(node: DetailNode(of: counter))
         
         self.title = counter.title
     }
     
     init(with title: String) {
-        super.init(node: DetailView(with: title))
+        super.init(node: DetailNode(with: title))
         
         self.title = title
     }
@@ -74,7 +74,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
             })
             .disposed(by: disposeBag)
         
-        let detailNode = node as! DetailView
+        let detailNode = node as! DetailNode
         
         detailNode.noteView.textView.rx
             .didBeginEditing
@@ -180,7 +180,7 @@ class DetailViewController: ASViewController<ASDisplayNode> {
     }
     
     private func dismissKeyboard() {
-        let detailNode = node as! DetailView
+        let detailNode = node as! DetailNode
         
         detailNode.titleField.resignFirstResponder()
         detailNode.noteView.resignFirstResponder()

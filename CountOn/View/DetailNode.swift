@@ -16,11 +16,11 @@ import RxCocoa
 import RxKeyboard
 import RxGesture
 
-class DetailView: ASDisplayNode {
+final class DetailNode: ASDisplayNode {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    let titleTitle = ASTextNode()
+    private let titleTitle = ASTextNode()
     var titleField = UITextField()
     private lazy var titleNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
@@ -28,17 +28,17 @@ class DetailView: ASDisplayNode {
         })
     }()
     
-    let noteTitle = ASTextNode()
+    private let noteTitle = ASTextNode()
     let noteView = ASEditableTextNode()
     
-    var statusPicker = UIPickerView()
+    private var statusPicker = UIPickerView()
     private lazy var statusNode: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
             return (self?.statusPicker)!
         })
     }()
     
-    var absoluteDate = false {
+    private var absoluteDate = false {
         didSet {
             if absoluteDate {
                 // FIXME: The content offset for the first time is buggy
@@ -49,19 +49,17 @@ class DetailView: ASDisplayNode {
             setNeedsLayout()
         }
     }
-    var absoluteHistoryTable: HistoryTableNode?
-    var relativeHistoryTable: HistoryTableNode?
-    let bottomTitle = ASTextNode()
-    let statusTitle = ASTextNode()
-    let resetButton = ASButtonNode()
+    private var absoluteHistoryTable: HistoryTableNode?
+    private var relativeHistoryTable: HistoryTableNode?
+    private let bottomTitle = ASTextNode()
+    private let statusTitle = ASTextNode()
+    private let resetButton = ASButtonNode()
 
-    let centerParagraphStyle = NSMutableParagraphStyle()
-    let multiLineParagraphStyle = NSMutableParagraphStyle()
-    let multiLineCenterParagraphStyle = NSMutableParagraphStyle()
+    private let centerParagraphStyle = NSMutableParagraphStyle()
+    private let multiLineParagraphStyle = NSMutableParagraphStyle()
+    private let multiLineCenterParagraphStyle = NSMutableParagraphStyle()
     
-
-    
-    var isInEditMode: Bool
+    private var isInEditMode: Bool
     
     var isFromTable: Bool {
         if let _ = counter {
@@ -71,7 +69,7 @@ class DetailView: ASDisplayNode {
         }
     }
     
-    var typePickerView = UISegmentedControl(items: [R.string.localizable.increase(), R.string.localizable.decrease(), R.string.localizable.both()])
+    private var typePickerView = UISegmentedControl(items: [R.string.localizable.increase(), R.string.localizable.decrease(), R.string.localizable.both()])
     private lazy var typePicker: ASDisplayNode = {
         return ASDisplayNode(viewBlock: { [weak self] () -> UIView in
             self?.typePickerView.selectedSegmentIndex = self?.type.rawValue ?? 0
@@ -80,12 +78,12 @@ class DetailView: ASDisplayNode {
         })
     }()
     
-    var title = ""
-    var note = ""
-    var type = CountType.increase
-    var status = 0
+    private var title = ""
+    private var note = ""
+    private var type = CountType.increase
+    private var status = 0
     
-    var counter: Counter?
+    private var counter: Counter?
     
     override init() {
         isInEditMode = true
@@ -450,7 +448,7 @@ class DetailView: ASDisplayNode {
     }
 }
 
-extension DetailView: UIPickerViewDataSource, UIPickerViewDelegate {
+extension DetailNode: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }

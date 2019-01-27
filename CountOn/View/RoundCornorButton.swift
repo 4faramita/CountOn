@@ -9,7 +9,7 @@
 import UIKit
 import AsyncDisplayKit
 
-class ButtonWithRoundedCornor: ASButtonNode {
+final class RoundCornorButton: ASButtonNode {
 
     override func layout() {
         super.layout()

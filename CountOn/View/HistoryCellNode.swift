@@ -9,12 +9,12 @@
 import UIKit
 import AsyncDisplayKit
 
-class HistoryCellNode: ASCellNode {
-    let type = ASTextNode()
-    let date = ASTextNode()
+final class HistoryCellNode: ASCellNode {
+    private let type = ASTextNode()
+    private let date = ASTextNode()
     
-    let absoluteDateString: String
-    let relativeDateString: String
+    private let absoluteDateString: String
+    private let relativeDateString: String
     
     init(with history: History, absoluteDate: Bool) {
         absoluteDateString = history.date.dateTimeString()

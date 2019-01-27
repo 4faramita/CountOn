@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import IceCream
 
-class History: Object {
+final class History: Object {
     @objc dynamic var id = UUID().uuidString
     @objc dynamic var isDeleted = false
     

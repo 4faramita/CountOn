@@ -9,7 +9,7 @@
 import AsyncDisplayKit
 import UIKit
 
-final class CountArea: ASDisplayNode {
+final class CountAreaNode: ASDisplayNode {
     
     let type: CountType
     var countValue: Int {
@@ -17,7 +17,7 @@ final class CountArea: ASDisplayNode {
             setLabel()
         }
     }
-    var countLabel = ASTextNode()
+    private var countLabel = ASTextNode()
     
     private func setLabel() {
         countLabel.attributedText = NSAttributedString(

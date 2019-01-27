@@ -18,36 +18,36 @@ import Whisper
 
 final class CounterCellNode: ASCellNode {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    var counter: Counter {
+    private var counter: Counter {
         didSet {
-            countArea = CountArea(for: types[counter.type], from: counter.status)
+            countArea = CountAreaNode(for: types[counter.type], from: counter.status)
         }
     }
     
-    var countArea = CountArea()
-    let count = ASTextNode()
+    private var countArea = CountAreaNode()
+    private let count = ASTextNode()
     
-    let title = ASTextNode()
-    let lastLaunch = ASTextNode()
+    private let title = ASTextNode()
+    private let lastLaunch = ASTextNode()
     
-    let addButton = ASButtonNode()
-    let minusButton = ASButtonNode()
+    private let addButton = ASButtonNode()
+    private let minusButton = ASButtonNode()
     
-    let counterBackground = ASImageNode()
+    private let counterBackground = ASImageNode()
     
 //    let notification = UINotificationFeedbackGenerator()
-    let selection = UISelectionFeedbackGenerator()
+    private let selection = UISelectionFeedbackGenerator()
 
 
-    let types: [CountType] = [.increase, .decrease, .twoWays]
+    private let types: [CountType] = [.increase, .decrease, .twoWays]
     
     init(with counter: Counter) {
         
         self.counter = counter
         
-        self.countArea = CountArea(for: types[counter.type], from: counter.status)
+        self.countArea = CountAreaNode(for: types[counter.type], from: counter.status)
         
         super.init()
         

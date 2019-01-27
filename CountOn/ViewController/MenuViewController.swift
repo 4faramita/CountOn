@@ -12,12 +12,12 @@ import SnapKit
 import SwiftyUserDefaults
 import RxSwift
 
-class MenuViewController: UIViewController {
+final class MenuViewController: UIViewController {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    let iCloudSyncSwitch = UISwitch()
-    let iCloudSyncLabel = UILabel()
+    private let iCloudSyncSwitch = UISwitch()
+    private let iCloudSyncLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

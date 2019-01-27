@@ -12,7 +12,7 @@ import SnapKit
 import RealmSwift
 import AsyncDisplayKit
 
-class SearchAddBarView: UIImageView, UITextFieldDelegate {
+final class SearchAddBarView: UIImageView, UITextFieldDelegate {
     
     // Singleton
     static let shared = SearchAddBarView()

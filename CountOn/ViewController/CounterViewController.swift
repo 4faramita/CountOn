@@ -18,19 +18,19 @@ import SideMenu
 
 final class CounterViewController:  ASViewController<ASDisplayNode> {
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
-    var arrowedNode: ArrowedNode {
+    private var arrowedNode: ArrowedNode {
         return node as! ArrowedNode
     }
+    
+    private var notificationToken: NotificationToken?
+    
+    private var dismissKeyboardTipView: EasyTipView?
     
     var tableNode: ASTableNode {
         return arrowedNode.tableNode
     }
-    
-    var notificationToken: NotificationToken?
-    
-    var dismissKeyboardTipView: EasyTipView?
     
     init() {        
         super.init(node: ArrowedNode())
